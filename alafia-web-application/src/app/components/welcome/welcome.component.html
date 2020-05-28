@@ -1,0 +1,9 @@
+<div>
+  <h1 class="hh">Bienvenido a Alafia</h1>
+  <h2>Mesa reservada a nombre de {{table.booking.client.name}}</h2>
+  <p>¿Desea confirmar su asistencia como usuario {{table.booking.client.name}} ?</p>
+  <button mat-flat-button style="margin-right: 10px" (click)="confirmClientInTable()">Confirmar</button>
+  <button mat-flat-button style="background-color: darkorange; margin-left: 10px" (click)="selectOtherClient()">No soy yo</button>
+</div>
+
+

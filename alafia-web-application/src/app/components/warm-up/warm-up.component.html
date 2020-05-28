@@ -1,0 +1,7 @@
+<div>
+  <h1 style="font-size: xx-large">Bienvenido a Alafia</h1>
+  <h2>Mesa reservada al cliente: {{this.dataService.activeTable.booking.client.name}}</h2>
+  <h3>Seleccione su comensal en la mesa:</h3>
+  <p style="font-style: oblique" *ngFor="let diner of this.dataService.activeTable.booking.diners" (click)="confirmDinerInTable(diner)">{{diner.name}}</p>
+  <button mat-flat-button style="background-color: darkorange" (click)="selectOtherClient()">No estoy en la lista</button>
+</div>

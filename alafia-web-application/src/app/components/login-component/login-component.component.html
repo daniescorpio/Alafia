@@ -1,0 +1,16 @@
+<div class="componentView">
+  <h1>Alafia</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="login-input-field">
+      <mat-label>Email</mat-label>
+      <input type="email"matInput placeholder="Ex. pat@example.com" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field class="login-input-field">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+
+    <button mat-raised-button type="submit">Login</button>
+  </form>
+</div>

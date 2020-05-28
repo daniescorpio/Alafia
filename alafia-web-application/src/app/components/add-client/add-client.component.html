@@ -1,0 +1,12 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="add-client-field">
+    <mat-label>Email</mat-label>
+    <input type="email"matInput placeholder="Ex. pat@example.com" formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field class="add-client-field">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput placeholder="Name" formControlName="name">
+  </mat-form-field>
+
+  <button mat-raised-button type="submit">Añadir cliente</button>

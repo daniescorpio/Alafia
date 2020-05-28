@@ -1,0 +1,27 @@
+<!--<mat-toolbar *ngIf="loginService.logged" color="primary">-->
+<!--  <mat-toolbar-row>-->
+<!--    <span>Alafia</span>-->
+<!--    <span class="spacer"></span>-->
+<!--    <mat-icon class="logout" aria-hidden="false" aria-label="Logout delete icon" routerLink="login"-->
+<!--              [routerLink]="'/login'" (click)="logOut()">backspace</mat-icon>-->
+<!--  </mat-toolbar-row>-->
+<!--</mat-toolbar>-->
+
+<div class="router">
+  <mat-drawer-container class="example-container">
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <p (click)="onClick('welcome'); drawer.toggle()">Welcome</p>
+      <p (click)="onClick('warm-up'); drawer.toggle()">Warm Up</p>
+      <p (click)="onClick('drinks'); drawer.toggle()">Drinks</p>
+    </mat-drawer>
+    <div class="example-sidenav-content">
+      <button type="button" mat-raised-button (click)="drawer.toggle()">
+        Menú
+      </button>
+      <div class="mainContent">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-drawer-container>
+</div>
+

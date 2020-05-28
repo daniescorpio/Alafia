@@ -1,0 +1,6 @@
+<div>
+  <mat-list>
+    <mat-list-item *ngFor="let table of data.tables; let i = index" (click)="saveAsNewClient(table.booking.client.id)">{{table.booking.client.name}}</mat-list-item>
+  </mat-list>
+</div>
+

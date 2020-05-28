@@ -1,0 +1,50 @@
+{
+  "restaurant": [
+    Mesa,
+    Mesa,
+    ...
+  ],
+  "table": {
+    "id": "idMesa",
+    "booking": Booking
+  },
+  "booking": {
+    "id": "idBooking",
+    "diners": [
+      Client,
+      Client,
+      ...
+    ]
+  },
+  "client": {
+    "id": "idCliente",
+    "order": Pedido
+  },
+  "order": {
+    "courses": [
+      Plato,
+      Plato,
+      ...
+    ],
+    "drinks": [
+      Bebida,
+      Bebida,
+      ...
+    ]
+  },
+  "course": {
+    "id": "idPlato",
+    "description": "descripcion del plato",
+    "price": "precio",
+    "nuttValues": "valores nutricionales",
+    "obtainProcess": "proceso de obtencion",
+    "history:": "Historia del plato"
+  },
+  "drink": [
+    {
+      "id": "idBebida",
+      "description": "descripcion de la bebida",
+      "price": "precio"
+    }
+  ]
+}

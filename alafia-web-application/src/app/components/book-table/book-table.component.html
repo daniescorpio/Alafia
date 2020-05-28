@@ -1,0 +1,34 @@
+<div class="componentView">
+  <h1>Table configuration</h1>
+
+  <mat-form-field class="menuForm">
+    <mat-label>Diners?</mat-label>
+    <mat-select #fontSize value="16px" [(ngModel)]="dinersInTable">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+      <mat-option value="4">4</mat-option>
+      <mat-option value="5">5</mat-option>
+      <mat-option value="6">6</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngFor="let diner of this.diners; let i = index">
+    <mat-form-field class="menuForm" *ngIf="i < dinersInTable">
+      <mat-label>Menu?</mat-label>
+      <mat-select #fontSize value="16px" [(ngModel)]="this.diners[i].menuType" (selectionChange)="showMenuInfo(i)">
+        <mat-option value="menu_1">Menu 1</mat-option>
+        <mat-option value="menu_2">Menu 2</mat-option>
+        <mat-option value="menu_3">Menu 3</mat-option>
+        <mat-option value="menu_4">Menu 4</mat-option>
+        <mat-option value="menu_5">Menu 5</mat-option>
+        <mat-option value="menu_6">Menu 6</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="set-table">
+    <button *ngIf="allDinersWithMenu()" mat-raised-button color="primary" (click)="triggerDiners()">Set Table</button>
+    <button *ngIf="!allDinersWithMenu()" mat-raised-button disabled>Set Table</button>
+  </div>
+</div>
