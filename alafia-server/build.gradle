@@ -22,12 +22,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
     implementation 'cz.jirutka.spring:embedmongo-spring:1.1'
-
-
-
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    compile("io.springfox:springfox-swagger2:2.9.2")
+    compile("io.springfox:springfox-swagger-ui:2.9.2")
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'net.javacrumbs.json-unit:json-unit-assertj:2.17.0'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }

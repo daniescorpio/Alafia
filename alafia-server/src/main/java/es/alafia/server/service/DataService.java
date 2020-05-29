@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Service
 @AllArgsConstructor
@@ -24,17 +23,6 @@ public class DataService {
     public List<Restaurant> retrieveRestaurantsData() {
         return restaurantRepository.findAll();
     }
-
-    //TODO: Move under basic rest operations
-    public DinnerTable retrieveTable(String tableId) throws TableNotFoundException {
-        try {
-            return dinnerTableRepository.findById(tableId).orElseThrow();
-        }
-        catch (Exception e) {
-            throw new TableNotFoundException("Table with id " + tableId + " not found in DB");
-        }
-    }
-
 
     public List<DinnerTable> retrieveDinnerTablesData() {
         return dinnerTableRepository.findAll();
@@ -59,4 +47,43 @@ public class DataService {
     public List<Drink> retrieveDrinksData() {
         return drinkRepository.findAll();
     }
+
+    public Restaurant saveNewRestaurant(Restaurant restaurant) {
+        return restaurantRepository.save(restaurant);
+    }
+
+    public DinnerTable saveNewDinnerTable(DinnerTable dinnerTable) {
+        return dinnerTableRepository.save(dinnerTable);
+    }
+
+    public Booking saveNewBooking(Booking booking) {
+        return bookingRepository.save(booking);
+    }
+
+    public Client saveNewClient(Client client) {
+        return clientRepository.save(client);
+    }
+
+    public Order saveNewOrder(Order order) {
+        return orderRepository.save(order);
+    }
+
+    public Course saveNewCourse(Course course) {
+        return courseRepository.save(course);
+    }
+
+    public Drink saveNewDrink(Drink drink) {
+        return drinkRepository.save(drink);
+    }
+
+    //TODO: Move under basic rest operations
+    public DinnerTable retrieveTable(String tableId) throws TableNotFoundException {
+        try {
+            return dinnerTableRepository.findById(tableId).orElseThrow();
+        }
+        catch (Exception e) {
+            throw new TableNotFoundException("Table with id " + tableId + " not found in DB");
+        }
+    }
+
 }

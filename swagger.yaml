@@ -1,0 +1,799 @@
+swagger: '2.0'
+info:
+  description: Alafia Api
+  version: '1.0'
+  title: Alafia Api
+  contact: {}
+host: 'localhost:8080'
+basePath: /
+tags:
+  - name: alafia-controller
+    description: Alafia Controller
+paths:
+  /api/active-table:
+    get:
+      tags:
+        - alafia-controller
+      summary: getActiveTable
+      operationId: getActiveTableUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: activeTableId
+          in: query
+          description: activeTableId
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DinnerTable'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/bookings:
+    get:
+      tags:
+        - alafia-controller
+      summary: getBookingsData
+      operationId: getBookingsDataUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Booking'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - alafia-controller
+      summary: saveNewBooking
+      operationId: saveNewBookingUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: client.id
+          in: query
+          required: false
+          type: string
+        - name: client.mail
+          in: query
+          required: false
+          type: string
+        - name: client.name
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.courses[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.courses[0].history'
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.courses[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.courses[0].nutritionalValues'
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.courses[0].obtainProcess'
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.courses[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'client.order.drinks[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.drinks[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'client.order.drinks[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: client.order.id
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].mail'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.courses[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.courses[0].history'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.courses[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.courses[0].nutritionalValues'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.courses[0].obtainProcess'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.courses[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'diners[0].order.drinks[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.drinks[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'diners[0].order.drinks[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'diners[0].order.id'
+          in: query
+          required: false
+          type: string
+        - name: id
+          in: query
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Booking'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/clients:
+    get:
+      tags:
+        - alafia-controller
+      summary: getClientsData
+      operationId: getClientsDataUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Client'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - alafia-controller
+      summary: saveNewClient
+      operationId: saveNewClientUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: id
+          in: query
+          required: false
+          type: string
+        - name: mail
+          in: query
+          required: false
+          type: string
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: 'order.courses[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'order.courses[0].history'
+          in: query
+          required: false
+          type: string
+        - name: 'order.courses[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'order.courses[0].nutritionalValues'
+          in: query
+          required: false
+          type: string
+        - name: 'order.courses[0].obtainProcess'
+          in: query
+          required: false
+          type: string
+        - name: 'order.courses[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'order.drinks[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'order.drinks[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'order.drinks[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: order.id
+          in: query
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Client'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/courses:
+    get:
+      tags:
+        - alafia-controller
+      summary: getCoursesData
+      operationId: getCoursesDataUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Course'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - alafia-controller
+      summary: saveNewCourse
+      operationId: saveNewCourseUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: description
+          in: query
+          required: false
+          type: string
+        - name: history
+          in: query
+          required: false
+          type: string
+        - name: id
+          in: query
+          required: false
+          type: string
+        - name: nutritionalValues
+          in: query
+          required: false
+          type: string
+        - name: obtainProcess
+          in: query
+          required: false
+          type: string
+        - name: price
+          in: query
+          required: false
+          type: number
+          format: double
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Course'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/dinner-tables:
+    get:
+      tags:
+        - alafia-controller
+      summary: getDinnerTablesData
+      operationId: getDinnerTablesDataUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DinnerTable'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - alafia-controller
+      summary: saveNewDinnerTable
+      operationId: saveNewDinnerTableUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: booking.client.id
+          in: query
+          required: false
+          type: string
+        - name: booking.client.mail
+          in: query
+          required: false
+          type: string
+        - name: booking.client.name
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.courses[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.courses[0].history'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.courses[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.courses[0].nutritionalValues'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.courses[0].obtainProcess'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.courses[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'booking.client.order.drinks[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.drinks[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.client.order.drinks[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: booking.client.order.id
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].mail'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.courses[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.courses[0].history'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.courses[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.courses[0].nutritionalValues'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.courses[0].obtainProcess'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.courses[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'booking.diners[0].order.drinks[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.drinks[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'booking.diners[0].order.drinks[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'booking.diners[0].order.id'
+          in: query
+          required: false
+          type: string
+        - name: booking.id
+          in: query
+          required: false
+          type: string
+        - name: id
+          in: query
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/DinnerTable'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/drinks:
+    get:
+      tags:
+        - alafia-controller
+      summary: getDrinksData
+      operationId: getDrinksDataUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Drink'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - alafia-controller
+      summary: saveNewDrink
+      operationId: saveNewDrinkUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: description
+          in: query
+          required: false
+          type: string
+        - name: id
+          in: query
+          required: false
+          type: string
+        - name: price
+          in: query
+          required: false
+          type: number
+          format: double
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Drink'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/orders:
+    get:
+      tags:
+        - alafia-controller
+      summary: getOrdersData
+      operationId: getOrdersDataUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - alafia-controller
+      summary: saveNewOrder
+      operationId: saveNewOrderUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: 'courses[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'courses[0].history'
+          in: query
+          required: false
+          type: string
+        - name: 'courses[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'courses[0].nutritionalValues'
+          in: query
+          required: false
+          type: string
+        - name: 'courses[0].obtainProcess'
+          in: query
+          required: false
+          type: string
+        - name: 'courses[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'drinks[0].description'
+          in: query
+          required: false
+          type: string
+        - name: 'drinks[0].id'
+          in: query
+          required: false
+          type: string
+        - name: 'drinks[0].price'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: id
+          in: query
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Order'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/restaurants:
+    get:
+      tags:
+        - alafia-controller
+      summary: getRestaurantsData
+      operationId: getRestaurantsDataUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Restaurant'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - alafia-controller
+      summary: saveNewRestaurant
+      operationId: saveNewRestaurantUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: restaurant
+          description: restaurant
+          required: true
+          schema:
+            $ref: '#/definitions/Restaurant'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Restaurant'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  Booking:
+    type: object
+    properties:
+      client:
+        $ref: '#/definitions/Client'
+      diners:
+        type: array
+        items:
+          $ref: '#/definitions/Client'
+      id:
+        type: string
+    title: Booking
+  Client:
+    type: object
+    properties:
+      id:
+        type: string
+      mail:
+        type: string
+      name:
+        type: string
+      order:
+        $ref: '#/definitions/Order'
+    title: Client
+  Course:
+    type: object
+    properties:
+      description:
+        type: string
+      history:
+        type: string
+      id:
+        type: string
+      nutritionalValues:
+        type: string
+      obtainProcess:
+        type: string
+      price:
+        type: number
+        format: double
+    title: Course
+  DinnerTable:
+    type: object
+    properties:
+      booking:
+        $ref: '#/definitions/Booking'
+      id:
+        type: string
+    title: DinnerTable
+  Drink:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      price:
+        type: number
+        format: double
+    title: Drink
+  Order:
+    type: object
+    properties:
+      courses:
+        type: array
+        items:
+          $ref: '#/definitions/Course'
+      drinks:
+        type: array
+        items:
+          $ref: '#/definitions/Drink'
+      id:
+        type: string
+    title: Order
+  Restaurant:
+    type: object
+    properties:
+      dinnerTables:
+        type: array
+        items:
+          $ref: '#/definitions/DinnerTable'
+      id:
+        type: string
+    title: Restaurant

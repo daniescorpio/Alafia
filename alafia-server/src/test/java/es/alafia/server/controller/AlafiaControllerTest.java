@@ -8,7 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
+import java.awt.print.Book;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +27,7 @@ public class AlafiaControllerTest {
     private AlafiaController alafiaController;
 
     @Test
-    void shouldRetrieveAllRestaurantsSavedInDB() {
+    void shouldCallDataServiceToRetrieveAllRestaurantsSavedInDB() {
         when(dataService.retrieveRestaurantsData()).thenReturn(List.of(Restaurant.builder().build()));
 
         List<Restaurant> restaurantsRetrieved = alafiaController.getRestaurantsData();
@@ -35,7 +37,18 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldRetrieveAllDinnerTablesSavedInDB() {
+    void shouldCallDataServiceToSaveNewRestaurantInDB() {
+        Restaurant restaurant = Restaurant.builder().build();
+        when(dataService.saveNewRestaurant(any(Restaurant.class))).thenReturn(restaurant);
+
+        Restaurant response = alafiaController.saveNewRestaurant(restaurant);
+
+        verify(dataService, times(1)).saveNewRestaurant(restaurant);
+        assertEquals(restaurant, response);
+    }
+
+    @Test
+    void shouldCallDataServiceToRetrieveAllDinnerTablesSavedInDB() {
         when(dataService.retrieveDinnerTablesData()).thenReturn(List.of(DinnerTable.builder().build()));
 
         List<DinnerTable> dinnerTablesData = alafiaController.getDinnerTablesData();
@@ -45,7 +58,18 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldRetrieveAllBookingsSavedInDB() {
+    void shouldCallDataServiceToSaveNewDinnerTableInDB() {
+        DinnerTable dinnerTable = DinnerTable.builder().build();
+        when(dataService.saveNewDinnerTable(any(DinnerTable.class))).thenReturn(dinnerTable);
+
+        DinnerTable response = alafiaController.saveNewDinnerTable(dinnerTable);
+
+        verify(dataService, times(1)).saveNewDinnerTable(dinnerTable);
+        assertEquals(dinnerTable, response);
+    }
+
+    @Test
+    void shouldCallDataServiceToRetrieveAllBookingsSavedInDB() {
         when(dataService.retrieveBookingsData()).thenReturn(List.of(Booking.builder().build()));
 
         List<Booking> bookingsData = alafiaController.getBookingsData();
@@ -55,7 +79,18 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldRetrieveAllClientsSavedInDB() {
+    void shouldCallDataServiceToSaveNewBookingInDB() {
+        Booking booking = Booking.builder().build();
+        when(dataService.saveNewBooking(any(Booking.class))).thenReturn(booking);
+
+        Booking response = alafiaController.saveNewBooking(booking);
+
+        verify(dataService, times(1)).saveNewBooking(booking);
+        assertEquals(booking, response);
+    }
+
+    @Test
+    void shouldCallDataServiceToRetrieveAllClientsSavedInDB() {
         when(dataService.retrieveClientsData()).thenReturn(List.of(Client.builder().build()));
 
         List<Client> clientsData = alafiaController.getClientsData();
@@ -65,7 +100,18 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldRetrieveAllOrdersSavedInDB() {
+    void shouldCallDataServiceToSaveNewClientInDB() {
+        Client client = Client.builder().build();
+        when(dataService.saveNewClient(any(Client.class))).thenReturn(client);
+
+        Client response = alafiaController.saveNewClient(client);
+
+        verify(dataService, times(1)).saveNewClient(client);
+        assertEquals(client, response);
+    }
+
+    @Test
+    void shouldCallDataServiceToRetrieveAllOrdersSavedInDB() {
         when(dataService.retrieveOrdersData()).thenReturn(List.of(Order.builder().build()));
 
         List<Order> ordersData = alafiaController.getOrdersData();
@@ -75,7 +121,18 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldRetrieveAllCoursesSavedInDB() {
+    void shouldCallDataServiceToSaveNewOrderInDB() {
+        Order order = Order.builder().build();
+        when(dataService.saveNewOrder(any(Order.class))).thenReturn(order);
+
+        Order response = alafiaController.saveNewOrder(order);
+
+        verify(dataService, times(1)).saveNewOrder(order);
+        assertEquals(order, response);
+    }
+
+    @Test
+    void shouldCallDataServiceToRetrieveAllCoursesSavedInDB() {
         when(dataService.retrieveCoursesData()).thenReturn(List.of(Course.builder().build()));
 
         List<Course> coursesData = alafiaController.getCoursesData();
@@ -85,7 +142,18 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldRetrieveAllDrinksSavedInDB() {
+    void shouldCallDataServiceToSaveNewCourseInDB() {
+        Course course = Course.builder().build();
+        when(dataService.saveNewCourse(any(Course.class))).thenReturn(course);
+
+        Course response = alafiaController.saveNewCourse(course);
+
+        verify(dataService, times(1)).saveNewCourse(course);
+        assertEquals(course, response);
+    }
+
+    @Test
+    void shouldCallDataServiceToRetrieveAllDrinksSavedInDB() {
         when(dataService.retrieveDrinksData()).thenReturn(List.of(Drink.builder().build()));
 
         List<Drink> drinksData = alafiaController.getDrinksData();
@@ -95,7 +163,18 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldRetrieveDataOfActiveTable() throws TableNotFoundException {
+    void shouldCallDataServiceToSaveNewDrinkInDB() {
+        Drink drink = Drink.builder().build();
+        when(dataService.saveNewDrink(any(Drink.class))).thenReturn(drink);
+
+        Drink response = alafiaController.saveNewDrink(drink);
+
+        verify(dataService, times(1)).saveNewDrink(drink);
+        assertEquals(drink, response);
+    }
+
+    @Test
+    void shouldCallDataServiceToRetrieveDataOfActiveTable() throws TableNotFoundException {
         String activeTableId = "activeTableId";
         when(dataService.retrieveTable(anyString())).thenReturn(DinnerTable.builder().build());
 

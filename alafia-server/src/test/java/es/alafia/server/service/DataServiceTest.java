@@ -44,16 +44,6 @@ public class DataServiceTest {
     private DataService dataService;
 
     @Test
-    void shouldRetrieveFromDBATable() throws TableNotFoundException {
-        String tableId = "tableId";
-        when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(DinnerTable.builder().build()));
-
-        dataService.retrieveTable(tableId);
-
-        verify(dinnerTableRepository).findById(tableId);
-    }
-
-    @Test
     void shouldRetrieveFromDBRestaurantsData() {
         when(restaurantRepository.findAll()).thenReturn(List.of(Restaurant.builder().build()));
 
@@ -61,6 +51,17 @@ public class DataServiceTest {
 
         verify(restaurantRepository, times(1)).findAll();
         assertFalse(restaurantList.isEmpty());
+    }
+
+    @Test
+    void shouldSaveInDBNewRestaurant() {
+        Restaurant restaurant = Restaurant.builder().build();
+        when(restaurantRepository.save(any(Restaurant.class))).thenReturn(restaurant);
+
+        Restaurant restaurantSaved = dataService.saveNewRestaurant(restaurant);
+
+        verify(restaurantRepository, times(1)).save(restaurant);
+        assertEquals(restaurant, restaurantSaved);
     }
 
     @Test
@@ -74,6 +75,17 @@ public class DataServiceTest {
     }
 
     @Test
+    void shouldSaveInDBNewDinnerTable() {
+        DinnerTable dinnerTable= DinnerTable.builder().build();
+        when(dinnerTableRepository.save(any(DinnerTable.class))).thenReturn(dinnerTable);
+
+        DinnerTable dinnerTableSaved = dataService.saveNewDinnerTable(dinnerTable);
+
+        verify(dinnerTableRepository, times(1)).save(dinnerTable);
+        assertEquals(dinnerTable, dinnerTableSaved);
+    }
+
+    @Test
     void shouldRetrieveFromDBBookingsData() {
         when(bookingRepository.findAll()).thenReturn(List.of(Booking.builder().build()));
 
@@ -81,6 +93,17 @@ public class DataServiceTest {
 
         verify(bookingRepository, times(1)).findAll();
         assertFalse(bookingList.isEmpty());
+    }
+
+    @Test
+    void shouldSaveInDBNewBooking() {
+        Booking booking = Booking.builder().build();
+        when(bookingRepository.save(any(Booking.class))).thenReturn(booking);
+
+        Booking bookingSaved = dataService.saveNewBooking(booking);
+
+        verify(bookingRepository, times(1)).save(booking);
+        assertEquals(booking, bookingSaved);
     }
 
     @Test
@@ -94,6 +117,17 @@ public class DataServiceTest {
     }
 
     @Test
+    void shouldSaveInDBNewClient() {
+        Client client = Client.builder().build();
+        when(clientRepository.save(any(Client.class))).thenReturn(client);
+
+        Client clientSaved = dataService.saveNewClient(client);
+
+        verify(clientRepository, times(1)).save(client);
+        assertEquals(client, clientSaved);
+    }
+
+    @Test
     void shouldRetrieveFromDBOrdersData() {
         when(orderRepository.findAll()).thenReturn(List.of(Order.builder().build()));
 
@@ -101,6 +135,17 @@ public class DataServiceTest {
 
         verify(orderRepository, times(1)).findAll();
         assertFalse(orderList.isEmpty());
+    }
+
+    @Test
+    void shouldSaveInDBNewOrder() {
+        Order order = Order.builder().build();
+        when(orderRepository.save(any(Order.class))).thenReturn(order);
+
+        Order orderSaved = dataService.saveNewOrder(order);
+
+        verify(orderRepository, times(1)).save(order);
+        assertEquals(order, orderSaved);
     }
 
     @Test
@@ -114,6 +159,17 @@ public class DataServiceTest {
     }
 
     @Test
+    void shouldSaveInDBNewCourse() {
+        Course course = Course.builder().build();
+        when(courseRepository.save(any(Course.class))).thenReturn(course);
+
+        Course courseSaved = dataService.saveNewCourse(course);
+
+        verify(courseRepository, times(1)).save(course);
+        assertEquals(course, courseSaved);
+    }
+
+    @Test
     void shouldRetrieveFromDBDrinksData() {
         when(drinkRepository.findAll()).thenReturn(List.of(Drink.builder().build()));
 
@@ -121,6 +177,27 @@ public class DataServiceTest {
 
         verify(drinkRepository, times(1)).findAll();
         assertFalse(drinkList.isEmpty());
+    }
+
+    @Test
+    void shouldSaveInDBNewDrink() {
+        Drink drink = Drink.builder().build();
+        when(drinkRepository.save(any(Drink.class))).thenReturn(drink);
+
+        Drink drinkSaved = dataService.saveNewDrink(drink);
+
+        verify(drinkRepository, times(1)).save(drink);
+        assertEquals(drink, drinkSaved);
+    }
+
+    @Test
+    void shouldRetrieveFromDBATable() throws TableNotFoundException {
+        String tableId = "tableId";
+        when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(DinnerTable.builder().build()));
+
+        dataService.retrieveTable(tableId);
+
+        verify(dinnerTableRepository).findById(tableId);
     }
 
     @Test
