@@ -1,7 +1,6 @@
 package es.alafia.server.controller;
 
-import es.alafia.server.model.DinnerTable;
-import es.alafia.server.model.Restaurant;
+import es.alafia.server.model.*;
 import es.alafia.server.model.exception.TableNotFoundException;
 import es.alafia.server.service.DataService;
 import lombok.AllArgsConstructor;
@@ -28,6 +27,30 @@ public class AlafiaController {
     @GetMapping(value = "/active-table")
     public DinnerTable getActiveTable(String activeTableId) throws TableNotFoundException {
         return dataService.retrieveTable(activeTableId);
+    }
+
+    public List<DinnerTable> getDinnerTablesData() {
+        return dataService.retrieveDinnerTablesData();
+    }
+
+    public List<Booking> getBookingsData() {
+        return dataService.retrieveBookingsData();
+    }
+
+    public List<Client> getClientsData() {
+        return dataService.retrieveClientsData();
+    }
+
+    public List<Order> getOrdersData() {
+        return dataService.retrieveOrdersData();
+    }
+
+    public List<Course> getCoursesData() {
+        return dataService.retrieveCoursesData();
+    }
+
+    public List<Drink> getDrinksData() {
+        return dataService.retrieveDrinksData();
     }
 }
 

@@ -2,6 +2,7 @@ package es.alafia.server;
 
 import es.alafia.server.model.*;
 import es.alafia.server.repository.*;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class LoadInitData {
 
     private final RestaurantRepository restaurantRepository;
@@ -19,25 +21,25 @@ public class LoadInitData {
     private final CourseRepository courseRepository;
     private final DrinkRepository drinkRepository;
 
-    public LoadInitData(RestaurantRepository restaurantRepository,
-                        DinnerTableRepository dinnerTableRepository,
-                        DrinkRepository drinkRepository,
-                        ClientRepository clientRepository,
-                        OrderRepository orderRepository,
-                        CourseRepository courseRepository,
-                        BookingRepository bookingRepository) {
-        this.restaurantRepository = restaurantRepository;
-        this.dinnerTableRepository = dinnerTableRepository;
-        this.bookingRepository = bookingRepository;
-        this.clientRepository = clientRepository;
-        this.orderRepository = orderRepository;
-        this.courseRepository = courseRepository;
-        this.drinkRepository = drinkRepository;
-        loadData();
-        retrieveData();
-    }
+//    public LoadInitData(RestaurantRepository restaurantRepository,
+//                        DinnerTableRepository dinnerTableRepository,
+//                        DrinkRepository drinkRepository,
+//                        ClientRepository clientRepository,
+//                        OrderRepository orderRepository,
+//                        CourseRepository courseRepository,
+//                        BookingRepository bookingRepository) {
+//        this.restaurantRepository = restaurantRepository;
+//        this.dinnerTableRepository = dinnerTableRepository;
+//        this.bookingRepository = bookingRepository;
+//        this.clientRepository = clientRepository;
+//        this.orderRepository = orderRepository;
+//        this.courseRepository = courseRepository;
+//        this.drinkRepository = drinkRepository;
+//        loadData();
+//        retrieveData();
+//    }
 
-    private void retrieveData() {
+    public void retrieveData() {
         log.info("Drinks in DB: {}", drinkRepository.findAll().size());
         log.info("Courses in DB: {}", courseRepository.findAll().size());
         log.info("Orders in DB: {}", orderRepository.findAll().size());
@@ -50,7 +52,7 @@ public class LoadInitData {
         log.info("{}: {}, {}", drink.getId(), drink.getDescription(), drink.getPrice());
     }
 
-    private void loadData() {
+    public void loadData() {
         Drink drink_1 = Drink.builder()
                 .description("CocaCola")
                 .price(2.5)
