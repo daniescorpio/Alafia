@@ -1,6 +1,6 @@
 <div>
   <h1>Seleccion de bebida</h1>
-  <p *ngFor="let drink of this.getDrinkKeys()" (click)="selectDrink(drink)">{{drink.description}}: {{drink.price}}€</p>
+  <p *ngFor="let drink of this.drinks" (click)="selectDrink(drink)">{{drink.description}}: {{drink.price}}€</p>
   <div *ngIf="selectedDrink!=null">
     <h2>Bebida elegida: {{this.selectedDrink.description}}</h2>
     <button mat-flat-button color="primary" (click)="confirmSelectedDrink()">Confirmar bebida</button>

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Table} from '../../model/table';
+import {DinnerTable} from '../../model/dinnerTable';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {SelectClientComponent} from '../select-client/select-client.component';
+import {Restaurant} from "../../model/restaurant";
 
 @Component({
   selector: 'app-welcome',
@@ -12,15 +13,14 @@ import {SelectClientComponent} from '../select-client/select-client.component';
 })
 export class WelcomeComponent implements OnInit {
 
-  table: Table = this.dataService.activeTable;
+  // table: DinnerTable = this.dataService.activeTable;
+  // table: DinnerTable;
 
   constructor(public dataService: DataService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.dataService.getRestaurants().subscribe((data) => {
-      console.log(data);
-    });
+    this.dataService.loadMockedData();
   }
 
   confirmClientInTable() {
@@ -32,7 +32,7 @@ export class WelcomeComponent implements OnInit {
       width: '250px',
       data: this.dataService.restaurant
     }).afterClosed().subscribe(result => {
-      this.table = this.dataService.activeTable;
+
     });
   }
 }

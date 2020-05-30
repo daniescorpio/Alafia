@@ -1,7 +1,7 @@
 import {Client} from './client';
 import {Booking} from './booking';
 
-export class Table {
+export class DinnerTable {
   id: string;
   booking: Booking;
 

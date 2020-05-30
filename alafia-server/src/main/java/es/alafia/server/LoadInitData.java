@@ -21,24 +21,6 @@ public class LoadInitData {
     private final CourseRepository courseRepository;
     private final DrinkRepository drinkRepository;
 
-//    public LoadInitData(RestaurantRepository restaurantRepository,
-//                        DinnerTableRepository dinnerTableRepository,
-//                        DrinkRepository drinkRepository,
-//                        ClientRepository clientRepository,
-//                        OrderRepository orderRepository,
-//                        CourseRepository courseRepository,
-//                        BookingRepository bookingRepository) {
-//        this.restaurantRepository = restaurantRepository;
-//        this.dinnerTableRepository = dinnerTableRepository;
-//        this.bookingRepository = bookingRepository;
-//        this.clientRepository = clientRepository;
-//        this.orderRepository = orderRepository;
-//        this.courseRepository = courseRepository;
-//        this.drinkRepository = drinkRepository;
-//        loadData();
-//        retrieveData();
-//    }
-
     public void retrieveData() {
         log.info("Drinks in DB: {}", drinkRepository.findAll().size());
         log.info("Courses in DB: {}", courseRepository.findAll().size());

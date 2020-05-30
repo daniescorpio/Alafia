@@ -1,9 +1,10 @@
-import {Table} from './table';
+import {DinnerTable} from './dinnerTable';
 
 export class Restaurant {
-  tables: Table[];
+  id: string;
+  dinnerTables: DinnerTable[];
 
-  constructor(tables: Table[]) {
-    this.tables = tables;
+  constructor(tables: DinnerTable[]) {
+    this.dinnerTables = tables;
   }
 }

@@ -1,5 +1,6 @@
 package es.alafia.server.controller;
 
+import es.alafia.server.LoadInitData;
 import es.alafia.server.model.*;
 import es.alafia.server.model.exception.TableNotFoundException;
 import es.alafia.server.service.DataService;
@@ -17,40 +18,66 @@ import java.util.List;
 public class AlafiaController {
 
     private final DataService dataService;
+    private final LoadInitData loadInitData;
+
+    @GetMapping(value = "/load-data")
+    public void loadMockedData() {
+        if (dataService.checkDBEmpty()) {
+            log.info("DB empty, loading initial data");
+            loadInitData.loadData();
+            log.info("Mocked data loaded in DB");
+        } else {
+            log.info("DB with data, load isn't necessary");
+        }
+    }
 
     @GetMapping(value = "/restaurants")
     public List<Restaurant> getRestaurantsData() {
-        return dataService.retrieveRestaurantsData();
+        List<Restaurant> restaurants = dataService.retrieveRestaurantsData();
+        log.info("Found {} restaurants in DB", restaurants.size());
+        return restaurants;
     }
 
     @GetMapping(value = "/dinner-tables")
     public List<DinnerTable> getDinnerTablesData() {
-        return dataService.retrieveDinnerTablesData();
+        List<DinnerTable> dinnerTables = dataService.retrieveDinnerTablesData();
+        log.info("Found {} dinner tables in DB", dinnerTables.size());
+        return dinnerTables;
     }
 
     @GetMapping(value = "/bookings")
     public List<Booking> getBookingsData() {
-        return dataService.retrieveBookingsData();
+        List<Booking> bookings = dataService.retrieveBookingsData();
+        log.info("Found {} bookings in DB", bookings.size());
+        return bookings;
     }
 
     @GetMapping(value = "/clients")
     public List<Client> getClientsData() {
-        return dataService.retrieveClientsData();
+        List<Client> clients = dataService.retrieveClientsData();
+        log.info("Found {} clients in DB", clients.size());
+        return clients;
     }
 
     @GetMapping(value = "/orders")
     public List<Order> getOrdersData() {
-        return dataService.retrieveOrdersData();
+        List<Order> orders = dataService.retrieveOrdersData();
+        log.info("Found {} orders in DB", orders.size());
+        return orders;
     }
 
     @GetMapping(value = "/courses")
     public List<Course> getCoursesData() {
-        return dataService.retrieveCoursesData();
+        List<Course> courses = dataService.retrieveCoursesData();
+        log.info("Found {} courses in DB", courses.size());
+        return courses;
     }
 
     @GetMapping(value = "/drinks")
     public List<Drink> getDrinksData() {
-        return dataService.retrieveDrinksData();
+        List<Drink> drinks = dataService.retrieveDrinksData();
+        log.info("Found {} drinks in DB", drinks.size());
+        return drinks;
     }
 
     @GetMapping(value = "/active-table")
@@ -61,7 +88,9 @@ public class AlafiaController {
     @PostMapping(value = "/restaurants")
     @ResponseStatus(HttpStatus.CREATED)
     public Restaurant saveNewRestaurant(@RequestBody Restaurant restaurant) {
-        return dataService.saveNewRestaurant(restaurant);
+        Restaurant newRestaurant = dataService.saveNewRestaurant(restaurant);
+        log.info("Restaurant saved with id: {}", newRestaurant.getId());
+        return newRestaurant;
     }
 
     @PostMapping(value = "/dinner-tables")
@@ -78,8 +107,10 @@ public class AlafiaController {
 
     @PostMapping(value = "/clients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client saveNewClient(Client client) {
-        return dataService.saveNewClient(client);
+    public Client saveNewClient(@RequestBody ClientDTO client) {
+        Client newClient = dataService.saveNewClient(client);
+        log.info("Client saved with id: {}", newClient.getId());
+        return newClient;
     }
 
     @PostMapping(value = "/orders")

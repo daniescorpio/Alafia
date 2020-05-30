@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Restaurant} from '../model/restaurant';
-import {Table} from '../model/table';
+import {DinnerTable} from '../model/dinnerTable';
 import {Client} from '../model/client';
 import {Order} from '../model/order';
 import {Course} from '../model/course';
@@ -14,7 +14,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class DataService {
 
-  course1: Course = new Course(
+  /*course1: Course = new Course(
     'id_course1',
     'course1_name',
     9.4,
@@ -69,31 +69,131 @@ export class DataService {
     [this.client1, this.client2]
   );
 
-  table1: Table = new Table(
+  table1: DinnerTable = new DinnerTable(
     'id_table1',
     this.booking1,
     [this.client2]);
-  table2: Table = new Table(
+  table2: DinnerTable = new DinnerTable(
     'id_table2',
     this.booking2,
     [this.client1]);
 
   restaurant: Restaurant = new Restaurant(
-    [this.table1, this.table2]);
+    [this.table1, this.table2]);*/
 
-  stock: Stock = new Stock();
+  // stock: Stock = new Stock();
 
-  activeTable: Table = this.table1;
-  activeClient: Client = this.client1;
+  apiPath = 'http://localhost:8080/api';
 
-  constructor(private httpClient: HttpClient) {
-    const drinksStock = new Map();
-    drinksStock.set(this.drink1, 100);
-    drinksStock.set(this.drink2, 90);
-    this.stock.setDrinks(drinksStock);
+  restaurant: Restaurant;
+
+  activeTable: DinnerTable;
+  activeClient: Client;
+
+  constructor(private httpClient: HttpClient) {}
+
+  loadMockedData() {
+    return this.httpClient.get(this.apiPath + '/load-data').subscribe(data => {
+      console.log('Data loaded complete')
+      console.log('Setting default restaurant...')
+      this.setDefaultRestaurant();
+    });
   }
 
+  setDefaultRestaurant() {
+    this.getRestaurants().subscribe((data: Restaurant[]) => {
+      console.log('Retrieved ' + data.length + ' restaurants from server');
+      console.log(data)
+      if (data.length > 0) {
+        this.restaurant = data[0];
+        console.log('Restaurant setted: ' + this.restaurant.id)
+      }
+      this.setDefaultActiveDinnerTable();
+    })
+  }
+
+  setDefaultActiveDinnerTable() {
+    this.activeTable = this.restaurant.dinnerTables[0];
+    console.log('Active table setted: ', this.activeTable.id);
+    console.log(this.activeTable);
+  }
+
+  // ******** BASIC API OPERATIONS ********
+
   getRestaurants() {
-    return this.httpClient.get('http://localhost:8080/api/restaurants');
+    return this.httpClient.get(this.apiPath + '/restaurants');
+  }
+
+  postRestaurant(restaurant: Restaurant) {
+    return this.httpClient.post(this.apiPath + '/restaurants', restaurant).subscribe(data => {
+      console.log('Restaurant saved: ')
+      console.log(data)
+    });
+  }
+
+  getDinnerTables() {
+    return this.httpClient.get(this.apiPath + '/dinner-tables');
+  }
+
+  postDinnerTable(dinnerTable: DinnerTable) {
+    return this.httpClient.post(this.apiPath + '/dinner-tables', dinnerTable).subscribe(data => {
+      console.log('Dinner table saved: ')
+      console.log(data)
+    });
+  }
+
+  getBookings() {
+    return this.httpClient.get(this.apiPath + '/bookings');
+  }
+
+  postBooking(booking: Booking) {
+    return this.httpClient.post(this.apiPath + '/booking', booking).subscribe(data => {
+      console.log('Booking saved: ')
+      console.log(data)
+    });
+  }
+
+  getClients() {
+    return this.httpClient.get(this.apiPath + '/clients');
+  }
+
+  postClient(client: Client) {
+    return this.httpClient.post(this.apiPath + '/clients', client).subscribe(data => {
+      console.log('Client saved: ')
+      console.log(data)
+    });
+  }
+
+  getOrders() {
+    return this.httpClient.get(this.apiPath + '/orders');
+  }
+
+  postOrder(order: Order) {
+    return this.httpClient.post(this.apiPath + '/orders', order).subscribe(data => {
+      console.log('Order saved: ')
+      console.log(data)
+    });
+  }
+
+  getCourses() {
+    return this.httpClient.get(this.apiPath + '/courses');
+  }
+
+  postCourse(course: Course) {
+    return this.httpClient.post(this.apiPath + '/courses', course).subscribe(data => {
+      console.log('Course saved: ')
+      console.log(data)
+    });
+  }
+
+  getDrinks() {
+    return this.httpClient.get(this.apiPath + '/drinks');
+  }
+
+  postDrink(drink: Drink) {
+    return this.httpClient.post(this.apiPath + '/drinks', drink).subscribe(data => {
+      console.log('Drink saved: ')
+      console.log(data)
+    });
   }
 }

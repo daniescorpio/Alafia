@@ -23,9 +23,9 @@ export class SelectClientComponent implements OnInit {
 
   saveAsNewClient(idNewClient) {
     console.log(this.dataService.activeTable);
-    this.dataService.activeTable = this.data.tables.find(table => table.booking.client.id === idNewClient);
+    this.dataService.activeTable = this.data.dinnerTables.find(table => table.booking.client.id === idNewClient);
     console.log('finding booking id: ', idNewClient);
-    console.log(this.data.tables);
+    console.log(this.data.dinnerTables);
     console.log(this.dataService.activeTable);
     this.dialogRef.close();
   }

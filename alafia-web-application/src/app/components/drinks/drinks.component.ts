@@ -11,14 +11,19 @@ import {Router} from '@angular/router';
 export class DrinksComponent implements OnInit {
 
   selectedDrink: Drink;
+  drinks: Drink[];
 
   constructor(public dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getDrinkKeys();
   }
 
   getDrinkKeys() {
-    return Array.from(this.dataService.stock.getDrinks().keys());
+    this.dataService.getDrinks().subscribe((data: Drink[]) => {
+      console.log('Retrieved ' + data.length + ' drinks from DB')
+      this.drinks = data;
+    });
   }
 
   selectDrink(selectedDrink: Drink) {
@@ -26,6 +31,7 @@ export class DrinksComponent implements OnInit {
   }
 
   confirmSelectedDrink() {
+    //TODO: set selected drink into client
     this.router.navigateByUrl('/welcome');
   }
 }

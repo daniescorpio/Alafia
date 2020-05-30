@@ -32,7 +32,9 @@ export class WarmUpComponent implements OnInit {
       data: this.dataService.restaurant
     }).afterClosed().subscribe(result => {
       console.log(this.dataService.activeClient.mail);
-      if (result) this.router.navigateByUrl('/drinks');
+      if (result) {
+        this.router.navigateByUrl('/drinks');
+      }
     });
   }
 }

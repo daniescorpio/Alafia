@@ -34,7 +34,9 @@ export class AddClientComponent implements OnInit {
     if (this.loginForm.value.email === null || this.loginForm.value.name === null) {
       this.dialogRef.close(false);
     }
-    this.dataService.activeTable.booking.diners.push(new Client(null, this.loginForm.value.name, this.loginForm.value.email, null));
+    let newClient = new Client(null, this.dataService.activeTable.booking.id, this.loginForm.value.name, this.loginForm.value.email, null);
+    this.dataService.activeTable.booking.diners.push(newClient);
+    this.dataService.postClient(newClient);
     this.dataService.activeClient = this.dataService.activeTable.booking.diners.find(client => client.mail = this.loginForm.value.email);
     this.dialogRef.close(true);
   }
