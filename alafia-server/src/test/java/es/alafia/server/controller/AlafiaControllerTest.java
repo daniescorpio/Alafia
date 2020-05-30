@@ -1,16 +1,14 @@
 package es.alafia.server.controller;
 
 import es.alafia.server.model.*;
-import es.alafia.server.model.exception.TableNotFoundException;
+import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
 
-import java.awt.print.Book;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -174,7 +172,7 @@ public class AlafiaControllerTest {
     }
 
     @Test
-    void shouldCallDataServiceToRetrieveDataOfActiveTable() throws TableNotFoundException {
+    void shouldCallDataServiceToRetrieveDataOfActiveTable() throws RequestedItemNotFoundException {
         String activeTableId = "activeTableId";
         when(dataService.retrieveTable(anyString())).thenReturn(DinnerTable.builder().build());
 

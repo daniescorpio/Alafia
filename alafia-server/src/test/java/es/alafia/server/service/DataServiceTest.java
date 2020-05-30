@@ -1,7 +1,7 @@
 package es.alafia.server.service;
 
 import es.alafia.server.model.*;
-import es.alafia.server.model.exception.TableNotFoundException;
+import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -191,7 +191,7 @@ public class DataServiceTest {
     }
 
     @Test
-    void shouldRetrieveFromDBATable() throws TableNotFoundException {
+    void shouldRetrieveFromDBATable() throws RequestedItemNotFoundException {
         String tableId = "tableId";
         when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(DinnerTable.builder().build()));
 
@@ -205,7 +205,7 @@ public class DataServiceTest {
         String tableId = "tableId";
         when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.empty());
 
-        TableNotFoundException exception = assertThrows(TableNotFoundException.class, () -> {
+        RequestedItemNotFoundException exception = assertThrows(RequestedItemNotFoundException.class, () -> {
             dataService.retrieveTable(tableId);
         });
 

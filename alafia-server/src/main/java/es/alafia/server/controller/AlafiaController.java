@@ -2,7 +2,9 @@ package es.alafia.server.controller;
 
 import es.alafia.server.LoadInitData;
 import es.alafia.server.model.*;
-import es.alafia.server.model.exception.TableNotFoundException;
+import es.alafia.server.model.dto.AddDrinkDTO;
+import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -81,7 +83,7 @@ public class AlafiaController {
     }
 
     @GetMapping(value = "/active-table")
-    public DinnerTable getActiveTable(String activeTableId) throws TableNotFoundException {
+    public DinnerTable getActiveTable(String activeTableId) throws RequestedItemNotFoundException {
         return dataService.retrieveTable(activeTableId);
     }
 
@@ -95,19 +97,19 @@ public class AlafiaController {
 
     @PostMapping(value = "/dinner-tables")
     @ResponseStatus(HttpStatus.CREATED)
-    public DinnerTable saveNewDinnerTable(DinnerTable dinnerTable) {
+    public DinnerTable saveNewDinnerTable(@RequestBody DinnerTable dinnerTable) {
         return dataService.saveNewDinnerTable(dinnerTable);
     }
 
     @PostMapping(value = "/bookings")
     @ResponseStatus(HttpStatus.CREATED)
-    public Booking saveNewBooking(Booking booking) {
+    public Booking saveNewBooking(@RequestBody Booking booking) {
         return dataService.saveNewBooking(booking);
     }
 
     @PostMapping(value = "/clients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client saveNewClient(@RequestBody ClientDTO client) {
+    public Client saveNewClient(@RequestBody ClientDTO client) throws RequestedItemNotFoundException {
         Client newClient = dataService.saveNewClient(client);
         log.info("Client saved with id: {}", newClient.getId());
         return newClient;
@@ -115,20 +117,27 @@ public class AlafiaController {
 
     @PostMapping(value = "/orders")
     @ResponseStatus(HttpStatus.CREATED)
-    public Order saveNewOrder(Order order) {
+    public Order saveNewOrder(@RequestBody Order order) {
         return dataService.saveNewOrder(order);
     }
 
     @PostMapping(value = "/courses")
     @ResponseStatus(HttpStatus.CREATED)
-    public Course saveNewCourse(Course course) {
+    public Course saveNewCourse(@RequestBody Course course) {
         return dataService.saveNewCourse(course);
     }
 
     @PostMapping(value = "/drinks")
     @ResponseStatus(HttpStatus.CREATED)
-    public Drink saveNewDrink(Drink drink) {
+    public Drink saveNewDrink(@RequestBody Drink drink) {
         return dataService.saveNewDrink(drink);
+    }
+
+    @PostMapping(value = "/add-drink")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client addDrinkInClient(@RequestBody AddDrinkDTO addDrinkDTO) throws RequestedItemNotFoundException {
+        log.info("Trying to add drink with id {} in client with id {}", addDrinkDTO.getDrinkId(), addDrinkDTO.getClientId());
+        return dataService.addDrinkInClient(addDrinkDTO);
     }
 }
 

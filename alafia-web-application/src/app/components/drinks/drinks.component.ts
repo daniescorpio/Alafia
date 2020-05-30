@@ -31,7 +31,7 @@ export class DrinksComponent implements OnInit {
   }
 
   confirmSelectedDrink() {
-    //TODO: set selected drink into client
+    this.dataService.addDrinkToClient(this.dataService.activeClient.id, this.selectedDrink.id);
     this.router.navigateByUrl('/welcome');
   }
 }

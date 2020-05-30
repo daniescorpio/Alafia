@@ -1,7 +1,9 @@
 package es.alafia.server.service;
 
 import es.alafia.server.model.*;
-import es.alafia.server.model.exception.TableNotFoundException;
+import es.alafia.server.model.dto.AddDrinkDTO;
+import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +76,7 @@ public class DataService {
         return bookingRepository.save(booking);
     }
 
-    public Client saveNewClient(ClientDTO client) {
+    public Client saveNewClient(ClientDTO client) throws RequestedItemNotFoundException {
         log.info("Saving new client for booking: {}", client.getBookingId());
         Client newClient = Client.builder()
                 .name(client.getName())
@@ -98,18 +100,44 @@ public class DataService {
 
     //TODO: Move under basic rest operations
 
-    public DinnerTable retrieveTable(String tableId) throws TableNotFoundException {
+    public DinnerTable retrieveTable(String tableId) throws RequestedItemNotFoundException {
         try {
             return dinnerTableRepository.findById(tableId).orElseThrow();
         } catch (Exception e) {
-            throw new TableNotFoundException("Table with id " + tableId + " not found in DB");
+            throw new RequestedItemNotFoundException("Table with id " + tableId + " not found in DB");
         }
     }
 
-    private void updateBookingWithNewClientData(ClientDTO client, Client newClient) {
-        Booking booking = bookingRepository.findById(client.getBookingId()).orElseThrow();
+    private void updateBookingWithNewClientData(ClientDTO client, Client newClient) throws RequestedItemNotFoundException {
+        Booking booking;
+        try {
+            booking = bookingRepository.findById(client.getBookingId()).orElseThrow();
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Booking with id " + client.getBookingId() + " not found in DB");
+        }
         booking.getDiners().add(
                 newClient);
         bookingRepository.save(booking);
+    }
+
+    public Client addDrinkInClient(AddDrinkDTO addDrinkDTO) throws RequestedItemNotFoundException {
+        Client client;
+        Drink drink;
+        try {
+            client = clientRepository.findById(addDrinkDTO.getClientId()).orElseThrow();
+            log.info("Client with id {} retrieved from DB correctly", addDrinkDTO.getClientId());
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Client with id " + addDrinkDTO.getClientId() + " not found in DB");
+        }
+        try {
+            drink = drinkRepository.findById(addDrinkDTO.getDrinkId()).orElseThrow();
+            log.info("Drink with id {} retrieved from DB correctly", addDrinkDTO.getDrinkId());
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Drink with id " + addDrinkDTO.getDrinkId() + " not found in DB");
+        }
+        client.getOrder().getDrinks().add(drink);
+        Client clientWithDrinkAgreed = clientRepository.save(client);
+        log.info("Drink agreed correctly in client");
+        return clientWithDrinkAgreed;
     }
 }

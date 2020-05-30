@@ -6,7 +6,6 @@ import {Order} from '../model/order';
 import {Course} from '../model/course';
 import {Drink} from '../model/drink';
 import {Booking} from '../model/booking';
-import {Stock} from '../model/stock';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -90,7 +89,8 @@ export class DataService {
   activeTable: DinnerTable;
   activeClient: Client;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+  }
 
   loadMockedData() {
     return this.httpClient.get(this.apiPath + '/load-data').subscribe(data => {
@@ -116,6 +116,13 @@ export class DataService {
     this.activeTable = this.restaurant.dinnerTables[0];
     console.log('Active table setted: ', this.activeTable.id);
     console.log(this.activeTable);
+  }
+
+  addDrinkToClient(clientId: string, drinkId: string) {
+    return this.httpClient.post(this.apiPath + '/add-drink', {'clientId': clientId, 'drinkId': drinkId}).subscribe(data => {
+      console.log('Drink with id '+ drinkId + ' added in client with id ' + clientId)
+      console.log(data)
+    })
   }
 
   // ******** BASIC API OPERATIONS ********
