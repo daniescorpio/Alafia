@@ -121,7 +121,7 @@ public class LoadInitData {
 
         Booking booking_1 = Booking.builder()
                 .client(client_1)
-                .diners(List.of(client_1, client_2))
+                .diners(List.of(client_1/*, client_2*/))
                 .build();
         Booking booking_2 = Booking.builder()
                 .client(client_4)
@@ -136,7 +136,7 @@ public class LoadInitData {
                 .build();
 
         Restaurant restaurant = Restaurant.builder()
-                .dinnerTables(List.of(dinnerTable_1, dinnerTable_2))
+                .dinnerTables(List.of(dinnerTable_1/*, dinnerTable_2*/))
                 .build();
 
         drinkRepository.save(drink_1);

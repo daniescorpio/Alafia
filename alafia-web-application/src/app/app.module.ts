@@ -27,6 +27,7 @@ import {DrinksComponent} from './components/drinks/drinks.component';
 import {AddClientComponent} from './components/add-client/add-client.component';
 import { RoomManagerComponent } from './components/room-manager/room-manager.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { SelectedTableComponent } from './components/selected-table/selected-table.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     WarmUpComponent,
     DrinksComponent,
     AddClientComponent,
-    RoomManagerComponent
+    RoomManagerComponent,
+    SelectedTableComponent
   ],
   imports: [
     BrowserModule,

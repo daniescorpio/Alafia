@@ -1,0 +1,23 @@
+<div>
+  <h2><b>Mesa seleccionada: </b>{{this.data.id}}</h2>
+  <mat-grid-list cols="2" rowHeight="1:2">
+    <h3>Comensales:</h3>
+    <mat-grid-tile *ngFor="let dinner of this.dinners">
+      <div class="gridElement">
+        <p><b>Id cliente: </b></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;{{dinner.id}}</p>
+        <p><b>Nombre cliente: </b></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;{{dinner.name}}</p>
+        <p><b>Platos: </b></p>
+        <div *ngFor="let course of dinner.order.courses" (click)="setCourseStatus(course.id, dinner.id)" class="courses">
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;{{course.description}}:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span *ngIf="!course.served"><b>En espera</b></span>
+          <span *ngIf="course.served"><b>Servido</b></span>
+        </div>
+        <p></p>
+        <p><b>Bebidas: </b></p>
+        <p *ngFor="let drink of dinner.order.drinks">&nbsp;&nbsp;&nbsp;&nbsp;{{drink.description}}</p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

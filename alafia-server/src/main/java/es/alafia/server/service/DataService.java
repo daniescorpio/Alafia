@@ -3,6 +3,7 @@ package es.alafia.server.service;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.AddDrinkDTO;
 import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.dto.UpdateCourseDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.repository.*;
 import lombok.AllArgsConstructor;
@@ -82,8 +83,9 @@ public class DataService {
                 .name(client.getName())
                 .mail(client.getMail())
                 .build();
-        updateBookingWithNewClientData(client, newClient);
-        return clientRepository.save(newClient);
+        Client savedClient = clientRepository.save(newClient);
+        updateParentsWithNewClientData(client, savedClient);
+        return savedClient;
     }
 
     public Order saveNewOrder(Order order) {
@@ -108,7 +110,7 @@ public class DataService {
         }
     }
 
-    private void updateBookingWithNewClientData(ClientDTO client, Client newClient) throws RequestedItemNotFoundException {
+    private void updateParentsWithNewClientData(ClientDTO client, Client newClient) throws RequestedItemNotFoundException {
         Booking booking;
         try {
             booking = bookingRepository.findById(client.getBookingId()).orElseThrow();
@@ -118,6 +120,26 @@ public class DataService {
         booking.getDiners().add(
                 newClient);
         bookingRepository.save(booking);
+
+        DinnerTable dinnerTable;
+        try {
+            dinnerTable = dinnerTableRepository.findById(client.getDinnerTableId()).orElseThrow();
+        }
+        catch (Exception e) {
+            throw new RequestedItemNotFoundException("Booking with id " + client.getBookingId() + " not found in DB");
+        }
+        dinnerTable.setBooking(booking);
+        dinnerTableRepository.save(dinnerTable);
+
+        Restaurant restaurant;
+        try {
+            restaurant = restaurantRepository.findById(client.getRestaurantId()).orElseThrow();
+        }
+        catch (Exception e) {
+            throw new RequestedItemNotFoundException("Booking with id " + client.getBookingId() + " not found in DB");
+        }
+        restaurant.getDinnerTables().stream().filter(table -> table.getId().equals(client.getDinnerTableId())).findFirst().orElseThrow().setBooking(booking);
+        restaurantRepository.save(restaurant);
     }
 
     public Client addDrinkInClient(AddDrinkDTO addDrinkDTO) throws RequestedItemNotFoundException {
@@ -139,5 +161,36 @@ public class DataService {
         Client clientWithDrinkAgreed = clientRepository.save(client);
         log.info("Drink agreed correctly in client");
         return clientWithDrinkAgreed;
+    }
+
+    public Course updateCourseStatus(UpdateCourseDTO courseDTO) throws RequestedItemNotFoundException {
+        Client client;
+        Course course;
+        try {
+            client = clientRepository.findById(courseDTO.getClientId()).orElseThrow();
+            log.info("Client with id {} retrieved from DB correctly", courseDTO.getClientId());
+        }
+        catch (Exception e) {
+            throw new RequestedItemNotFoundException("Client with id " + courseDTO.getClientId() + " not found in DB");
+        }
+        try {
+            course = courseRepository.findById(courseDTO.getCourseId()).orElseThrow();
+            log.info("Course with id {} retrieved from DB correctly", courseDTO.getCourseId());
+        }
+        catch (Exception e) {
+            throw new RequestedItemNotFoundException("Client with id " + courseDTO.getClientId() + " not found in DB");
+        }
+        boolean newCourseStatus = !course.isServed();
+        course.setServed(newCourseStatus);
+        courseRepository.save(course);
+        log.info("New status for course with id {} is {}", courseDTO.getCourseId(), newCourseStatus);
+        client.getOrder().getCourses().stream()
+                .filter(c -> c.getId().equals(courseDTO.getCourseId()))
+                .findFirst()
+                .orElseThrow()
+                .setServed(newCourseStatus);
+        clientRepository.save(client);
+        log.info("Client with id {} updated with new course status", courseDTO.getClientId());
+        return course;
     }
 }

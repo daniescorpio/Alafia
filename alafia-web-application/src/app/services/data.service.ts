@@ -7,6 +7,7 @@ import {Course} from '../model/course';
 import {Drink} from '../model/drink';
 import {Booking} from '../model/booking';
 import {HttpClient} from '@angular/common/http';
+import {ClientDto} from "../model/dto/clientDto";
 
 @Injectable({
   providedIn: 'root'
@@ -119,10 +120,20 @@ export class DataService {
   }
 
   addDrinkToClient(clientId: string, drinkId: string) {
-    return this.httpClient.post(this.apiPath + '/add-drink', {'clientId': clientId, 'drinkId': drinkId}).subscribe(data => {
-      console.log('Drink with id '+ drinkId + ' added in client with id ' + clientId)
-      console.log(data)
-    })
+    //TODO: Solo se actualizan la tabla clients y drinks
+    return this.httpClient.post(this.apiPath + '/add-drink', {'clientId': clientId, 'drinkId': drinkId})
+      .subscribe(data => {
+        console.log('Drink with id ' + drinkId + ' added in client with id ' + clientId)
+        console.log(data)
+      });
+  }
+
+  updateCourseStatus(clientId: string, courseId: string) {
+    //TODO: Solo se actualizan la tabla clients y courses
+    return this.httpClient.post(this.apiPath + '/update-course', {'clientId': clientId, 'courseId': courseId})
+      .subscribe((data: Course) => {
+        console.log('Course with id ' + courseId + 'updated with status ' + data.served)
+      });
   }
 
   // ******** BASIC API OPERATIONS ********
@@ -164,11 +175,9 @@ export class DataService {
     return this.httpClient.get(this.apiPath + '/clients');
   }
 
-  postClient(client: Client) {
-    return this.httpClient.post(this.apiPath + '/clients', client).subscribe(data => {
-      console.log('Client saved: ')
-      console.log(data)
-    });
+  postClient(client: ClientDto) {
+    //TODO: Solo se actualiza la tabla clientes
+    return this.httpClient.post(this.apiPath + '/clients', client);
   }
 
   getOrders() {

@@ -4,6 +4,7 @@ import es.alafia.server.LoadInitData;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.AddDrinkDTO;
 import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.dto.UpdateCourseDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
 import lombok.AllArgsConstructor;
@@ -138,6 +139,13 @@ public class AlafiaController {
     public Client addDrinkInClient(@RequestBody AddDrinkDTO addDrinkDTO) throws RequestedItemNotFoundException {
         log.info("Trying to add drink with id {} in client with id {}", addDrinkDTO.getDrinkId(), addDrinkDTO.getClientId());
         return dataService.addDrinkInClient(addDrinkDTO);
+    }
+
+    @PostMapping(value = "/update-course")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Course updateCourseInClient(@RequestBody UpdateCourseDTO courseDTO) throws RequestedItemNotFoundException {
+        log.info("Trying to update course with id {} in client with id {}", courseDTO.getCourseId(), courseDTO.getClientId());
+        return dataService.updateCourseStatus(courseDTO);
     }
 }
 

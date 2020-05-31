@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DataService} from '../../services/data.service';
-import {Client} from '../../model/client';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Restaurant} from '../../model/restaurant';
+import {ClientDto} from "../../model/dto/clientDto";
+import {Client} from "../../model/client";
 
 @Component({
   selector: 'app-add-client',
@@ -25,7 +26,8 @@ export class AddClientComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AddClientComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Restaurant,
-              public dataService: DataService) { }
+              public dataService: DataService) {
+  }
 
   ngOnInit(): void {
   }
@@ -34,9 +36,21 @@ export class AddClientComponent implements OnInit {
     if (this.loginForm.value.email === null || this.loginForm.value.name === null) {
       this.dialogRef.close(false);
     }
-    let newClient = new Client(null, this.dataService.activeTable.booking.id, this.loginForm.value.name, this.loginForm.value.email, null);
-    this.dataService.activeTable.booking.diners.push(newClient);
-    this.dataService.postClient(newClient);
+    let newClient = new ClientDto(
+      this.loginForm.value.name,
+      this.loginForm.value.email,
+      this.dataService.activeTable.booking.id,
+      this.dataService.activeTable.id,
+      this.dataService.restaurant.id
+    );
+    //TODO: Set new client as active client
+    // this.dataService.activeTable.booking.diners.push(newClient);
+    // this.dataService.activeClient = this.dataService.activeTable.booking.diners.find(client => client.mail = this.loginForm.value.email);
+
+    this.dataService.postClient(newClient).subscribe((data: Client) => {
+      console.log(data);
+      this.dataService.activeTable.booking.diners.push(data);
+    });
     this.dataService.activeClient = this.dataService.activeTable.booking.diners.find(client => client.mail = this.loginForm.value.email);
     this.dialogRef.close(true);
   }
