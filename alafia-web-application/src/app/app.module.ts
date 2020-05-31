@@ -25,7 +25,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {WarmUpComponent} from './components/warm-up/warm-up.component';
 import {DrinksComponent} from './components/drinks/drinks.component';
 import {AddClientComponent} from './components/add-client/add-client.component';
-
+import { RoomManagerComponent } from './components/room-manager/room-manager.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {AddClientComponent} from './components/add-client/add-client.component';
     SelectClientComponent,
     WarmUpComponent,
     DrinksComponent,
-    AddClientComponent
+    AddClientComponent,
+    RoomManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import {AddClientComponent} from './components/add-client/add-client.component';
     MatDialogModule,
     MatListModule,
     MatSidenavModule,
-    HttpClientModule
+    HttpClientModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

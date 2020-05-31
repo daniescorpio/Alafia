@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {WarmUpComponent} from './components/warm-up/warm-up.component';
 import {DrinksComponent} from './components/drinks/drinks.component';
+import {RoomManagerComponent} from "./components/room-manager/room-manager.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -25,6 +26,9 @@ const appRoutes: Routes = [
   },
   { path: 'drinks',
     component: DrinksComponent
+  },
+  { path: 'room-manager',
+    component: RoomManagerComponent
   }
 ];
 export default appRoutes;

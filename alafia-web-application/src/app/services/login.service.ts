@@ -20,7 +20,7 @@ export class LoginService {
 
   public onClickLogin(value: any) {
     if (value.email === 'alafia@alafia.es' && value.password === 'alafia') {
-      this.router.navigateByUrl('/welcome');
+      this.router.navigateByUrl('/room-manager');
       this.user = value.email;
       this.password = value.password;
       this.logged = true;

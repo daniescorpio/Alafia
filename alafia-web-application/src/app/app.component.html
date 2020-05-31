@@ -11,6 +11,7 @@
   <mat-drawer-container class="example-container">
     <mat-drawer #drawer class="example-sidenav" mode="side">
       <p (click)="this.dataService.loadMockedData(); drawer.toggle()">Load mocked data</p>
+      <p (click)="onClick('login'); drawer.toggle()">Room Manager</p>
       <p (click)="onClick('welcome'); drawer.toggle()">Welcome</p>
       <p (click)="onClick('warm-up'); drawer.toggle()">Warm Up</p>
       <p (click)="onClick('drinks'); drawer.toggle()">Drinks</p>
