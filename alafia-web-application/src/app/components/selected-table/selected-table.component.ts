@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {DinnerTable} from "../../model/dinnerTable";
 import {Client} from "../../model/client";
 import {DataService} from "../../services/data.service";
+import {CourseDto} from "../../model/dto/courseDto";
 import {Course} from "../../model/course";
 
 @Component({
@@ -21,7 +22,22 @@ export class SelectedTableComponent implements OnInit {
     this.dinners = this.data.booking.diners;
   }
 
-  setCourseStatus(clientId: string, courseId: string) {
-    this.dataService.updateCourseStatus(courseId, clientId);
+  setCourseStatus(courseId: string) {
+    let courseDto: CourseDto = new CourseDto(
+      courseId,
+      this.dataService.activeClient.order.id,
+      this.dataService.activeClient.id,
+      this.dataService.activeTable.booking.id,
+      this.dataService.activeTable.id,
+      this.dataService.restaurant.id
+    );
+    this.dataService.updateCourseStatus(courseDto)
+      .subscribe((data: Course) => {
+        console.log('Course with id ' + courseDto.courseId + 'updated with status ' + data.served)
+        this.dataService.getDinnersForTable(this.dataService.activeTable.id)
+          .subscribe((table: DinnerTable) => {
+            this.dinners = table.booking.diners;
+          });
+      });
   }
 }

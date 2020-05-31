@@ -155,15 +155,15 @@ public class LoadInitData {
         orderRepository.save(order_4);
 
         clientRepository.save(client_1);
-        clientRepository.save(client_2);
-        clientRepository.save(client_3);
-        clientRepository.save(client_4);
+//        clientRepository.save(client_2);
+//        clientRepository.save(client_3);
+//        clientRepository.save(client_4);
 
         bookingRepository.save(booking_1);
-        bookingRepository.save(booking_2);
+//        bookingRepository.save(booking_2);
 
         dinnerTableRepository.save(dinnerTable_1);
-        dinnerTableRepository.save(dinnerTable_2);
+//        dinnerTableRepository.save(dinnerTable_2);
 
         restaurantRepository.save(restaurant);
     }

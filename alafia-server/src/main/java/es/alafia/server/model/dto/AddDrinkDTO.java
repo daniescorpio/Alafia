@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddDrinkDTO {
-    private String clientId;
     private String drinkId;
+    private String orderId;
+    private String clientId;
+    private String bookingId;
+    private String dinnerTableId;
+    private String restaurantId;
 }

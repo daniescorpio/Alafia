@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {Drink} from '../../model/drink';
 import {Router} from '@angular/router';
+import {DrinkDto} from "../../model/dto/drinkDto";
 
 @Component({
   selector: 'app-drinks',
@@ -13,7 +14,8 @@ export class DrinksComponent implements OnInit {
   selectedDrink: Drink;
   drinks: Drink[];
 
-  constructor(public dataService: DataService, private router: Router) { }
+  constructor(public dataService: DataService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.getDrinkKeys();
@@ -31,7 +33,16 @@ export class DrinksComponent implements OnInit {
   }
 
   confirmSelectedDrink() {
-    this.dataService.addDrinkToClient(this.dataService.activeClient.id, this.selectedDrink.id);
+    let drinkDto: DrinkDto = new DrinkDto(
+      this.selectedDrink.id,
+      this.dataService.activeClient.order.id,
+      this.dataService.activeClient.id,
+      this.dataService.activeTable.booking.id,
+      this.dataService.activeTable.id,
+      this.dataService.restaurant.id
+    );
+
+    this.dataService.addDrinkToClient(drinkDto);
     this.router.navigateByUrl('/welcome');
   }
 }

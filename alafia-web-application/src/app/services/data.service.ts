@@ -8,6 +8,8 @@ import {Drink} from '../model/drink';
 import {Booking} from '../model/booking';
 import {HttpClient} from '@angular/common/http';
 import {ClientDto} from "../model/dto/clientDto";
+import {DrinkDto} from "../model/dto/drinkDto";
+import {CourseDto} from "../model/dto/courseDto";
 
 @Injectable({
   providedIn: 'root'
@@ -119,21 +121,20 @@ export class DataService {
     console.log(this.activeTable);
   }
 
-  addDrinkToClient(clientId: string, drinkId: string) {
-    //TODO: Solo se actualizan la tabla clients y drinks
-    return this.httpClient.post(this.apiPath + '/add-drink', {'clientId': clientId, 'drinkId': drinkId})
+  addDrinkToClient(drinkDto: DrinkDto) {
+    return this.httpClient.post(this.apiPath + '/add-drink', drinkDto)
       .subscribe(data => {
-        console.log('Drink with id ' + drinkId + ' added in client with id ' + clientId)
+        console.log('Drink with id ' + drinkDto.drinkId + ' added in client with id ' + drinkDto.clientId)
         console.log(data)
       });
   }
 
-  updateCourseStatus(clientId: string, courseId: string) {
-    //TODO: Solo se actualizan la tabla clients y courses
-    return this.httpClient.post(this.apiPath + '/update-course', {'clientId': clientId, 'courseId': courseId})
-      .subscribe((data: Course) => {
-        console.log('Course with id ' + courseId + 'updated with status ' + data.served)
-      });
+  updateCourseStatus(courseDto: CourseDto) {
+    return this.httpClient.post(this.apiPath + '/update-course', courseDto);
+  }
+
+  getDinnersForTable(tableId: string) {
+    return this.httpClient.get(this.apiPath + '/diners/' + tableId);
   }
 
   // ******** BASIC API OPERATIONS ********
@@ -176,7 +177,6 @@ export class DataService {
   }
 
   postClient(client: ClientDto) {
-    //TODO: Solo se actualiza la tabla clientes
     return this.httpClient.post(this.apiPath + '/clients', client);
   }
 

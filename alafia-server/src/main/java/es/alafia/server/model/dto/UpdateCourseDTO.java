@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateCourseDTO {
-    private String clientId;
     private String courseId;
+    private String orderId;
+    private String clientId;
+    private String bookingId;
+    private String dinnerTableId;
+    private String restaurantId;
 }

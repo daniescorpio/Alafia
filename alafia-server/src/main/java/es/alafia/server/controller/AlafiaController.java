@@ -88,6 +88,12 @@ public class AlafiaController {
         return dataService.retrieveTable(activeTableId);
     }
 
+    @GetMapping(value = "/diners/{tableId}")
+    public DinnerTable getDinersOfTable(@PathVariable String tableId) throws RequestedItemNotFoundException {
+        return dataService.getDinersOfTable(tableId);
+    }
+
+
     @PostMapping(value = "/restaurants")
     @ResponseStatus(HttpStatus.CREATED)
     public Restaurant saveNewRestaurant(@RequestBody Restaurant restaurant) {
