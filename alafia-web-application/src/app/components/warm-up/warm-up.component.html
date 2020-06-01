@@ -1,7 +1,22 @@
-<div>
+<div style="max-height: 600px">
   <h1 style="font-size: xx-large">Bienvenido a Alafia</h1>
   <h2>Mesa reservada al cliente: {{this.dataService.activeTable.booking.client.name}}</h2>
   <h3>Seleccione su comensal en la mesa:</h3>
-  <p style="font-style: oblique" *ngFor="let diner of this.dataService.activeTable.booking.diners" (click)="confirmDinerInTable(diner)">{{diner.name}}</p>
-  <button mat-flat-button style="background-color: darkorange" (click)="selectOtherClient()">No estoy en la lista</button>
+  <div style="max-height: 300px; height: fit-content; overflow: scroll;">
+    <mat-grid-list cols="2" rowHeight="2:1" gutterSize="10px">
+      <mat-grid-tile *ngFor="let diner of this.dataService.activeTable.booking.diners" (click)="confirmDinerInTable(diner)">
+        <div class="gridElement">
+          <p style="font-style: oblique; font-size: large">{{diner.name}}</p>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <button mat-flat-button color="primary"
+          (click)="selectOtherClient()"
+          style="background-color: #b45d2e;
+            font-size: x-large;
+            padding: 30px;
+            width: 100%; margin-top: 5%">
+    No estoy en la lista
+  </button>
 </div>

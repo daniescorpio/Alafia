@@ -10,14 +10,16 @@
 <div class="router">
   <mat-drawer-container class="example-container">
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p (click)="this.dataService.loadMockedData(); drawer.toggle()">Load mocked data</p>
-      <p (click)="onClick('login'); drawer.toggle()">Room Manager</p>
-      <p (click)="onClick('welcome'); drawer.toggle()">Welcome</p>
-      <p (click)="onClick('warm-up'); drawer.toggle()">Warm Up</p>
-      <p (click)="onClick('drinks'); drawer.toggle()">Drinks</p>
+      <div class="box">
+        <p (click)="this.dataService.loadMockedData(); drawer.toggle()">Load mocked data</p>
+        <p (click)="onClick('login'); drawer.toggle()">Room Manager</p>
+        <p (click)="onClick('welcome'); drawer.toggle()">Welcome</p>
+        <p (click)="onClick('warm-up'); drawer.toggle()">Warm Up</p>
+        <p (click)="onClick('drinks'); drawer.toggle()">Drinks</p>
+      </div>
     </mat-drawer>
     <div class="example-sidenav-content">
-      <button type="button" mat-raised-button (click)="drawer.toggle()">
+      <button type="button" mat-raised-button (click)="drawer.toggle()" style="font-size: xx-large">
         Menú
       </button>
       <div class="mainContent">

@@ -1,12 +1,30 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="add-client-field">
-    <mat-label>Email</mat-label>
-    <input type="email"matInput placeholder="Ex. pat@example.com" formControlName="email">
-  </mat-form-field>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="text-align: center">
+  <p>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="email">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+  </p>
+  <button mat-flat-button (click)="this.dialogRef.close()"
+          style="background-color: #b45d2e;
+            font-size: x-large;
+            padding: 30px;
+            width: 100%; margin-top: 5%">
+    Volver atras
+  </button>
+  <button *ngIf="this.loginForm.value.email && this.loginForm.value.name"
+          mat-flat-button type="submit"
+          style="background-color: #8bb42e;
+            font-size: x-large;
+            padding: 30px;
+            width: 100%; margin-top: 5%">
+    Añadir cliente a la mesa
+  </button>
+</form>
 
-  <mat-form-field class="add-client-field">
-    <mat-label>Name</mat-label>
-    <input type="text" matInput placeholder="Name" formControlName="name">
-  </mat-form-field>
-
-  <button mat-raised-button type="submit">Añadir cliente</button>

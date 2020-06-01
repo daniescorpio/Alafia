@@ -24,6 +24,9 @@ export class AddClientComponent implements OnInit {
     ]),
   });
 
+  email: string;
+  name: string;
+
   constructor(public dialogRef: MatDialogRef<AddClientComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Restaurant,
               public dataService: DataService) {

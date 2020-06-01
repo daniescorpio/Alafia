@@ -28,7 +28,7 @@ export class WarmUpComponent implements OnInit {
 
   selectOtherClient() {
     this.dialog.open(AddClientComponent, {
-      width: '250px',
+      width: '75%',
       data: this.dataService.restaurant
     }).afterClosed().subscribe(result => {
       console.log(this.dataService.activeClient.mail);

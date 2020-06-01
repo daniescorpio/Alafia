@@ -1,0 +1,23 @@
+.gridElement {
+  padding: 3%;
+  height: 80%;
+  width: 100%;
+  background-color: #efca89;
+  border-radius: 10px;
+  border: ridge rgba(31, 24, 6, 0.22);
+}
+
+mat-grid-list {
+  overflow: auto;
+}
+
+p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+  white-space: nowrap;
+}

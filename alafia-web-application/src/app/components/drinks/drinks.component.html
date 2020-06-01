@@ -1,12 +1,14 @@
-<div class="mainContent">
+<div class="mainContent" style="max-height: 600px">
   <h1>Seleccion de bebida</h1>
-  <mat-grid-list cols="2" rowHeight="2:1" gutterSize="10px">
-    <mat-grid-tile *ngFor="let drink of this.drinks" (click)="selectDrink(drink)">
-      <div class="gridElement">
-        <span>{{drink.description}}: {{drink.price}}€</span>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <div style="max-height: 300px; height: fit-content; overflow: scroll;">
+    <mat-grid-list cols="2" rowHeight="2:1" gutterSize="10px">
+      <mat-grid-tile *ngFor="let drink of this.drinks" (click)="selectDrink(drink)">
+        <div class="gridElement">
+          <span>{{drink.description}}: <b>{{drink.price}}€</b></span>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
   <div *ngIf="selectedDrink!=null" class="confirmDrink">
     <button mat-flat-button color="primary"
             (click)="confirmSelectedDrink()"

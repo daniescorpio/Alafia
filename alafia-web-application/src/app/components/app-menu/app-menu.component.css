@@ -14,7 +14,7 @@ span {
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  font-size: x-large;
+  font-size: large;
   white-space: nowrap;
 }
 

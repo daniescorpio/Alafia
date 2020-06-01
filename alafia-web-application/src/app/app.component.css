@@ -6,6 +6,21 @@
   flex: 1 1 auto;
 }
 
+p {
+  border-radius: 10px;
+  border: ridge rgba(31, 24, 6, 0.22);
+  padding: 20px;
+  background-color: #e2cfb2;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  margin-bottom: 30px;
+}
+
 .example-container {
   background-color: #bda988;
   position: absolute;
@@ -43,6 +58,8 @@
 }
 
 .example-sidenav {
+  display: flex;
+  flex-direction: column;
   background-color: #bda988;
   padding-top: 20px;
   padding-right: 20px;

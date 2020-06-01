@@ -1,9 +1,24 @@
 <div>
-  <h1 class="hh">Bienvenido a Alafia</h1>
-  <h2>Mesa reservada a nombre de {{this.dataService.activeTable.booking.client.name}}</h2>
-  <p>¿Desea confirmar su asistencia como usuario {{this.dataService.activeTable.booking.client.name}} ?</p>
-  <button mat-flat-button style="margin-right: 10px" (click)="confirmClientInTable()">Confirmar</button>
-  <button mat-flat-button style="background-color: darkorange; margin-left: 10px" (click)="selectOtherClient()">No soy yo</button>
+  <h1 style="font-size: xx-large">Bienvenido a Alafia</h1>
+  <h2 style="font-size: x-large">Mesa reservada a nombre de {{this.dataService.activeTable.booking.client.name}}</h2>
+  <div class="confirmDrink">
+    <button mat-flat-button color="primary"
+            (click)="confirmClientInTable()"
+            style="background-color: #8bb42e;
+            font-size: large;
+            padding: 30px;
+            width: 100%">
+      Confirmar usuario {{this.dataService.activeTable.booking.client.name}}
+    </button>
+  </div>
+  <button mat-flat-button color="primary"
+          (click)="selectOtherClient()"
+          style="background-color: #b45d2e;
+            font-size: large;
+            padding: 30px;
+            width: 100%; margin-top: 5%">
+    Seleccionar otro usuario
+  </button>
 </div>
 
 
