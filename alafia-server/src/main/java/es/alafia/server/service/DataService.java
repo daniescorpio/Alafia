@@ -218,6 +218,10 @@ public class DataService {
             booking.getDiners().add(newClient);
         }
 
+        if (booking.getClient().getId().equals(newClient.getId())) {
+            booking.setClient(newClient);
+        }
+
         bookingRepository.save(booking);
         log.info("Booking updated with new data");
 
