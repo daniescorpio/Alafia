@@ -22,7 +22,10 @@ export class SelectedTableComponent implements OnInit {
     this.dinners = this.data.booking.diners;
   }
 
-  setCourseStatus(courseId: string) {
+  setCourseStatus(courseId: string, dinerId: string) {
+    if (this.dataService.activeClient === undefined) {
+      this.dataService.activeClient = this.data.booking.diners.find(client => client.id === dinerId);
+    }
     let courseDto: CourseDto = new CourseDto(
       courseId,
       this.dataService.activeClient.order.id,

@@ -33,6 +33,7 @@ export class RoomManagerComponent implements OnInit {
   }
 
   onTableClick(table: DinnerTable) {
+    this.dataService.activeTable = table;
     this.dialog.open(SelectedTableComponent, {
       width: '75%',
       data: table,
