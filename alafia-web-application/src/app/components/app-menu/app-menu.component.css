@@ -1,0 +1,53 @@
+.gridElement {
+  padding: 3%;
+  height: 80%;
+  width: 100%;
+  background-color: #efca89;
+  border-radius: 10px;
+  border: ridge rgba(31, 24, 6, 0.22);
+}
+
+span {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+  white-space: nowrap;
+}
+
+mat-grid-list {
+  overflow: auto;
+}
+
+.mainContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  padding: 30px;
+  background-color: #cebfab;
+  border-radius: 30px;
+  border: ridge #eab11d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.001);
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.confirmDrink {
+  text-align: center;
+  margin-top: 5%;
+}
+

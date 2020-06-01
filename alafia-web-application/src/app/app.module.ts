@@ -13,6 +13,13 @@ import {LoginComponentComponent} from './components/login-component/login-compon
 import {BookTableComponent, MenuInfoComponent} from './components/book-table/book-table.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {SelectClientComponent} from './components/select-client/select-client.component';
+import {WarmUpComponent} from './components/warm-up/warm-up.component';
+import {DrinksComponent} from './components/drinks/drinks.component';
+import {AddClientComponent} from './components/add-client/add-client.component';
+import {RoomManagerComponent} from './components/room-manager/room-manager.component';
+import {SelectedTableComponent} from './components/selected-table/selected-table.component';
+import {ExperienceComponent} from './components/experience/experience.component';
+import {AppMenuComponent, ModalDrinkComponent} from './components/app-menu/app-menu.component';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -22,12 +29,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {WarmUpComponent} from './components/warm-up/warm-up.component';
-import {DrinksComponent} from './components/drinks/drinks.component';
-import {AddClientComponent} from './components/add-client/add-client.component';
-import { RoomManagerComponent } from './components/room-manager/room-manager.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { SelectedTableComponent } from './components/selected-table/selected-table.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,10 @@ import { SelectedTableComponent } from './components/selected-table/selected-tab
     DrinksComponent,
     AddClientComponent,
     RoomManagerComponent,
-    SelectedTableComponent
+    SelectedTableComponent,
+    ExperienceComponent,
+    AppMenuComponent,
+    ModalDrinkComponent
   ],
   imports: [
     BrowserModule,

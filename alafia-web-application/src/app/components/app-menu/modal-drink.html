@@ -7,24 +7,24 @@
       </div>
     </mat-grid-tile>
   </mat-grid-list>
-  <div *ngIf="selectedDrink!=null" class="confirmDrink">
-    <button mat-flat-button color="primary"
-            (click)="confirmSelectedDrink()"
-            style="background-color: #8bb42e;
+  <div>
+    <div *ngIf="selectedDrink!=null" class="confirmDrink">
+      <button mat-flat-button color="primary"
+              (click)="confirmSelectedDrink()"
+              style="background-color: #8bb42e;
             font-size: xx-large;
             padding: 30px;
             width: 100%">
-      Añadir {{this.selectedDrink.description}}
-    </button>
-  </div>
-  <div class="confirmDrink">
+        Añadir {{this.selectedDrink.description}}
+      </button>
+    </div>
     <button mat-flat-button color="primary"
-            (click)="noAddDrink()"
+            (click)="this.dialogRef.close()"
             style="background-color: #b45d2e;
             font-size: xx-large;
             padding: 30px;
-            width: 100%">
-      No añadir bebida
+            width: 100%; margin-top: 5%">
+      Volver atrás
     </button>
   </div>
 </div>
