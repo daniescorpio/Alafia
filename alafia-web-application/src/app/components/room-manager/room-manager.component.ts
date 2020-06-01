@@ -36,6 +36,7 @@ export class RoomManagerComponent implements OnInit {
     this.dataService.activeTable = table;
     this.dialog.open(SelectedTableComponent, {
       width: '75%',
+      height: '75%',
       data: table,
     }).afterClosed().subscribe(
       result => {
