@@ -1,6 +1,7 @@
 package es.alafia.server.service;
 
 import es.alafia.server.model.*;
+import es.alafia.server.model.dto.ClientDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.repository.*;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ public class DataServiceTest {
     void shouldRetrieveFromDBRestaurantsData() {
         when(restaurantRepository.findAll()).thenReturn(List.of(Restaurant.builder().build()));
 
-        List<Restaurant> restaurantList = dataService.retrieveRestaurantsData();
+        var restaurantList = dataService.retrieveRestaurantsData();
 
         verify(restaurantRepository, times(1)).findAll();
         assertFalse(restaurantList.isEmpty());
@@ -55,10 +56,10 @@ public class DataServiceTest {
 
     @Test
     void shouldSaveInDBNewRestaurant() {
-        Restaurant restaurant = Restaurant.builder().build();
+        var restaurant = Restaurant.builder().build();
         when(restaurantRepository.save(any(Restaurant.class))).thenReturn(restaurant);
 
-        Restaurant restaurantSaved = dataService.saveNewRestaurant(restaurant);
+        var restaurantSaved = dataService.saveNewRestaurant(restaurant);
 
         verify(restaurantRepository, times(1)).save(restaurant);
         assertEquals(restaurant, restaurantSaved);
@@ -68,7 +69,7 @@ public class DataServiceTest {
     void shouldRetrieveFromDBDinnerTablesData() {
         when(dinnerTableRepository.findAll()).thenReturn(List.of(DinnerTable.builder().build()));
 
-        List<DinnerTable> dinnerTableList = dataService.retrieveDinnerTablesData();
+        var dinnerTableList = dataService.retrieveDinnerTablesData();
 
         verify(dinnerTableRepository, times(1)).findAll();
         assertFalse(dinnerTableList.isEmpty());
@@ -76,10 +77,10 @@ public class DataServiceTest {
 
     @Test
     void shouldSaveInDBNewDinnerTable() {
-        DinnerTable dinnerTable= DinnerTable.builder().build();
+        var dinnerTable= DinnerTable.builder().build();
         when(dinnerTableRepository.save(any(DinnerTable.class))).thenReturn(dinnerTable);
 
-        DinnerTable dinnerTableSaved = dataService.saveNewDinnerTable(dinnerTable);
+        var dinnerTableSaved = dataService.saveNewDinnerTable(dinnerTable);
 
         verify(dinnerTableRepository, times(1)).save(dinnerTable);
         assertEquals(dinnerTable, dinnerTableSaved);
@@ -89,7 +90,7 @@ public class DataServiceTest {
     void shouldRetrieveFromDBBookingsData() {
         when(bookingRepository.findAll()).thenReturn(List.of(Booking.builder().build()));
 
-        List<Booking> bookingList = dataService.retrieveBookingsData();
+        var bookingList = dataService.retrieveBookingsData();
 
         verify(bookingRepository, times(1)).findAll();
         assertFalse(bookingList.isEmpty());
@@ -97,10 +98,10 @@ public class DataServiceTest {
 
     @Test
     void shouldSaveInDBNewBooking() {
-        Booking booking = Booking.builder().build();
+        var booking = Booking.builder().build();
         when(bookingRepository.save(any(Booking.class))).thenReturn(booking);
 
-        Booking bookingSaved = dataService.saveNewBooking(booking);
+        var bookingSaved = dataService.saveNewBooking(booking);
 
         verify(bookingRepository, times(1)).save(booking);
         assertEquals(booking, bookingSaved);
@@ -110,19 +111,40 @@ public class DataServiceTest {
     void shouldRetrieveFromDBClientsData() {
         when(clientRepository.findAll()).thenReturn(List.of(Client.builder().build()));
 
-        List<Client> clientList = dataService.retrieveClientsData();
+        var clientList = dataService.retrieveClientsData();
 
         verify(clientRepository, times(1)).findAll();
         assertFalse(clientList.isEmpty());
     }
 
     @Test
-    void shouldSaveInDBNewClient() {
-        Client client = Client.builder().build();
+    void shouldSaveInDBNewClient() throws RequestedItemNotFoundException {
+        var client = Client.builder()
+                .id("clientId")
+                .build();
+        var clientDTO = ClientDTO.builder()
+                .bookingId("bookingId")
+                .dinnerTableId("dinnerTableId")
+                .restaurantId("restaurantId")
+                .build();
+        var booking = Booking.builder()
+                .diners(List.of(client))
+                .client(client)
+                .build();
+        var dinnerTable = DinnerTable.builder()
+                .id("dinnerTableId")
+                .build();
+        var restaurant = Restaurant.builder()
+                .dinnerTables(List.of(dinnerTable))
+                .build();
+        when(bookingRepository.findById(anyString())).thenReturn(Optional.of(booking));
         when(clientRepository.save(any(Client.class))).thenReturn(client);
+        when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(dinnerTable));
+        when(restaurantRepository.findById(anyString())).thenReturn(Optional.of(restaurant));
 
-        Client clientSaved = dataService.saveNewClient(client);
+        var clientSaved = dataService.saveNewClient(clientDTO);
 
+        client.setId(null);
         verify(clientRepository, times(1)).save(client);
         assertEquals(client, clientSaved);
     }
@@ -131,7 +153,7 @@ public class DataServiceTest {
     void shouldRetrieveFromDBOrdersData() {
         when(orderRepository.findAll()).thenReturn(List.of(Order.builder().build()));
 
-        List<Order> orderList = dataService.retrieveOrdersData();
+        var orderList = dataService.retrieveOrdersData();
 
         verify(orderRepository, times(1)).findAll();
         assertFalse(orderList.isEmpty());
@@ -139,10 +161,10 @@ public class DataServiceTest {
 
     @Test
     void shouldSaveInDBNewOrder() {
-        Order order = Order.builder().build();
+        var order = Order.builder().build();
         when(orderRepository.save(any(Order.class))).thenReturn(order);
 
-        Order orderSaved = dataService.saveNewOrder(order);
+        var orderSaved = dataService.saveNewOrder(order);
 
         verify(orderRepository, times(1)).save(order);
         assertEquals(order, orderSaved);
@@ -152,7 +174,7 @@ public class DataServiceTest {
     void shouldRetrieveFromDBCoursesData() {
         when(courseRepository.findAll()).thenReturn(List.of(Course.builder().build()));
 
-        List<Course> courseList = dataService.retrieveCoursesData();
+        var courseList = dataService.retrieveCoursesData();
 
         verify(courseRepository, times(1)).findAll();
         assertFalse(courseList.isEmpty());
@@ -160,10 +182,10 @@ public class DataServiceTest {
 
     @Test
     void shouldSaveInDBNewCourse() {
-        Course course = Course.builder().build();
+        var course = Course.builder().build();
         when(courseRepository.save(any(Course.class))).thenReturn(course);
 
-        Course courseSaved = dataService.saveNewCourse(course);
+        var courseSaved = dataService.saveNewCourse(course);
 
         verify(courseRepository, times(1)).save(course);
         assertEquals(course, courseSaved);
@@ -173,7 +195,7 @@ public class DataServiceTest {
     void shouldRetrieveFromDBDrinksData() {
         when(drinkRepository.findAll()).thenReturn(List.of(Drink.builder().build()));
 
-        List<Drink> drinkList = dataService.retrieveDrinksData();
+        var drinkList = dataService.retrieveDrinksData();
 
         verify(drinkRepository, times(1)).findAll();
         assertFalse(drinkList.isEmpty());
@@ -181,10 +203,10 @@ public class DataServiceTest {
 
     @Test
     void shouldSaveInDBNewDrink() {
-        Drink drink = Drink.builder().build();
+        var drink = Drink.builder().build();
         when(drinkRepository.save(any(Drink.class))).thenReturn(drink);
 
-        Drink drinkSaved = dataService.saveNewDrink(drink);
+        var drinkSaved = dataService.saveNewDrink(drink);
 
         verify(drinkRepository, times(1)).save(drink);
         assertEquals(drink, drinkSaved);
@@ -192,7 +214,7 @@ public class DataServiceTest {
 
     @Test
     void shouldRetrieveFromDBATable() throws RequestedItemNotFoundException {
-        String tableId = "tableId";
+        var tableId = "tableId";
         when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(DinnerTable.builder().build()));
 
         dataService.retrieveTable(tableId);
@@ -202,7 +224,7 @@ public class DataServiceTest {
 
     @Test
     void shouldThrowTableNotFoundException_whenTableWithCommingIdIsNotSavedInDB() {
-        String tableId = "tableId";
+        var tableId = "tableId";
         when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.empty());
 
         RequestedItemNotFoundException exception = assertThrows(RequestedItemNotFoundException.class, () -> {

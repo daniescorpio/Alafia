@@ -2,6 +2,10 @@ package es.alafia.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.alafia.server.model.*;
+import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.repository.BookingRepository;
+import es.alafia.server.repository.DinnerTableRepository;
+import es.alafia.server.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +18,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,6 +36,15 @@ class AlafiaServerApplicationTests {
     @Autowired
     private ObjectMapper mapper;
 
+    @Autowired
+    private BookingRepository bookingRepository;
+
+    @Autowired
+    private DinnerTableRepository dinnerTableRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     @Test
     void shouldGetRestaurantsData() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/restaurants"))
@@ -38,9 +53,9 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewRestaurant() throws Exception {
-        Restaurant restaurant = Restaurant.builder().build();
+        var restaurant = Restaurant.builder().build();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/restaurants")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(restaurant)))
@@ -58,9 +73,9 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewDinnerTable() throws Exception {
-        DinnerTable dinnerTable = DinnerTable.builder().build();
+        var dinnerTable = DinnerTable.builder().build();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/dinner-tables")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(dinnerTable)))
@@ -78,9 +93,9 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewBooking() throws Exception {
-        Booking booking = Booking.builder().build();
+        var booking = Booking.builder().build();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/bookings")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(booking)))
@@ -98,9 +113,22 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewClient() throws Exception {
-        Client client = Client.builder().build();
+        var booking = bookingRepository.save(Booking.builder()
+                .diners(new ArrayList<>())
+                .client(Client.builder().id("ID").build())
+                .build());
+        var dinnerTable = dinnerTableRepository.save(DinnerTable.builder().build());
+        var restaurant = restaurantRepository.save(Restaurant.builder()
+                .dinnerTables(List.of(dinnerTable))
+                .build());
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        var client = ClientDTO.builder()
+                .bookingId(booking.getId())
+                .dinnerTableId(dinnerTable.getId())
+                .restaurantId(restaurant.getId())
+                .build();
+
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/clients")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(client)))
@@ -118,9 +146,9 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewOrder() throws Exception {
-        Order order = Order.builder().build();
+        var order = Order.builder().build();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/orders")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(order)))
@@ -138,9 +166,9 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewCourse() throws Exception {
-        Course course = Course.builder().build();
+        var course = Course.builder().build();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/courses")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(course)))
@@ -158,9 +186,9 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewDrink() throws Exception {
-        Drink drink = Drink.builder().build();
+        var drink = Drink.builder().build();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/drinks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(drink)))

@@ -1,6 +1,7 @@
 package es.alafia.server.controller;
 
 import es.alafia.server.model.*;
+import es.alafia.server.model.dto.ClientDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class AlafiaControllerTest {
     void shouldCallDataServiceToRetrieveAllRestaurantsSavedInDB() {
         when(dataService.retrieveRestaurantsData()).thenReturn(List.of(Restaurant.builder().build()));
 
-        List<Restaurant> restaurantsRetrieved = alafiaController.getRestaurantsData();
+        var restaurantsRetrieved = alafiaController.getRestaurantsData();
 
         verify(dataService, times(1)).retrieveRestaurantsData();
         assertFalse(restaurantsRetrieved.isEmpty());
@@ -36,10 +37,10 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToSaveNewRestaurantInDB() {
-        Restaurant restaurant = Restaurant.builder().build();
+        var restaurant = Restaurant.builder().build();
         when(dataService.saveNewRestaurant(any(Restaurant.class))).thenReturn(restaurant);
 
-        Restaurant response = alafiaController.saveNewRestaurant(restaurant);
+        var response = alafiaController.saveNewRestaurant(restaurant);
 
         verify(dataService, times(1)).saveNewRestaurant(restaurant);
         assertEquals(restaurant, response);
@@ -49,7 +50,7 @@ public class AlafiaControllerTest {
     void shouldCallDataServiceToRetrieveAllDinnerTablesSavedInDB() {
         when(dataService.retrieveDinnerTablesData()).thenReturn(List.of(DinnerTable.builder().build()));
 
-        List<DinnerTable> dinnerTablesData = alafiaController.getDinnerTablesData();
+        var dinnerTablesData = alafiaController.getDinnerTablesData();
 
         verify(dataService, times(1)).retrieveDinnerTablesData();
         assertFalse(dinnerTablesData.isEmpty());
@@ -57,10 +58,10 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToSaveNewDinnerTableInDB() {
-        DinnerTable dinnerTable = DinnerTable.builder().build();
+        var dinnerTable = DinnerTable.builder().build();
         when(dataService.saveNewDinnerTable(any(DinnerTable.class))).thenReturn(dinnerTable);
 
-        DinnerTable response = alafiaController.saveNewDinnerTable(dinnerTable);
+        var response = alafiaController.saveNewDinnerTable(dinnerTable);
 
         verify(dataService, times(1)).saveNewDinnerTable(dinnerTable);
         assertEquals(dinnerTable, response);
@@ -70,7 +71,7 @@ public class AlafiaControllerTest {
     void shouldCallDataServiceToRetrieveAllBookingsSavedInDB() {
         when(dataService.retrieveBookingsData()).thenReturn(List.of(Booking.builder().build()));
 
-        List<Booking> bookingsData = alafiaController.getBookingsData();
+        var bookingsData = alafiaController.getBookingsData();
 
         verify(dataService, times(1)).retrieveBookingsData();
         assertFalse(bookingsData.isEmpty());
@@ -78,10 +79,10 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToSaveNewBookingInDB() {
-        Booking booking = Booking.builder().build();
+        var booking = Booking.builder().build();
         when(dataService.saveNewBooking(any(Booking.class))).thenReturn(booking);
 
-        Booking response = alafiaController.saveNewBooking(booking);
+        var response = alafiaController.saveNewBooking(booking);
 
         verify(dataService, times(1)).saveNewBooking(booking);
         assertEquals(booking, response);
@@ -91,20 +92,21 @@ public class AlafiaControllerTest {
     void shouldCallDataServiceToRetrieveAllClientsSavedInDB() {
         when(dataService.retrieveClientsData()).thenReturn(List.of(Client.builder().build()));
 
-        List<Client> clientsData = alafiaController.getClientsData();
+        var clientsData = alafiaController.getClientsData();
 
         verify(dataService, times(1)).retrieveClientsData();
         assertFalse(clientsData.isEmpty());
     }
 
     @Test
-    void shouldCallDataServiceToSaveNewClientInDB() {
-        Client client = Client.builder().build();
-        when(dataService.saveNewClient(any(Client.class))).thenReturn(client);
+    void shouldCallDataServiceToSaveNewClientInDB() throws RequestedItemNotFoundException {
+        var client = Client.builder().build();
+        var clientDto = ClientDTO.builder().build();
+        when(dataService.saveNewClient(any(ClientDTO.class))).thenReturn(client);
 
-        Client response = alafiaController.saveNewClient(client);
+        var response = alafiaController.saveNewClient(clientDto);
 
-        verify(dataService, times(1)).saveNewClient(client);
+        verify(dataService, times(1)).saveNewClient(clientDto);
         assertEquals(client, response);
     }
 
@@ -112,7 +114,7 @@ public class AlafiaControllerTest {
     void shouldCallDataServiceToRetrieveAllOrdersSavedInDB() {
         when(dataService.retrieveOrdersData()).thenReturn(List.of(Order.builder().build()));
 
-        List<Order> ordersData = alafiaController.getOrdersData();
+        var ordersData = alafiaController.getOrdersData();
 
         verify(dataService, times(1)).retrieveOrdersData();
         assertFalse(ordersData.isEmpty());
@@ -120,10 +122,10 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToSaveNewOrderInDB() {
-        Order order = Order.builder().build();
+        var order = Order.builder().build();
         when(dataService.saveNewOrder(any(Order.class))).thenReturn(order);
 
-        Order response = alafiaController.saveNewOrder(order);
+        var response = alafiaController.saveNewOrder(order);
 
         verify(dataService, times(1)).saveNewOrder(order);
         assertEquals(order, response);
@@ -133,7 +135,7 @@ public class AlafiaControllerTest {
     void shouldCallDataServiceToRetrieveAllCoursesSavedInDB() {
         when(dataService.retrieveCoursesData()).thenReturn(List.of(Course.builder().build()));
 
-        List<Course> coursesData = alafiaController.getCoursesData();
+        var coursesData = alafiaController.getCoursesData();
 
         verify(dataService, times(1)).retrieveCoursesData();
         assertFalse(coursesData.isEmpty());
@@ -141,10 +143,10 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToSaveNewCourseInDB() {
-        Course course = Course.builder().build();
+        var course = Course.builder().build();
         when(dataService.saveNewCourse(any(Course.class))).thenReturn(course);
 
-        Course response = alafiaController.saveNewCourse(course);
+        var response = alafiaController.saveNewCourse(course);
 
         verify(dataService, times(1)).saveNewCourse(course);
         assertEquals(course, response);
@@ -154,7 +156,7 @@ public class AlafiaControllerTest {
     void shouldCallDataServiceToRetrieveAllDrinksSavedInDB() {
         when(dataService.retrieveDrinksData()).thenReturn(List.of(Drink.builder().build()));
 
-        List<Drink> drinksData = alafiaController.getDrinksData();
+        var drinksData = alafiaController.getDrinksData();
 
         verify(dataService, times(1)).retrieveDrinksData();
         assertFalse(drinksData.isEmpty());
@@ -162,10 +164,10 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToSaveNewDrinkInDB() {
-        Drink drink = Drink.builder().build();
+        var drink = Drink.builder().build();
         when(dataService.saveNewDrink(any(Drink.class))).thenReturn(drink);
 
-        Drink response = alafiaController.saveNewDrink(drink);
+        var response = alafiaController.saveNewDrink(drink);
 
         verify(dataService, times(1)).saveNewDrink(drink);
         assertEquals(drink, response);
@@ -173,10 +175,10 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToRetrieveDataOfActiveTable() throws RequestedItemNotFoundException {
-        String activeTableId = "activeTableId";
+        var activeTableId = "activeTableId";
         when(dataService.retrieveTable(anyString())).thenReturn(DinnerTable.builder().build());
 
-        DinnerTable activeDinnerTable = alafiaController.getActiveTable(activeTableId);
+        var activeDinnerTable = alafiaController.getActiveTable(activeTableId);
 
         assertNotNull(activeDinnerTable);
         verify(dataService).retrieveTable(activeTableId);
