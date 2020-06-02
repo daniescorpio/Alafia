@@ -4,6 +4,9 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {Client} from "../../model/client";
 import {Drink} from "../../model/drink";
 import {DrinkDto} from "../../model/dto/drinkDto";
+import {MigrationTestComponent} from "../migration-test/migration-test.component";
+import {ExtrasComponent} from "../extras/extras.component";
+import {ExperienceManagerComponent} from "../experience-manager/experience-manager.component";
 
 @Component({
   selector: 'app-app-menu',
@@ -32,15 +35,42 @@ export class AppMenuComponent implements OnInit {
   }
 
   onExperienceManagerClick() {
+    this.dialog.open(ExperienceManagerComponent, {
+      width: '75%',
+      height: '75%',
+      data: this.dataService.activeClient,
+    }).afterClosed().subscribe(
+      result => {
 
+      }, error => {
+        console.log('Modal closed clicking background')
+      });
   }
 
   onExtrasClick() {
+    this.dialog.open(ExtrasComponent, {
+      width: '75%',
+      height: '75%',
+      data: this.dataService.activeClient,
+    }).afterClosed().subscribe(
+      result => {
 
+      }, error => {
+        console.log('Modal closed clicking background')
+      });
   }
 
   onMigrationTestClick() {
+    this.dialog.open(MigrationTestComponent, {
+      width: '75%',
+      height: '75%',
+      data: this.dataService.activeClient,
+    }).afterClosed().subscribe(
+      result => {
 
+      }, error => {
+        console.log('Modal closed clicking background')
+      });
   }
 }
 

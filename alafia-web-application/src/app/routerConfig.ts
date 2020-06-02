@@ -8,6 +8,9 @@ import {DrinksComponent} from './components/drinks/drinks.component';
 import {RoomManagerComponent} from "./components/room-manager/room-manager.component";
 import {ExperienceComponent} from "./components/experience/experience.component";
 import {AppMenuComponent} from "./components/app-menu/app-menu.component";
+import {ExperienceManagerComponent} from "./components/experience-manager/experience-manager.component";
+import {ExtrasComponent} from "./components/extras/extras.component";
+import {MigrationTestComponent} from "./components/migration-test/migration-test.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -37,6 +40,15 @@ const appRoutes: Routes = [
   },
   { path: 'app-menu',
     component: AppMenuComponent
+  },
+  { path: 'experience-manager',
+    component: ExperienceManagerComponent
+  },
+  { path: 'extras',
+    component: ExtrasComponent
+  },
+  { path: 'migration-test',
+    component: MigrationTestComponent
   }
 ];
 export default appRoutes;

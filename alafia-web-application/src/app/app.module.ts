@@ -30,6 +30,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ExperienceManagerComponent } from './components/experience-manager/experience-manager.component';
+import { ExtrasComponent } from './components/extras/extras.component';
+import { MigrationTestComponent } from './components/migration-test/migration-test.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
     SelectedTableComponent,
     ExperienceComponent,
     AppMenuComponent,
-    ModalDrinkComponent
+    ModalDrinkComponent,
+    ExperienceManagerComponent,
+    ExtrasComponent,
+    MigrationTestComponent
   ],
   imports: [
     BrowserModule,
