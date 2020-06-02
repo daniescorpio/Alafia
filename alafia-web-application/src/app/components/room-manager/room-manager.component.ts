@@ -12,24 +12,11 @@ import {SelectedTableComponent} from "../selected-table/selected-table.component
 })
 export class RoomManagerComponent implements OnInit {
 
-  dinnerTables: DinnerTable[];
-
   constructor(public dataService: DataService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.dataService.getRestaurants().subscribe(
-      (data: Restaurant[]) => {
-        if (data.length > 0) {
-          this.dinnerTables = data[0].dinnerTables;
-        } else {
-          this.dataService.loadMockedData();
-          this.dinnerTables = this.dataService.restaurant.dinnerTables;
-        }
-      },
-      error => {
-        console.error('Error retrieving restaurant data');
-      });
+    this.dataService.loadMockedData();
   }
 
   onTableClick(table: DinnerTable) {

@@ -35,24 +35,32 @@ export class AddClientComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onGoBack() {
+    this.loginForm.value.email = null;
+    this.loginForm.value.name = null;
+    this.dialogRef.close();
+  }
+
   onSubmit() {
     if (this.loginForm.value.email === null || this.loginForm.value.name === null) {
       this.dialogRef.close(false);
     }
-    let newClient = new ClientDto(
-      this.loginForm.value.name,
-      this.loginForm.value.email,
-      this.dataService.activeTable.booking.id,
-      this.dataService.activeTable.id,
-      this.dataService.restaurant.id
-    );
+    else {
+      let newClient = new ClientDto(
+        this.loginForm.value.name,
+        this.loginForm.value.email,
+        this.dataService.activeTable.booking.id,
+        this.dataService.activeTable.id,
+        this.dataService.restaurant.id
+      );
 
-    this.dataService.postClient(newClient).subscribe((data: Client) => {
-      console.log(data);
-      this.dataService.activeTable.booking.diners.push(data);
-      this.dataService.activeClient = data;
-      console.log(this.dataService.activeClient);
-      this.dialogRef.close(true);
-    });
+      this.dataService.postClient(newClient).subscribe((data: Client) => {
+        console.log(data);
+        this.dataService.activeTable.booking.diners.push(data);
+        this.dataService.activeClient = data;
+        console.log(this.dataService.activeClient);
+        this.dialogRef.close(true);
+      });
+    }
   }
 }

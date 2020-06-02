@@ -149,7 +149,7 @@ public class AlafiaController {
 
     @PostMapping(value = "/update-course")
     @ResponseStatus(HttpStatus.CREATED)
-    public Course updateCourseInClient(@RequestBody UpdateCourseDTO courseDTO) throws RequestedItemNotFoundException {
+    public Order updateCourseInClient(@RequestBody UpdateCourseDTO courseDTO) throws RequestedItemNotFoundException {
         log.info("Trying to update course with id {} in client with id {}", courseDTO.getCourseId(), courseDTO.getClientId());
         return dataService.updateCourseStatus(courseDTO);
     }

@@ -31,8 +31,8 @@ export class WarmUpComponent implements OnInit {
       width: '75%',
       data: this.dataService.restaurant
     }).afterClosed().subscribe(result => {
-      console.log(this.dataService.activeClient.mail);
       if (result) {
+        console.log(this.dataService.activeClient.mail);
         this.router.navigateByUrl('/drinks');
       }
     });

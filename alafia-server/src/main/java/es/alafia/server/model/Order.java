@@ -19,5 +19,7 @@ public class Order {
 
     private List<Course> courses;
 
+    private List<String> coursesIdServed;
+
     private List<Drink> drinks;
 }

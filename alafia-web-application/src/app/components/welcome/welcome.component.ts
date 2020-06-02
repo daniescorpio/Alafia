@@ -13,9 +13,6 @@ import {Restaurant} from "../../model/restaurant";
 })
 export class WelcomeComponent implements OnInit {
 
-  // table: DinnerTable = this.dataService.activeTable;
-  // table: DinnerTable;
-
   constructor(public dataService: DataService, private router: Router, public dialog: MatDialog) {
   }
 

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -83,18 +84,22 @@ public class LoadInitData {
 
         Order order_1 = Order.builder()
                 .courses(List.of(course_1))
+                .coursesIdServed(new ArrayList<>())
                 .drinks(List.of(drink_1))
                 .build();
         Order order_2 = Order.builder()
                 .courses(List.of(course_1))
+                .coursesIdServed(new ArrayList<>())
                 .drinks(List.of(drink_1, drink_2, drink_3, drink_4))
                 .build();
         Order order_3 = Order.builder()
                 .courses(List.of(course_1, course_2, course_3, course_4))
+                .coursesIdServed(new ArrayList<>())
                 .drinks(List.of(drink_1))
                 .build();
         Order order_4 = Order.builder()
                 .courses(List.of())
+                .coursesIdServed(new ArrayList<>())
                 .drinks(List.of())
                 .build();
 
@@ -118,14 +123,24 @@ public class LoadInitData {
                 .name("name client_4")
                 .order(order_4)
                 .build();
+        Client client_5 = Client.builder()
+                .mail("mail client_5")
+                .name("name client_5")
+                .order(order_3)
+                .build();
+        Client client_6 = Client.builder()
+                .mail("mail client_6")
+                .name("name client_6")
+                .order(order_4)
+                .build();
 
         Booking booking_1 = Booking.builder()
                 .client(client_1)
-                .diners(List.of(client_1/*, client_2, client_3, client_4, client_1, client_2*/))
+                .diners(List.of(client_1, client_2, client_3, client_4))
                 .build();
         Booking booking_2 = Booking.builder()
                 .client(client_4)
-                .diners(List.of(client_3, client_4))
+                .diners(List.of(client_5, client_6))
                 .build();
 
         DinnerTable dinnerTable_1 = DinnerTable.builder()
@@ -136,7 +151,7 @@ public class LoadInitData {
                 .build();
 
         Restaurant restaurant = Restaurant.builder()
-                .dinnerTables(List.of(dinnerTable_1/*, dinnerTable_2*/))
+                .dinnerTables(List.of(dinnerTable_1, dinnerTable_2))
                 .build();
 
         drinkRepository.save(drink_1);
@@ -155,15 +170,17 @@ public class LoadInitData {
         orderRepository.save(order_4);
 
         clientRepository.save(client_1);
-//        clientRepository.save(client_2);
-//        clientRepository.save(client_3);
-//        clientRepository.save(client_4);
+        clientRepository.save(client_2);
+        clientRepository.save(client_3);
+        clientRepository.save(client_4);
+        clientRepository.save(client_5);
+        clientRepository.save(client_6);
 
         bookingRepository.save(booking_1);
-//        bookingRepository.save(booking_2);
+        bookingRepository.save(booking_2);
 
         dinnerTableRepository.save(dinnerTable_1);
-//        dinnerTableRepository.save(dinnerTable_2);
+        dinnerTableRepository.save(dinnerTable_2);
 
         restaurantRepository.save(restaurant);
     }

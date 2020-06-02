@@ -1,5 +1,5 @@
 <mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile *ngFor="let dinnerTable of this.dinnerTables">
+  <mat-grid-tile *ngFor="let dinnerTable of this.dataService.restaurant.dinnerTables">
     <div class="gridElement" (click)="onTableClick(dinnerTable)">
       <p><b>Id de la mesa: </b><br>{{dinnerTable.id}}</p>
       <p><b>Reserva de la mesa: </b><br>{{dinnerTable.booking.client.name}}</p>

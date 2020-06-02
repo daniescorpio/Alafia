@@ -11,8 +11,8 @@
         <p><b>Platos: </b></p>
         <div *ngFor="let course of dinner.order.courses" (click)="setCourseStatus(course.id, dinner.id)" class="courses">
           <span>&nbsp;&nbsp;&nbsp;&nbsp;{{course.description}}:&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span *ngIf="!course.served"><b>En espera</b></span>
-          <span *ngIf="course.served"><b>Servido</b></span>
+          <span *ngIf="!dinner.order.coursesIdServed.includes(course.id)"><b>En espera</b></span>
+          <span *ngIf="dinner.order.coursesIdServed.includes(course.id)"><b>Servido</b></span>
         </div>
         <p></p>
         <p><b>Bebidas: </b></p>

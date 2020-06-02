@@ -25,6 +25,4 @@ public class Course {
     private String obtainProcess;
 
     private String history;
-
-    private boolean served;
 }
