@@ -1,7 +1,12 @@
 .gridElement {
   padding: 3%;
-  background-color: #efca89;
+  width: 90%;
+  background-color: rgba(188, 201, 187, 0.55);
   border-radius: 10px;
   border: ridge rgba(31, 24, 6, 0.22);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.001);
+}
+
+mat-grid-list {
+  overflow: auto;
 }

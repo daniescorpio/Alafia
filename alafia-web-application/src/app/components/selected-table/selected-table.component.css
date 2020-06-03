@@ -1,7 +1,8 @@
 .gridElement {
   padding: 3%;
+  width: 90%;
   height: max-content;
-  background-color: #efca89;
+  background-color: rgba(188, 201, 187, 0.55);
   border-radius: 10px;
   margin-bottom: 50px;
   border: ridge rgba(31, 24, 6, 0.22);

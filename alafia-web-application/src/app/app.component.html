@@ -9,24 +9,27 @@
 
 <div class="router">
   <mat-drawer-container class="example-container">
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-      <div class="box">
-        <p (click)="this.dataService.loadMockedData(); drawer.toggle()">Load mocked data</p>
-        <p (click)="onClick('login'); drawer.toggle()">Room Manager</p>
-        <p (click)="onClick('welcome'); drawer.toggle()">Welcome</p>
-        <p (click)="onClick('warm-up'); drawer.toggle()">Warm Up</p>
-        <p (click)="onClick('drinks'); drawer.toggle()">Drinks</p>
-        <p (click)="onClick('app-menu'); drawer.toggle()">App menu</p>
-      </div>
-    </mat-drawer>
-    <div class="example-sidenav-content">
-      <button type="button" mat-raised-button (click)="drawer.toggle()" style="font-size: xx-large">
+    <div class="no-sidenav-content">
+      <button type="button" mat-raised-button (click)="drawer.toggle()" style="font-size: xx-large; margin: 50px; z-index: 99">
         Menú
       </button>
       <div class="mainContent">
         <router-outlet></router-outlet>
       </div>
     </div>
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <div class="box">
+        <p (click)="this.dataService.loadMockedData(); drawer.toggle()">Load mocked data</p>
+        <p (click)="onClick('welcome'); drawer.toggle()">Welcome</p>
+        <p (click)="onClick('warm-up'); drawer.toggle()">Warm Up</p>
+        <p (click)="onClick('drinks'); drawer.toggle()">Drinks</p>
+        <p (click)="onClick('wait-diners'); drawer.toggle()">Wait Diners</p>
+        <p (click)="onClick('app-menu'); drawer.toggle()">App Menu</p>
+        <p (click)="onClick('experience'); drawer.toggle()">Experience</p>
+        <p (click)="onClick('bill'); drawer.toggle()">Bill</p>
+        <p (click)="onClick('login'); drawer.toggle()">Room Manager</p>
+      </div>
+    </mat-drawer>
   </mat-drawer-container>
 </div>
 

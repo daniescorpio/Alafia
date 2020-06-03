@@ -11,6 +11,8 @@ import {AppMenuComponent} from "./components/app-menu/app-menu.component";
 import {ExperienceManagerComponent} from "./components/experience-manager/experience-manager.component";
 import {ExtrasComponent} from "./components/extras/extras.component";
 import {MigrationTestComponent} from "./components/migration-test/migration-test.component";
+import {WaitDinersComponent} from "./components/wait-diners/wait-diners.component";
+import {BillComponent} from "./components/bill/bill.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -32,11 +34,8 @@ const appRoutes: Routes = [
   { path: 'drinks',
     component: DrinksComponent
   },
-  { path: 'room-manager',
-    component: RoomManagerComponent
-  },
-  { path: 'experience',
-    component: ExperienceComponent
+  { path: 'wait-diners',
+    component: WaitDinersComponent
   },
   { path: 'app-menu',
     component: AppMenuComponent
@@ -49,6 +48,15 @@ const appRoutes: Routes = [
   },
   { path: 'migration-test',
     component: MigrationTestComponent
+  },
+  { path: 'experience',
+    component: ExperienceComponent
+  },
+  { path: 'bill',
+    component: BillComponent
+  },
+  { path: 'room-manager',
+    component: RoomManagerComponent
   }
 ];
 export default appRoutes;

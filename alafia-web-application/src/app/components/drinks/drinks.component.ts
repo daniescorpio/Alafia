@@ -45,10 +45,10 @@ export class DrinksComponent implements OnInit {
     );
 
     this.dataService.addDrinkToClient(drinkDto);
-    this.router.navigateByUrl('/experience');
+    this.router.navigateByUrl('/wait-diners');
   }
 
   noAddDrink() {
-    this.router.navigateByUrl('/experience');
+    this.router.navigateByUrl('/wait-diners');
   }
 }

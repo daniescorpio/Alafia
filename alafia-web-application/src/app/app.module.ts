@@ -33,6 +33,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ExperienceManagerComponent } from './components/experience-manager/experience-manager.component';
 import { ExtrasComponent } from './components/extras/extras.component';
 import { MigrationTestComponent } from './components/migration-test/migration-test.component';
+import { WaitDinersComponent } from './components/wait-diners/wait-diners.component';
+import { BillComponent } from './components/bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { MigrationTestComponent } from './components/migration-test/migration-te
     ModalDrinkComponent,
     ExperienceManagerComponent,
     ExtrasComponent,
-    MigrationTestComponent
+    MigrationTestComponent,
+    WaitDinersComponent,
+    BillComponent
   ],
   imports: [
     BrowserModule,
