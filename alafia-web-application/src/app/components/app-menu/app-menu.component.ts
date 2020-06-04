@@ -63,7 +63,7 @@ export class AppMenuComponent implements OnInit {
   onMigrationTestClick() {
     this.dialog.open(MigrationTestComponent, {
       width: '75%',
-      height: '75%',
+      height: '80%',
       data: this.dataService.activeClient,
     }).afterClosed().subscribe(
       result => {

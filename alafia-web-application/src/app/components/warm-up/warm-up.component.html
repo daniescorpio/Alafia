@@ -2,7 +2,7 @@
   <h1 style="font-size: xx-large">Bienvenido a Alafia</h1>
   <h2>Mesa reservada al cliente: {{this.dataService.activeTable.booking.client.name}}</h2>
   <h3>Seleccione su comensal en la mesa:</h3>
-  <div style="max-height: 330px; height: fit-content; overflow: scroll;">
+  <div style="max-height: 350px; height: fit-content; overflow: scroll;">
     <mat-grid-list cols="2" rowHeight="2:1" gutterSize="10px">
       <mat-grid-tile *ngFor="let diner of this.dataService.activeTable.booking.diners" (click)="confirmDinerInTable(diner)">
         <div class="gridElement">

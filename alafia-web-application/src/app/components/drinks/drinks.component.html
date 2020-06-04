@@ -1,6 +1,6 @@
 <div class="mainContent" style="max-height: 600px">
   <h1>Seleccion de bebida</h1>
-  <div style="max-height: 330px; height: fit-content; overflow: scroll;">
+  <div style="max-height: 350px; height: fit-content; overflow: scroll;">
     <mat-grid-list cols="2" rowHeight="2:1" gutterSize="10px">
       <mat-grid-tile *ngFor="let drink of this.drinks" (click)="selectDrink(drink)">
         <div class="gridElement">
