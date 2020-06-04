@@ -5,6 +5,7 @@ import {SelectClientComponent} from '../select-client/select-client.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Client} from '../../model/client';
 import {AddClientComponent} from '../add-client/add-client.component';
+import {ClientDto} from "../../model/dto/clientDto";
 
 @Component({
   selector: 'app-warm-up',
@@ -13,8 +14,6 @@ import {AddClientComponent} from '../add-client/add-client.component';
 })
 export class WarmUpComponent implements OnInit {
 
-  diner: Client;
-
   constructor(private router: Router, public dataService: DataService, public dialog: MatDialog) {
   }
 
@@ -22,7 +21,20 @@ export class WarmUpComponent implements OnInit {
   }
 
   confirmDinerInTable(diner: Client) {
-    this.dataService.activeClient = diner;
+    this.dataService.updateClientStatus(new ClientDto(
+      diner.name,
+      diner.mail,
+      diner.id,
+      this.dataService.activeTable.booking.id,
+      this.dataService.activeTable.id,
+      this.dataService.restaurant.id,
+      diner.confirmed
+    )).subscribe((data: Client) => {
+      let index = this.dataService.activeTable.booking.diners.findIndex(c => c.id === data.id);
+      this.dataService.activeTable.booking.diners.splice(index, 1);
+      this.dataService.activeTable.booking.diners.push(data);
+      this.dataService.activeClient = data;
+    });
     this.router.navigateByUrl('/drinks');
   }
 

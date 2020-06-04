@@ -18,6 +18,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.loadMockedData();
+    this.dataService.restaurant = this.dataService.setAllDinerTablesWithStatus(this.dataService.restaurant);
   }
 
   confirmClientInTable() {

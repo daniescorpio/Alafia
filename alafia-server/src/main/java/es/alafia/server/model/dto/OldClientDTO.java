@@ -6,6 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class OldClientDTO extends ClientDTO{
+public class OldClientDTO extends ClientDTO {
     private String oldClientId;
 }

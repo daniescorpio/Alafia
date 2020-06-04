@@ -52,7 +52,8 @@ export class AddClientComponent implements OnInit {
         this.data.id,
         this.dataService.activeTable.booking.id,
         this.dataService.activeTable.id,
-        this.dataService.restaurant.id
+        this.dataService.restaurant.id,
+        this.data.confirmed
       );
 
       this.dataService.postClient(newClient).subscribe((data: Client) => {

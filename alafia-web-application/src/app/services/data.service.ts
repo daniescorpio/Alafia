@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {ClientDto} from "../model/dto/clientDto";
 import {DrinkDto} from "../model/dto/drinkDto";
 import {CourseDto} from "../model/dto/courseDto";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -108,11 +109,23 @@ export class DataService {
       console.log('Retrieved ' + data.length + ' restaurants from server');
       console.log(data)
       if (data.length > 0) {
+        this.setAllDinerTablesWithStatus(data[0]);
         this.restaurant = data[0];
         console.log('Restaurant setted: ' + this.restaurant.id)
       }
       this.setDefaultActiveDinnerTable();
     })
+  }
+
+  setAllDinerTablesWithStatus(restaurant: Restaurant) {
+    restaurant.dinnerTables.forEach(table => {
+      if (table.allDinersConfirmed === undefined) {
+        table.allDinersConfirmed = new BehaviorSubject<boolean>(true);
+      } else {
+        table.allDinersConfirmed.next(true);
+      }
+    })
+    return restaurant;
   }
 
   setDefaultActiveDinnerTable() {
@@ -135,6 +148,18 @@ export class DataService {
 
   getDinnersForTable(tableId: string) {
     return this.httpClient.get(this.apiPath + '/diners/' + tableId);
+  }
+
+  updateClientStatus(client: ClientDto) {
+    return this.httpClient.post(this.apiPath + '/update-client', client);
+  }
+
+  checkAllDinersConfirmed(): Observable<boolean> {
+    this.activeTable.booking.diners.forEach(diner => {
+      console.log('diner confirmed: ' + diner.confirmed)
+      if (!diner.confirmed) this.activeTable.allDinersConfirmed.next(false);
+    });
+    return this.activeTable.allDinersConfirmed.asObservable();
   }
 
   // ******** BASIC API OPERATIONS ********

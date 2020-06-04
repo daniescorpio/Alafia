@@ -1,10 +1,7 @@
 package es.alafia.server.service;
 
 import es.alafia.server.model.*;
-import es.alafia.server.model.dto.AddDrinkDTO;
-import es.alafia.server.model.dto.ClientDTO;
-import es.alafia.server.model.dto.OldClientDTO;
-import es.alafia.server.model.dto.UpdateCourseDTO;
+import es.alafia.server.model.dto.*;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -107,6 +104,19 @@ public class DataService {
         client.setMail(oldClientDTO.getMail());
         clientRepository.save(client);
         updateParentsWithNewClientData(oldClientDTO, client);
+        return client;
+    }
+
+    public Client updateClientStatus(UpdateClientDTO updateClientDTO) {
+        Client client;
+        try {
+            client = clientRepository.findById(updateClientDTO.getOldClientId()).orElseThrow();
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Client with id " + updateClientDTO + " not found in DB");
+        }
+        client.setConfirmed(!client.getConfirmed());
+        clientRepository.save(client);
+        updateParentsWithNewClientData(updateClientDTO, client);
         return client;
     }
 
@@ -242,6 +252,7 @@ public class DataService {
                 .filter(diner -> diner.getId().equals(newClient.getId()))
                 .findFirst();
         if (optionalClient.isPresent()) {
+            optionalClient.get().setConfirmed(newClient.getConfirmed());
             optionalClient.get().setMail(client.getMail());
             optionalClient.get().setName(client.getName());
             optionalClient.get().setOrder(newClient.getOrder());

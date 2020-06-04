@@ -2,10 +2,7 @@ package es.alafia.server.controller;
 
 import es.alafia.server.LoadInitData;
 import es.alafia.server.model.*;
-import es.alafia.server.model.dto.AddDrinkDTO;
-import es.alafia.server.model.dto.ClientDTO;
-import es.alafia.server.model.dto.OldClientDTO;
-import es.alafia.server.model.dto.UpdateCourseDTO;
+import es.alafia.server.model.dto.*;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
 import lombok.AllArgsConstructor;
@@ -119,7 +116,15 @@ public class AlafiaController {
     @ResponseStatus(HttpStatus.CREATED)
     public Client replaceClient(@RequestBody OldClientDTO client) {
         Client newClient = dataService.replaceClient(client);
-        log.info("Client saved with id: {}", newClient.getId());
+        log.info("Client saved with id: {} with new contact data", newClient.getId());
+        return newClient;
+    }
+
+    @PostMapping(value = "/update-client")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client updateClientStatus(@RequestBody UpdateClientDTO client) {
+        Client newClient = dataService.updateClientStatus(client);
+        log.info("Client saved with id: {} to confirmed: {}", newClient.getId(), newClient.getConfirmed());
         return newClient;
     }
 

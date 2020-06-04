@@ -6,6 +6,7 @@ export class Client {
   name: string;
   mail: string;
   order: Order;
+  confirmed: boolean;
 
   constructor(id: string, bookingId: string, name: string, mail: string, order: Order) {
     this.id = id;
@@ -13,5 +14,6 @@ export class Client {
     this.name = name;
     this.mail = mail;
     this.order = order;
+    this.confirmed = false;
   }
 }

@@ -20,4 +20,6 @@ public class Client {
     private String mail;
 
     private Order order;
+
+    private Boolean confirmed = false;
 }
