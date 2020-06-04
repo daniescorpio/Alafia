@@ -114,5 +114,6 @@ export class ModalDrinkComponent implements OnInit {
       this.dataService.restaurant.id
     );
     this.dataService.addDrinkToClient(drinkDto);
+    this.dialogRef.close();
   }
 }

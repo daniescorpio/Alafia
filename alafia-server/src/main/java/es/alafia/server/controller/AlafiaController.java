@@ -4,6 +4,7 @@ import es.alafia.server.LoadInitData;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.AddDrinkDTO;
 import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.dto.OldClientDTO;
 import es.alafia.server.model.dto.UpdateCourseDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
@@ -84,12 +85,12 @@ public class AlafiaController {
     }
 
     @GetMapping(value = "/active-table")
-    public DinnerTable getActiveTable(String activeTableId) throws RequestedItemNotFoundException {
+    public DinnerTable getActiveTable(String activeTableId) {
         return dataService.retrieveTable(activeTableId);
     }
 
     @GetMapping(value = "/diners/{tableId}")
-    public DinnerTable getDinersOfTable(@PathVariable String tableId) throws RequestedItemNotFoundException {
+    public DinnerTable getDinersOfTable(@PathVariable String tableId) {
         return dataService.getDinersOfTable(tableId);
     }
 
@@ -116,8 +117,8 @@ public class AlafiaController {
 
     @PostMapping(value = "/clients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client saveNewClient(@RequestBody ClientDTO client) throws RequestedItemNotFoundException {
-        Client newClient = dataService.saveNewClient(client);
+    public Client replaceClient(@RequestBody OldClientDTO client) {
+        Client newClient = dataService.replaceClient(client);
         log.info("Client saved with id: {}", newClient.getId());
         return newClient;
     }
@@ -142,14 +143,14 @@ public class AlafiaController {
 
     @PostMapping(value = "/add-drink")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client addDrinkInClient(@RequestBody AddDrinkDTO addDrinkDTO) throws RequestedItemNotFoundException {
+    public Client addDrinkInClient(@RequestBody AddDrinkDTO addDrinkDTO) {
         log.info("Trying to add drink with id {} in client with id {}", addDrinkDTO.getDrinkId(), addDrinkDTO.getClientId());
         return dataService.addDrinkInClient(addDrinkDTO);
     }
 
     @PostMapping(value = "/update-course")
     @ResponseStatus(HttpStatus.CREATED)
-    public Order updateCourseInClient(@RequestBody UpdateCourseDTO courseDTO) throws RequestedItemNotFoundException {
+    public Order updateCourseInClient(@RequestBody UpdateCourseDTO courseDTO) {
         log.info("Trying to update course with id {} in client with id {}", courseDTO.getCourseId(), courseDTO.getClientId());
         return dataService.updateCourseStatus(courseDTO);
     }

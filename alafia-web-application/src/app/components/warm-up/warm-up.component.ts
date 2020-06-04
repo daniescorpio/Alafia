@@ -27,14 +27,6 @@ export class WarmUpComponent implements OnInit {
   }
 
   selectOtherClient() {
-    this.dialog.open(AddClientComponent, {
-      width: '75%',
-      data: this.dataService.restaurant
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        console.log(this.dataService.activeClient.mail);
-        this.router.navigateByUrl('/drinks');
-      }
-    });
+    this.router.navigateByUrl('replace-client')
   }
 }

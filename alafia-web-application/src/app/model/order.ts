@@ -7,7 +7,6 @@ export class Order {
   coursesIdServed: string[];
   drinks: Drink[];
 
-
   constructor() {
   }
 }

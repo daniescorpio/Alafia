@@ -104,7 +104,7 @@ public class AlafiaControllerTest {
         var clientDto = ClientDTO.builder().build();
         when(dataService.saveNewClient(any(ClientDTO.class))).thenReturn(client);
 
-        var response = alafiaController.saveNewClient(clientDto);
+        var response = alafiaController.replaceClient(clientDto);
 
         verify(dataService, times(1)).saveNewClient(clientDto);
         assertEquals(client, response);

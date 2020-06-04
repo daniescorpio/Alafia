@@ -1,6 +1,6 @@
 package es.alafia.server.model.exception;
 
-public class RequestedItemNotFoundException extends Exception {
+public class RequestedItemNotFoundException extends RuntimeException {
 
     public RequestedItemNotFoundException() {
         super();

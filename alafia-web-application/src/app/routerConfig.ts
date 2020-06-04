@@ -13,6 +13,7 @@ import {ExtrasComponent} from "./components/extras/extras.component";
 import {MigrationTestComponent} from "./components/migration-test/migration-test.component";
 import {WaitDinersComponent} from "./components/wait-diners/wait-diners.component";
 import {BillComponent} from "./components/bill/bill.component";
+import {ReplaceClientComponent} from "./components/replace-client/replace-client.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -30,6 +31,9 @@ const appRoutes: Routes = [
   },
   { path: 'warm-up',
     component: WarmUpComponent
+  },
+  { path: 'replace-client',
+    component: ReplaceClientComponent
   },
   { path: 'drinks',
     component: DrinksComponent

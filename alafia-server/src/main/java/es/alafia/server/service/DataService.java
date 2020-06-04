@@ -1,10 +1,9 @@
 package es.alafia.server.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.AddDrinkDTO;
 import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.dto.OldClientDTO;
 import es.alafia.server.model.dto.UpdateCourseDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.repository.*;
@@ -12,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -81,7 +78,7 @@ public class DataService {
         return bookingRepository.save(booking);
     }
 
-    public Client saveNewClient(ClientDTO client) throws RequestedItemNotFoundException {
+    public Client saveNewClient(ClientDTO client) {
         log.info("Saving new client for booking: {}", client.getBookingId());
         var emptyOrder = Order.builder()
                 .courses(List.of())
@@ -98,6 +95,21 @@ public class DataService {
         return savedClient;
     }
 
+    public Client replaceClient(OldClientDTO oldClientDTO) {
+        Client client;
+        try {
+            client = clientRepository.findById(oldClientDTO.getOldClientId()).orElseThrow();
+
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Client with id " + oldClientDTO.getOldClientId() + " not found in DB");
+        }
+        client.setName(oldClientDTO.getName());
+        client.setMail(oldClientDTO.getMail());
+        clientRepository.save(client);
+        updateParentsWithNewClientData(oldClientDTO, client);
+        return client;
+    }
+
     public Order saveNewOrder(Order order) {
         return orderRepository.save(order);
     }
@@ -110,7 +122,7 @@ public class DataService {
         return drinkRepository.save(drink);
     }
 
-    public DinnerTable retrieveTable(String tableId) throws RequestedItemNotFoundException {
+    public DinnerTable retrieveTable(String tableId) {
         try {
             return dinnerTableRepository.findById(tableId).orElseThrow();
         } catch (Exception e) {
@@ -118,7 +130,7 @@ public class DataService {
         }
     }
 
-    public Client addDrinkInClient(AddDrinkDTO addDrinkDTO) throws RequestedItemNotFoundException {
+    public Client addDrinkInClient(AddDrinkDTO addDrinkDTO) {
         Client client;
         Order order;
         Drink drink;
@@ -147,6 +159,8 @@ public class DataService {
         var clientWithDrinkAgreed = clientRepository.save(client);
         log.info("Drink agreed correctly in client");
         var clientDTO = ClientDTO.builder()
+                .name(client.getName())
+                .mail(client.getMail())
                 .bookingId(addDrinkDTO.getBookingId())
                 .dinnerTableId(addDrinkDTO.getDinnerTableId())
                 .restaurantId(addDrinkDTO.getRestaurantId())
@@ -157,7 +171,7 @@ public class DataService {
         return clientWithDrinkAgreed;
     }
 
-    public Order updateCourseStatus(UpdateCourseDTO courseDTO) throws RequestedItemNotFoundException {
+    public Order updateCourseStatus(UpdateCourseDTO courseDTO) {
         Client client;
         Order order;
         Course course;
@@ -170,8 +184,7 @@ public class DataService {
         try {
             order = orderRepository.findById(courseDTO.getOrderId()).orElseThrow();
             log.info("Order with id {} retrieved from DB correctly", courseDTO.getOrderId());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + courseDTO.getClientId() + " not found in DB");
         }
         try {
@@ -199,6 +212,8 @@ public class DataService {
         Client savedClient = clientRepository.save(client);
         log.info("Client with id {} updated with new course status", courseDTO.getClientId());
         var clientDTO = ClientDTO.builder()
+                .mail(client.getMail())
+                .name(client.getName())
                 .bookingId(courseDTO.getBookingId())
                 .dinnerTableId(courseDTO.getDinnerTableId())
                 .restaurantId(courseDTO.getRestaurantId())
@@ -207,16 +222,15 @@ public class DataService {
         return order;
     }
 
-    public DinnerTable getDinersOfTable(String tableId) throws RequestedItemNotFoundException {
-        try{
+    public DinnerTable getDinersOfTable(String tableId) {
+        try {
             return dinnerTableRepository.findById(tableId).orElseThrow();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RequestedItemNotFoundException("Dinner table with id " + tableId + " not found in DB");
         }
     }
 
-    private void updateParentsWithNewClientData(ClientDTO client, Client newClient) throws RequestedItemNotFoundException {
+    private void updateParentsWithNewClientData(ClientDTO client, Client newClient) {
         log.info("Updating parents of client {}", newClient.getId());
         Booking booking;
         try {
@@ -228,6 +242,8 @@ public class DataService {
                 .filter(diner -> diner.getId().equals(newClient.getId()))
                 .findFirst();
         if (optionalClient.isPresent()) {
+            optionalClient.get().setMail(client.getMail());
+            optionalClient.get().setName(client.getName());
             optionalClient.get().setOrder(newClient.getOrder());
         } else {
             booking.getDiners().add(newClient);
