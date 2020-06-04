@@ -13,3 +13,7 @@
 mat-grid-list {
   overflow: auto;
 }
+
+.drinks {
+  display: block;
+}
