@@ -6,6 +6,8 @@ import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -232,5 +234,56 @@ public class DataServiceTest {
         });
 
         assertEquals("Table with id " + tableId + " not found in DB", exception.getMessage());
+    }
+
+    @Test
+    void shouldReturnTrueWhenAllDinnersAreConfirmedInTable() {
+        DinnerTable dinnerTable = DinnerTable.builder()
+                .booking(Booking.builder()
+                        .diners(List.of(
+                                Client.builder().confirmed(true).build(),
+                                Client.builder().confirmed(true).build())
+                        )
+                        .build())
+                .build();
+        when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(dinnerTable));
+
+        boolean clientsConfirmedInTable = dataService.checkClientsConfirmedInTable("tableId");
+
+        assertTrue(clientsConfirmedInTable);
+    }
+
+    @Test
+    void shouldReturnFalseWhenAnyDinnersAreNotConfirmedInTable() {
+        DinnerTable dinnerTable = DinnerTable.builder()
+                .booking(Booking.builder()
+                        .diners(List.of(
+                                Client.builder().confirmed(true).build(),
+                                Client.builder().confirmed(false).build())
+                        )
+                        .build())
+                .build();
+        when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(dinnerTable));
+
+        boolean clientsConfirmedInTable = dataService.checkClientsConfirmedInTable("tableId");
+
+        assertFalse(clientsConfirmedInTable);
+    }
+
+    @Test
+    void shouldReturnFalseWhenAllDinnersAreNotConfirmedInTable() {
+        DinnerTable dinnerTable = DinnerTable.builder()
+                .booking(Booking.builder()
+                        .diners(List.of(
+                                Client.builder().confirmed(false).build(),
+                                Client.builder().confirmed(false).build())
+                        )
+                        .build())
+                .build();
+        when(dinnerTableRepository.findById(anyString())).thenReturn(Optional.of(dinnerTable));
+
+        boolean clientsConfirmedInTable = dataService.checkClientsConfirmedInTable("tableId");
+
+        assertFalse(clientsConfirmedInTable);
     }
 }

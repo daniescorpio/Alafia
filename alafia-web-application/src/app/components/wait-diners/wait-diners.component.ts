@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {DataService} from "../../services/data.service";
-import validate = WebAssembly.validate;
 
 @Component({
   selector: 'app-wait-diners',
@@ -12,17 +11,25 @@ export class WaitDinersComponent implements OnInit {
 
 
   //TODO: When all dinners are confirmed in table, go to next component (app-menu)
+  // while loop?
   constructor(public router: Router, public dataService: DataService) {
-    this.dataService.checkAllDinersConfirmed().subscribe(value => {
-      console.log('All in table confirmed: ' + value);
-      if (value) this.router.navigateByUrl('app-menu');
-    });
   }
 
-  ngOnInit(): void {
-  }
 
-  skipExperience() {
+  async ngOnInit() {
+    let allConfirmed: boolean = false;
+    while (!allConfirmed) {
+      this.dataService.checkAllDinersConfirmed().subscribe((value: boolean) => {
+        allConfirmed = value;
+      });
+      console.log('Retrying in 5 secs....');
+      await this.delay(5000);
+    }
+    console.log('All confirmed')
     this.router.navigateByUrl('app-menu');
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

@@ -287,4 +287,14 @@ public class DataService {
         restaurantRepository.save(restaurant);
         log.info("Restaurant updated with new data");
     }
+
+    public boolean checkClientsConfirmedInTable(String tableId) {
+        DinnerTable table;
+        try {
+            table = dinnerTableRepository.findById(tableId).orElseThrow();
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("DinnerTable with id " + tableId + " not found in DB");
+        }
+        return table.getBooking().getDiners().stream().allMatch(Client::getConfirmed);
+    }
 }

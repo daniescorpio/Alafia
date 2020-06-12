@@ -39,6 +39,12 @@ public class AlafiaController {
         return restaurants;
     }
 
+    @GetMapping(value = "/clients-confirmed/{tableId}")
+    public boolean checkClientsConfirmedInTable(@PathVariable String tableId) {
+        log.info("Checking status of clients for table {}", tableId);
+        return dataService.checkClientsConfirmedInTable(tableId);
+    }
+
     @GetMapping(value = "/dinner-tables")
     public List<DinnerTable> getDinnerTablesData() {
         List<DinnerTable> dinnerTables = dataService.retrieveDinnerTablesData();

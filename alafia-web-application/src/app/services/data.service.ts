@@ -120,9 +120,9 @@ export class DataService {
   setAllDinerTablesWithStatus(restaurant: Restaurant) {
     restaurant.dinnerTables.forEach(table => {
       if (table.allDinersConfirmed === undefined) {
-        table.allDinersConfirmed = new BehaviorSubject<boolean>(true);
+        table.allDinersConfirmed = true;
       } else {
-        table.allDinersConfirmed.next(true);
+        table.allDinersConfirmed= true;
       }
     })
     return restaurant;
@@ -154,12 +154,13 @@ export class DataService {
     return this.httpClient.post(this.apiPath + '/update-client', client);
   }
 
-  checkAllDinersConfirmed(): Observable<boolean> {
-    this.activeTable.booking.diners.forEach(diner => {
-      console.log('diner confirmed: ' + diner.confirmed)
-      if (!diner.confirmed) this.activeTable.allDinersConfirmed.next(false);
-    });
-    return this.activeTable.allDinersConfirmed.asObservable();
+  checkAllDinersConfirmed() {
+    return this.httpClient.get(this.apiPath + '/clients-confirmed/' + this.activeTable.id)
+    // this.activeTable.booking.diners.forEach(diner => {
+    //   console.log('diner ' + diner.name + ' confirmed: ' + diner.confirmed)
+    //   if (!diner.confirmed) this.activeTable.allDinersConfirmed = false;
+    // });
+    // return this.activeTable.allDinersConfirmed;
   }
 
   // ******** BASIC API OPERATIONS ********

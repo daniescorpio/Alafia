@@ -2,6 +2,7 @@ package es.alafia.server.controller;
 
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.dto.OldClientDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
 import org.junit.jupiter.api.Test;
@@ -101,12 +102,12 @@ public class AlafiaControllerTest {
     @Test
     void shouldCallDataServiceToSaveNewClientInDB() throws RequestedItemNotFoundException {
         var client = Client.builder().build();
-        var clientDto = ClientDTO.builder().build();
+        var oldClientDto = new OldClientDTO();
         when(dataService.saveNewClient(any(ClientDTO.class))).thenReturn(client);
 
-        var response = alafiaController.replaceClient(clientDto);
+        var response = alafiaController.replaceClient(oldClientDto);
 
-        verify(dataService, times(1)).saveNewClient(clientDto);
+        verify(dataService, times(1)).saveNewClient(oldClientDto);
         assertEquals(client, response);
     }
 
