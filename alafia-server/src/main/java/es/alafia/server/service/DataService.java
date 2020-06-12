@@ -100,6 +100,7 @@ public class DataService {
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + oldClientDTO.getOldClientId() + " not found in DB");
         }
+        client.setConfirmed(true);
         client.setName(oldClientDTO.getName());
         client.setMail(oldClientDTO.getMail());
         clientRepository.save(client);
