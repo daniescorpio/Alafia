@@ -16,9 +16,12 @@ export class WelcomeComponent implements OnInit {
   constructor(public dataService: DataService, private router: Router, public dialog: MatDialog) {
   }
 
-  ngOnInit(): void {
-    this.dataService.loadMockedData();
-    this.dataService.restaurant = this.dataService.setAllDinerTablesWithStatus(this.dataService.restaurant);
+  async ngOnInit() {
+    console.log(this.dataService.restaurant);
+    while (this.dataService.restaurant === undefined) {
+      this.dataService.loadMockedData();
+      await this.dataService.delay(10000);
+    }
   }
 
   confirmClientInTable() {

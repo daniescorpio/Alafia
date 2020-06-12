@@ -22,14 +22,9 @@ export class WaitDinersComponent implements OnInit {
       this.dataService.checkAllDinersConfirmed().subscribe((value: boolean) => {
         allConfirmed = value;
       });
-      console.log('Retrying in 5 secs....');
-      await this.delay(5000);
+      await this.dataService.delay(1000);
     }
     console.log('All confirmed')
     this.router.navigateByUrl('app-menu');
-  }
-
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

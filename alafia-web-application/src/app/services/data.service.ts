@@ -96,6 +96,10 @@ export class DataService {
   constructor(private httpClient: HttpClient) {
   }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   loadMockedData() {
     return this.httpClient.get(this.apiPath + '/load-data').subscribe(data => {
       console.log('Data loaded complete')

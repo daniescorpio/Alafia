@@ -1,4 +1,7 @@
-<div>
+<div *ngIf="!this.dataService.activeTable">
+  <h1>Waiting data from server</h1>
+</div>
+<div *ngIf="this.dataService.activeTable">
   <h1 style="font-size: xx-large">ALAFIA</h1>
   <h1 style="font-size: xx-large">¡Bienvenidos!</h1>
   <h2 style="font-size: x-large">Reserva de {{this.dataService.activeTable.booking.client.name}}</h2>
