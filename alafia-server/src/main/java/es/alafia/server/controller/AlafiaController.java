@@ -66,6 +66,11 @@ public class AlafiaController {
         return clients;
     }
 
+    @GetMapping(value = "/clients/{clientId}")
+    public Client getClientData(@PathVariable String clientId) {
+        return dataService.retrieveClientData(clientId);
+    }
+
     @GetMapping(value = "/orders")
     public List<Order> getOrdersData() {
         List<Order> orders = dataService.retrieveOrdersData();

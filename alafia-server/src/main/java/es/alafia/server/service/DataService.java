@@ -298,4 +298,14 @@ public class DataService {
         }
         return table.getBooking().getDiners().stream().allMatch(Client::getConfirmed);
     }
+
+    public Client retrieveClientData(String clientId) {
+        Client client;
+        try {
+            client = clientRepository.findById(clientId).orElseThrow();
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Client with id " + clientId + " not found in DB");
+        }
+        return client;
+    }
 }

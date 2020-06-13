@@ -1,1 +1,13 @@
-<p>bill works!</p>
+<div *ngIf="client">
+  <h1 style="font-size: xx-large">Cuenta personal de {{client.name}}</h1>
+  <h2 style="margin-bottom: 5px">Platos:</h2>
+  <div *ngFor="let course of this.client.order.courses">
+    <span>{{course.description}}:&nbsp;</span>
+    <span>{{course.price}}€</span>
+  </div>
+  <h2 style="margin-bottom: 5px">Bebidas:</h2>
+  <div *ngFor="let drink of this.client.order.drinks">
+    <span>{{drink.description}}:&nbsp;</span>
+    <span>{{drink.price}}€</span>
+  </div>
+</div>

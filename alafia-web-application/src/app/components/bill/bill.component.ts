@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../../services/data.service";
+import {Client} from "../../model/client";
 
 @Component({
   selector: 'app-bill',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillComponent implements OnInit {
 
-  constructor() { }
+  client: Client;
+
+  constructor(public dataService: DataService) { }
 
   ngOnInit(): void {
+    this.dataService.getClientData().subscribe((data: Client) => {
+      this.client = data;
+    });
   }
 
 }

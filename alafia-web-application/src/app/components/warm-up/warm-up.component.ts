@@ -35,7 +35,7 @@ export class WarmUpComponent implements OnInit {
       this.dataService.activeTable.booking.diners.push(data);
       this.dataService.activeClient = data;
     });
-    this.router.navigateByUrl('/drinks');
+    this.router.navigateByUrl('/wait-diners');
   }
 
   selectOtherClient() {

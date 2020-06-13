@@ -25,6 +25,6 @@ export class WaitDinersComponent implements OnInit {
       await this.dataService.delay(1000);
     }
     console.log('All confirmed')
-    this.router.navigateByUrl('app-menu');
+    this.router.navigateByUrl('drinks');
   }
 }

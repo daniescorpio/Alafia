@@ -1,10 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {Drink} from '../../model/drink';
 import {Router} from '@angular/router';
 import {DrinkDto} from "../../model/dto/drinkDto";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {Client} from "../../model/client";
 
 @Component({
   selector: 'app-drinks',
@@ -45,10 +43,10 @@ export class DrinksComponent implements OnInit {
     );
 
     this.dataService.addDrinkToClient(drinkDto);
-    this.router.navigateByUrl('/wait-diners');
+    this.router.navigateByUrl('/app-menu');
   }
 
   noAddDrink() {
-    this.router.navigateByUrl('/wait-diners');
+    this.router.navigateByUrl('/app-menu');
   }
 }

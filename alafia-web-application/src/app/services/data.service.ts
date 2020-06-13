@@ -242,4 +242,8 @@ export class DataService {
       console.log(data)
     });
   }
+
+  getClientData() {
+    return this.httpClient.get(this.apiPath + '/clients/' + this.activeClient.id)
+  }
 }
