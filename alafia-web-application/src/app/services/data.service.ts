@@ -92,6 +92,7 @@ export class DataService {
 
   activeTable: DinnerTable;
   activeClient: Client;
+  courseIdToLaunchExperience: string;
 
   constructor(private httpClient: HttpClient) {
   }

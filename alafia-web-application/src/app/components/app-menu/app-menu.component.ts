@@ -7,6 +7,7 @@ import {DrinkDto} from "../../model/dto/drinkDto";
 import {MigrationTestComponent} from "../migration-test/migration-test.component";
 import {ExtrasComponent} from "../extras/extras.component";
 import {ExperienceManagerComponent} from "../experience-manager/experience-manager.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-app-menu',
@@ -15,10 +16,14 @@ import {ExperienceManagerComponent} from "../experience-manager/experience-manag
 })
 export class AppMenuComponent implements OnInit {
 
-  constructor(public dataService: DataService, public dialog: MatDialog) {
+  constructor(public dataService: DataService,
+              public dialog: MatDialog,
+              public router: Router) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    console.log('asking for launch experience');
+    this.askCoursesStatus();
   }
 
   onDrinkClick() {
@@ -72,6 +77,33 @@ export class AppMenuComponent implements OnInit {
         console.log('Modal closed clicking background')
       });
   }
+
+  async askCoursesStatus() {
+    let actualCoursesIdServed = this.dataService.activeClient.order.coursesIdServed;
+    console.log('actualCoursesIdServed: ');
+    console.log(actualCoursesIdServed);
+    let courses = this.dataService.activeClient.order.courses;
+    let updatedCourseId;
+    do {
+      this.dataService.getClientData().subscribe((data: Client) => {
+        console.log('Checking diffs to launch experience...');
+        updatedCourseId = data.order.coursesIdServed.filter(item => actualCoursesIdServed.indexOf(item) < 0)
+        console.log('differences: ');
+        console.log(updatedCourseId);
+        this.dataService.activeClient.order.coursesIdServed = data.order.coursesIdServed;
+        actualCoursesIdServed = data.order.coursesIdServed;
+        if(updatedCourseId.length === 1) {
+          this.launchExperience(updatedCourseId[0]);
+        }
+      });
+      await this.dataService.delay(5000);
+    } while (courses.length !== actualCoursesIdServed.length);
+  }
+
+  private launchExperience(updatedCourseId: string) {
+    this.dataService.courseIdToLaunchExperience = updatedCourseId;
+    this.router.navigateByUrl('experience');
+  }
 }
 
 @Component({
@@ -86,10 +118,11 @@ export class ModalDrinkComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ModalDrinkComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Client,
-              public dataService: DataService) {
+              public dataService: DataService,
+              public router: Router) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.getDrinkKeys();
   }
 

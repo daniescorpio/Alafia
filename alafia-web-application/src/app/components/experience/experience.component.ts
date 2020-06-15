@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-experience',
@@ -8,12 +9,13 @@ import {Router} from "@angular/router";
 })
 export class ExperienceComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public dataService: DataService) { }
 
   ngOnInit(): void {
   }
 
   skipExperience() {
+    this.dataService.courseIdToLaunchExperience = null;
     this.router.navigateByUrl('app-menu');
   }
 }
