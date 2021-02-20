@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "alafia-web-application"
+  "defaultProject": "alafia-web-application",
+  "cli": {
+    "analytics": false
+  }
 }

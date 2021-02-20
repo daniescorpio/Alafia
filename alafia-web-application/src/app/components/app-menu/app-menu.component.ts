@@ -1,13 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DataService} from "../../services/data.service";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {Client} from "../../model/client";
-import {Drink} from "../../model/drink";
-import {DrinkDto} from "../../model/dto/drinkDto";
-import {MigrationTestComponent} from "../migration-test/migration-test.component";
-import {ExtrasComponent} from "../extras/extras.component";
-import {ExperienceManagerComponent} from "../experience-manager/experience-manager.component";
-import {Router} from "@angular/router";
+import {DataService} from '../../services/data.service';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Client} from '../../model/client';
+import {Drink} from '../../model/drink';
+import {DrinkDto} from '../../model/dto/drinkDto';
+import {MigrationTestComponent} from '../migration-test/migration-test.component';
+import {ExtrasComponent} from '../extras/extras.component';
+import {ExperienceManagerComponent} from '../experience-manager/experience-manager.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-app-menu',
@@ -35,7 +35,7 @@ export class AppMenuComponent implements OnInit {
       result => {
 
       }, error => {
-        console.log('Modal closed clicking background')
+        console.log('Modal closed clicking background');
       });
   }
 
@@ -48,7 +48,7 @@ export class AppMenuComponent implements OnInit {
       result => {
 
       }, error => {
-        console.log('Modal closed clicking background')
+        console.log('Modal closed clicking background');
       });
   }
 
@@ -61,7 +61,7 @@ export class AppMenuComponent implements OnInit {
       result => {
 
       }, error => {
-        console.log('Modal closed clicking background')
+        console.log('Modal closed clicking background');
       });
   }
 
@@ -74,7 +74,7 @@ export class AppMenuComponent implements OnInit {
       result => {
 
       }, error => {
-        console.log('Modal closed clicking background')
+        console.log('Modal closed clicking background');
       });
   }
 
@@ -82,17 +82,17 @@ export class AppMenuComponent implements OnInit {
     let actualCoursesIdServed = this.dataService.activeClient.order.coursesIdServed;
     console.log('actualCoursesIdServed: ');
     console.log(actualCoursesIdServed);
-    let courses = this.dataService.activeClient.order.courses;
+    const courses = this.dataService.activeClient.order.courses;
     let updatedCourseId;
     do {
       this.dataService.getClientData().subscribe((data: Client) => {
         console.log('Checking diffs to launch experience...');
-        updatedCourseId = data.order.coursesIdServed.filter(item => actualCoursesIdServed.indexOf(item) < 0)
+        updatedCourseId = data.order.coursesIdServed.filter(item => actualCoursesIdServed.indexOf(item) < 0);
         console.log('differences: ');
         console.log(updatedCourseId);
         this.dataService.activeClient.order.coursesIdServed = data.order.coursesIdServed;
         actualCoursesIdServed = data.order.coursesIdServed;
-        if(updatedCourseId.length === 1) {
+        if (updatedCourseId.length === 1) {
           this.launchExperience(updatedCourseId[0]);
         }
       });
@@ -107,6 +107,7 @@ export class AppMenuComponent implements OnInit {
 }
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'modal-drink',
   templateUrl: 'modal-drink.html',
   styleUrls: ['./app-menu.component.css']
@@ -128,7 +129,7 @@ export class ModalDrinkComponent implements OnInit {
 
   getDrinkKeys() {
     this.dataService.getDrinks().subscribe((data: Drink[]) => {
-      console.log('Retrieved ' + data.length + ' drinks from DB')
+      console.log('Retrieved ' + data.length + ' drinks from DB');
       this.drinks = data;
     });
   }
@@ -138,7 +139,7 @@ export class ModalDrinkComponent implements OnInit {
   }
 
   confirmSelectedDrink() {
-    let drinkDto: DrinkDto = new DrinkDto(
+    const drinkDto: DrinkDto = new DrinkDto(
       this.selectedDrink.id,
       this.dataService.activeClient.order.id,
       this.dataService.activeClient.id,

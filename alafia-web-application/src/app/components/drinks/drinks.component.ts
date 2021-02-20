@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {Drink} from '../../model/drink';
 import {Router} from '@angular/router';
-import {DrinkDto} from "../../model/dto/drinkDto";
+import {DrinkDto} from '../../model/dto/drinkDto';
 
 @Component({
   selector: 'app-drinks',

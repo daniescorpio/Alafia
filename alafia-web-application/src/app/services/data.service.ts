@@ -94,6 +94,7 @@ export class DataService {
   activeClient: Client;
   courseIdToLaunchExperience: string;
 
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -103,8 +104,8 @@ export class DataService {
 
   loadMockedData() {
     return this.httpClient.get(this.apiPath + '/load-data').subscribe(data => {
-      console.log('Data loaded complete')
-      console.log('Setting default restaurant...')
+      console.log('Data loaded complete');
+      console.log('Setting default restaurant...');
       this.setDefaultRestaurant();
     });
   }
@@ -112,14 +113,14 @@ export class DataService {
   setDefaultRestaurant() {
     this.getRestaurants().subscribe((data: Restaurant[]) => {
       console.log('Retrieved ' + data.length + ' restaurants from server');
-      console.log(data)
+      console.log(data);
       if (data.length > 0) {
         this.setAllDinerTablesWithStatus(data[0]);
         this.restaurant = data[0];
-        console.log('Restaurant setted: ' + this.restaurant.id)
+        console.log('Restaurant setted: ' + this.restaurant.id);
       }
       this.setDefaultActiveDinnerTable();
-    })
+    });
   }
 
   setAllDinerTablesWithStatus(restaurant: Restaurant) {
@@ -127,9 +128,9 @@ export class DataService {
       if (table.allDinersConfirmed === undefined) {
         table.allDinersConfirmed = true;
       } else {
-        table.allDinersConfirmed= true;
+        table.allDinersConfirmed = true;
       }
-    })
+    });
     return restaurant;
   }
 
@@ -142,8 +143,8 @@ export class DataService {
   addDrinkToClient(drinkDto: DrinkDto) {
     return this.httpClient.post(this.apiPath + '/add-drink', drinkDto)
       .subscribe(data => {
-        console.log('Drink with id ' + drinkDto.drinkId + ' added in client with id ' + drinkDto.clientId)
-        console.log(data)
+        console.log('Drink with id ' + drinkDto.drinkId + ' added in client with id ' + drinkDto.clientId);
+        console.log(data);
       });
   }
 
@@ -160,7 +161,7 @@ export class DataService {
   }
 
   checkAllDinersConfirmed() {
-    return this.httpClient.get(this.apiPath + '/clients-confirmed/' + this.activeTable.id)
+    return this.httpClient.get(this.apiPath + '/clients-confirmed/' + this.activeTable.id);
     // this.activeTable.booking.diners.forEach(diner => {
     //   console.log('diner ' + diner.name + ' confirmed: ' + diner.confirmed)
     //   if (!diner.confirmed) this.activeTable.allDinersConfirmed = false;
@@ -176,8 +177,8 @@ export class DataService {
 
   postRestaurant(restaurant: Restaurant) {
     return this.httpClient.post(this.apiPath + '/restaurants', restaurant).subscribe(data => {
-      console.log('Restaurant saved: ')
-      console.log(data)
+      console.log('Restaurant saved: ');
+      console.log(data);
     });
   }
 
@@ -187,8 +188,8 @@ export class DataService {
 
   postDinnerTable(dinnerTable: DinnerTable) {
     return this.httpClient.post(this.apiPath + '/dinner-tables', dinnerTable).subscribe(data => {
-      console.log('Dinner table saved: ')
-      console.log(data)
+      console.log('Dinner table saved: ');
+      console.log(data);
     });
   }
 
@@ -198,8 +199,8 @@ export class DataService {
 
   postBooking(booking: Booking) {
     return this.httpClient.post(this.apiPath + '/booking', booking).subscribe(data => {
-      console.log('Booking saved: ')
-      console.log(data)
+      console.log('Booking saved: ');
+      console.log(data);
     });
   }
 
@@ -217,8 +218,8 @@ export class DataService {
 
   postOrder(order: Order) {
     return this.httpClient.post(this.apiPath + '/orders', order).subscribe(data => {
-      console.log('Order saved: ')
-      console.log(data)
+      console.log('Order saved: ');
+      console.log(data);
     });
   }
 
@@ -228,8 +229,8 @@ export class DataService {
 
   postCourse(course: Course) {
     return this.httpClient.post(this.apiPath + '/courses', course).subscribe(data => {
-      console.log('Course saved: ')
-      console.log(data)
+      console.log('Course saved: ');
+      console.log(data);
     });
   }
 
@@ -239,12 +240,17 @@ export class DataService {
 
   postDrink(drink: Drink) {
     return this.httpClient.post(this.apiPath + '/drinks', drink).subscribe(data => {
-      console.log('Drink saved: ')
-      console.log(data)
+      console.log('Drink saved: ');
+      console.log(data);
     });
   }
 
   getClientData() {
-    return this.httpClient.get(this.apiPath + '/clients/' + this.activeClient.id)
+    return this.httpClient.get(this.apiPath + '/clients/' + this.activeClient.id);
+  }
+
+  //TODO: complete endpoint on server
+  getTableBill(bookingId: string) {
+    return this.httpClient.get(this.apiPath + '/table-bill/' + bookingId);
   }
 }
