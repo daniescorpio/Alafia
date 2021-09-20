@@ -101,13 +101,15 @@ public class AlafiaControllerTest {
 
     @Test
     void shouldCallDataServiceToSaveNewClientInDB() throws RequestedItemNotFoundException {
-        var client = Client.builder().build();
+        var client = Client.builder()
+                .id("id")
+                .build();
         var oldClientDto = new OldClientDTO();
-        when(dataService.saveNewClient(any(ClientDTO.class))).thenReturn(client);
+        when(dataService.replaceClient(any(OldClientDTO.class))).thenReturn(client);
 
         var response = alafiaController.replaceClient(oldClientDto);
 
-        verify(dataService, times(1)).saveNewClient(oldClientDto);
+        verify(dataService, times(1)).replaceClient(oldClientDto);
         assertEquals(client, response);
     }
 

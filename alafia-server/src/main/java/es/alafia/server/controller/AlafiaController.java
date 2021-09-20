@@ -125,8 +125,8 @@ public class AlafiaController {
 
     @PostMapping(value = "/clients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client replaceClient(@RequestBody OldClientDTO client) {
-        Client newClient = dataService.replaceClient(client);
+    public Client replaceClient(@RequestBody OldClientDTO oldClient) {
+        Client newClient = dataService.replaceClient(oldClient);
         log.info("Client saved with id: {} with new contact data", newClient.getId());
         return newClient;
     }

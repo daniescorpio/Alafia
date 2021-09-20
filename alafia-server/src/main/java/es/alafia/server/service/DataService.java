@@ -96,7 +96,6 @@ public class DataService {
         Client client;
         try {
             client = clientRepository.findById(oldClientDTO.getOldClientId()).orElseThrow();
-
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + oldClientDTO.getOldClientId() + " not found in DB");
         }

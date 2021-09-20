@@ -3,7 +3,9 @@ package es.alafia.server;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.ClientDTO;
+import es.alafia.server.model.dto.OldClientDTO;
 import es.alafia.server.repository.BookingRepository;
+import es.alafia.server.repository.ClientRepository;
 import es.alafia.server.repository.DinnerTableRepository;
 import es.alafia.server.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -44,6 +45,9 @@ class AlafiaServerApplicationTests {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     @Test
     void shouldGetRestaurantsData() throws Exception {
@@ -113,25 +117,27 @@ class AlafiaServerApplicationTests {
 
     @Test
     void shouldCreateNewClient() throws Exception {
+        var client = clientRepository.save(Client.builder()
+                .id("ID")
+                .build());
         var booking = bookingRepository.save(Booking.builder()
                 .diners(new ArrayList<>())
-                .client(Client.builder().id("ID").build())
+                .client(client)
                 .build());
         var dinnerTable = dinnerTableRepository.save(DinnerTable.builder().build());
         var restaurant = restaurantRepository.save(Restaurant.builder()
                 .dinnerTables(List.of(dinnerTable))
                 .build());
 
-        var client = ClientDTO.builder()
-                .bookingId(booking.getId())
-                .dinnerTableId(dinnerTable.getId())
-                .restaurantId(restaurant.getId())
-                .build();
+        final OldClientDTO oldClientDTO = new OldClientDTO("ID");
+        oldClientDTO.setBookingId(booking.getId());
+        oldClientDTO.setDinnerTableId(dinnerTable.getId());
+        oldClientDTO.setRestaurantId(restaurant.getId());
 
         var mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/clients")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(client)))
+                .content(mapper.writeValueAsString(oldClientDTO)))
                 .andExpect(status().isCreated())
                 .andReturn();
 

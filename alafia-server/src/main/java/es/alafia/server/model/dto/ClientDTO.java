@@ -1,6 +1,5 @@
 package es.alafia.server.model.dto;
 
-import es.alafia.server.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
