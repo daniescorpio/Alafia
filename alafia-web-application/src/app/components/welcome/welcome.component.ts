@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DinnerTable} from '../../model/dinnerTable';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {SelectClientComponent} from '../select-client/select-client.component';
-import {Restaurant} from "../../model/restaurant";
 
 @Component({
   selector: 'app-welcome',

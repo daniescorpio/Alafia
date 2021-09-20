@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Client} from "../../model/client";
-import {Booking} from "../../model/booking";
+import {Client} from '../../model/client';
 
 @Component({
   selector: 'app-extras',
@@ -19,12 +18,16 @@ export class ExtrasComponent implements OnInit {
   }
 
   billRequest() {
-    this.router.navigateByUrl('/bill');
     this.dialogRef.close();
+    this.router.navigateByUrl('/bill');
   }
 
   fullBillRequest() {
-    this.router.navigateByUrl('/bill');
+    this.dialogRef.close();
+    this.router.navigateByUrl('/table-bill');
+  }
+
+  backToMenu() {
     this.dialogRef.close();
   }
 }

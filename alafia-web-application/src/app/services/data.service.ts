@@ -249,8 +249,8 @@ export class DataService {
     return this.httpClient.get(this.apiPath + '/clients/' + this.activeClient.id);
   }
 
-  //TODO: complete endpoint on server
-  getTableBill(bookingId: string) {
-    return this.httpClient.get(this.apiPath + '/table-bill/' + bookingId);
+  // TODO: complete endpoint on server
+  getTableBill() {
+    return this.httpClient.get(this.apiPath + '/table-bill/' + this.activeTable.id);
   }
 }

@@ -30,15 +30,20 @@ export class WarmUpComponent implements OnInit {
       this.dataService.restaurant.id,
       diner.confirmed
     )).subscribe((data: Client) => {
-      let index = this.dataService.activeTable.booking.diners.findIndex(c => c.id === data.id);
+      const index = this.dataService.activeTable.booking.diners.findIndex(c => c.id === data.id);
       this.dataService.activeTable.booking.diners.splice(index, 1);
       this.dataService.activeTable.booking.diners.push(data);
       this.dataService.activeClient = data;
     });
+    if (!diner.confirmed) {
+      console.log('Dinner ' + diner.name + ' with id ' + diner.id + ' has confirmed his seat on the table');
+    } else {
+      console.log('Dinner ' + diner.name + ' with id ' + diner.id + ' has refused his seat on the table');
+    }
     this.router.navigateByUrl('/wait-diners');
   }
 
   selectOtherClient() {
-    this.router.navigateByUrl('replace-client')
+    this.router.navigateByUrl('replace-client');
   }
 }

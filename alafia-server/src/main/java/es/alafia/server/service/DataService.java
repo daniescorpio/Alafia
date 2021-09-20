@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -306,5 +307,24 @@ public class DataService {
             throw new RequestedItemNotFoundException("Client with id " + clientId + " not found in DB");
         }
         return client;
+    }
+
+    public TableBillDTO retrieveTableBill(String tableId) {
+        try {
+            final var diners = dinnerTableRepository.findById(tableId)
+                    .map(DinnerTable::getBooking)
+                    .map(Booking::getDiners)
+                    .orElseThrow();
+            return TableBillDTO.builder()
+                    .courses(diners.stream()
+                            .flatMap(dinner -> dinner.getOrder().getCourses().stream())
+                            .collect(Collectors.toList()))
+                    .drinks(diners.stream()
+                            .flatMap(dinner -> dinner.getOrder().getDrinks().stream())
+                            .collect(Collectors.toList()))
+                    .build();
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Table with id " + tableId + " not found in DB");
+        }
     }
 }

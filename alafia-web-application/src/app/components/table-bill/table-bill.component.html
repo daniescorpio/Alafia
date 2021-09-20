@@ -1,0 +1,27 @@
+<div style="position: absolute; top: -260px; left: 60px">
+  <h1 style="font-size: xx-large">
+    Cuenta conjunta de la mesa del cliente <br> {{table.booking.client.name}}
+  </h1>
+  <h2 style="margin-bottom: 5px">Platos:</h2>
+  <div *ngFor="let course of this.tableBill.courses">
+    <span>{{course.description}}:&nbsp;</span>
+    <span>{{course.price}} €</span>
+  </div>
+  <h2 style="margin-bottom: 5px">Bebidas:</h2>
+  <div *ngFor="let drink of this.tableBill.drinks">
+    <span>{{drink.description}}:&nbsp;</span>
+    <span>{{drink.price}} €</span>
+  </div>
+  <h2><b>Total: </b>{{this.totalPrice}} €</h2>
+  <h3><b>Total platos: </b>{{this.totalCourses}} €</h3>
+  <h3><b>Total bebidas: </b>{{this.totalDrinks}} €</h3>
+  <button mat-flat-button color="primary"
+          (click)="backToMenu()"
+          style="background-color: #b45d2e;
+          font-size: xx-large;
+          padding: 30px;
+          width: 100%;
+          margin-bottom: 10px">
+    Volver al menu principal
+  </button>
+</div>

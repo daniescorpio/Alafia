@@ -36,6 +36,7 @@ import { MigrationTestComponent } from './components/migration-test/migration-te
 import { WaitDinersComponent } from './components/wait-diners/wait-diners.component';
 import { BillComponent } from './components/bill/bill.component';
 import { ReplaceClientComponent } from './components/replace-client/replace-client.component';
+import { TableBillComponent } from './components/table-bill/table-bill.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ReplaceClientComponent } from './components/replace-client/replace-clie
     MigrationTestComponent,
     WaitDinersComponent,
     BillComponent,
-    ReplaceClientComponent
+    ReplaceClientComponent,
+    TableBillComponent
   ],
   imports: [
     BrowserModule,

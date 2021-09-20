@@ -3,7 +3,6 @@ package es.alafia.server.controller;
 import es.alafia.server.LoadInitData;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.*;
-import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -169,6 +168,11 @@ public class AlafiaController {
     public Order updateCourseInClient(@RequestBody UpdateCourseDTO courseDTO) {
         log.info("Trying to update course with id {} in client with id {}", courseDTO.getCourseId(), courseDTO.getClientId());
         return dataService.updateCourseStatus(courseDTO);
+    }
+
+    @GetMapping(value = "/table-bill/{activeTableId}")
+    public TableBillDTO getTablleBill(@PathVariable String activeTableId) {
+        return dataService.retrieveTableBill(activeTableId);
     }
 }
 

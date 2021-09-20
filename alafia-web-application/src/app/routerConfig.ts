@@ -5,15 +5,16 @@ import { AppComponent } from './app.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {WarmUpComponent} from './components/warm-up/warm-up.component';
 import {DrinksComponent} from './components/drinks/drinks.component';
-import {RoomManagerComponent} from "./components/room-manager/room-manager.component";
-import {ExperienceComponent} from "./components/experience/experience.component";
-import {AppMenuComponent} from "./components/app-menu/app-menu.component";
-import {ExperienceManagerComponent} from "./components/experience-manager/experience-manager.component";
-import {ExtrasComponent} from "./components/extras/extras.component";
-import {MigrationTestComponent} from "./components/migration-test/migration-test.component";
-import {WaitDinersComponent} from "./components/wait-diners/wait-diners.component";
-import {BillComponent} from "./components/bill/bill.component";
-import {ReplaceClientComponent} from "./components/replace-client/replace-client.component";
+import {RoomManagerComponent} from './components/room-manager/room-manager.component';
+import {ExperienceComponent} from './components/experience/experience.component';
+import {AppMenuComponent} from './components/app-menu/app-menu.component';
+import {ExperienceManagerComponent} from './components/experience-manager/experience-manager.component';
+import {ExtrasComponent} from './components/extras/extras.component';
+import {MigrationTestComponent} from './components/migration-test/migration-test.component';
+import {WaitDinersComponent} from './components/wait-diners/wait-diners.component';
+import {BillComponent} from './components/bill/bill.component';
+import {ReplaceClientComponent} from './components/replace-client/replace-client.component';
+import {TableBillComponent} from "./components/table-bill/table-bill.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -58,6 +59,9 @@ const appRoutes: Routes = [
   },
   { path: 'bill',
     component: BillComponent
+  },
+  { path: 'table-bill',
+    component: TableBillComponent
   },
   { path: 'room-manager',
     component: RoomManagerComponent

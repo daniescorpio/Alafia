@@ -1,14 +1,30 @@
 <div *ngIf="client">
-  <h1 style="font-size: xx-large">Cuenta personal de {{client.name}}</h1>
-  <h2 style="margin-bottom: 5px">Platos:</h2>
-  <div *ngFor="let course of this.client.order.courses">
-    <span>{{course.description}}:&nbsp;</span>
-    <span>{{course.price}}€</span>
+  <div style="position: absolute; top: -260px; left: 130px">
+    <h1 style="font-size: xx-large;
+             top: 3%; left: auto">
+      Cuenta personal del cliente <br> {{client.name}}
+    </h1>
+    <h2 style="margin-bottom: 5px">Platos:</h2>
+    <div *ngFor="let course of this.client.order.courses">
+      <span>{{course.description}}:&nbsp;</span>
+      <span>{{course.price}} €</span>
+    </div>
+    <h2 style="margin-bottom: 5px">Bebidas:</h2>
+    <div *ngFor="let drink of this.client.order.drinks">
+      <span>{{drink.description}}:&nbsp;</span>
+      <span>{{drink.price}} €</span>
+    </div>
+    <h2><b>Total: </b>{{this.total}} €</h2>
+    <h3><b>Total platos: </b>{{this.totalCourses}} €</h3>
+    <h3><b>Total bebidas: </b>{{this.totalDrinks}} €</h3>
+    <button mat-flat-button color="primary"
+            (click)="backToMenu()"
+            style="background-color: #b45d2e;
+          font-size: xx-large;
+          padding: 30px;
+          width: 100%;
+          margin-bottom: 10px">
+      Volver al menu principal
+    </button>
   </div>
-  <h2 style="margin-bottom: 5px">Bebidas:</h2>
-  <div *ngFor="let drink of this.client.order.drinks">
-    <span>{{drink.description}}:&nbsp;</span>
-    <span>{{drink.price}}€</span>
-  </div>
-  <h2><b>Total: </b>{{this.total}}€</h2>
 </div>
