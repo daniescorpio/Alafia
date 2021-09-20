@@ -1,7 +1,7 @@
-import { Routes } from '@angular/router';
-import { LoginComponentComponent } from './components/login-component/login-component.component';
-import { BookTableComponent } from './components/book-table/book-table.component';
-import { AppComponent } from './app.component';
+import {Routes} from '@angular/router';
+import {LoginComponentComponent} from './components/login-component/login-component.component';
+import {BookTableComponent} from './components/book-table/book-table.component';
+import {AppComponent} from './app.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {WarmUpComponent} from './components/warm-up/warm-up.component';
 import {DrinksComponent} from './components/drinks/drinks.component';

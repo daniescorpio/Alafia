@@ -1,5 +1,3 @@
-import {Order} from "../order";
-
 export class DrinkDto {
   drinkId: string;
   orderId: string;

@@ -30,13 +30,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { ExperienceManagerComponent } from './components/experience-manager/experience-manager.component';
-import { ExtrasComponent } from './components/extras/extras.component';
-import { MigrationTestComponent } from './components/migration-test/migration-test.component';
-import { WaitDinersComponent } from './components/wait-diners/wait-diners.component';
-import { BillComponent } from './components/bill/bill.component';
-import { ReplaceClientComponent } from './components/replace-client/replace-client.component';
-import { TableBillComponent } from './components/table-bill/table-bill.component';
+import {ExperienceManagerComponent} from './components/experience-manager/experience-manager.component';
+import {ExtrasComponent} from './components/extras/extras.component';
+import {MigrationTestComponent} from './components/migration-test/migration-test.component';
+import {WaitDinersComponent} from './components/wait-diners/wait-diners.component';
+import {BillComponent} from './components/bill/bill.component';
+import {ReplaceClientComponent} from './components/replace-client/replace-client.component';
+import {TableBillComponent} from './components/table-bill/table-bill.component';
 
 @NgModule({
   declarations: [

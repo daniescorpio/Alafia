@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DinnerTable} from '../../model/dinnerTable';
 import {DataService} from '../../services/data.service';
 import {TableBill} from '../../model/tableBill';

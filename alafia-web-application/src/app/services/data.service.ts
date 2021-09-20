@@ -10,7 +10,6 @@ import {HttpClient} from '@angular/common/http';
 import {ClientDto} from "../model/dto/clientDto";
 import {DrinkDto} from "../model/dto/drinkDto";
 import {CourseDto} from "../model/dto/courseDto";
-import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

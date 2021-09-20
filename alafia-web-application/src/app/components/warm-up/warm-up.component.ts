@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DataService} from '../../services/data.service';
-import {SelectClientComponent} from '../select-client/select-client.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Client} from '../../model/client';
-import {AddClientComponent} from '../add-client/add-client.component';
 import {ClientDto} from "../../model/dto/clientDto";
 
 @Component({

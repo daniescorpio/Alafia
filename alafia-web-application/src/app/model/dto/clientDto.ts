@@ -1,5 +1,3 @@
-import {Order} from "../order";
-
 export class ClientDto {
   name: string;
   mail: string;

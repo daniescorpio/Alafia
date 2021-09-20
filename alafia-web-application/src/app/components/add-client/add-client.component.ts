@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DataService} from '../../services/data.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Restaurant} from '../../model/restaurant';
 import {ClientDto} from "../../model/dto/clientDto";
 import {Client} from "../../model/client";
 

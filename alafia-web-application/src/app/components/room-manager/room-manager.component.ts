@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DinnerTable} from "../../model/dinnerTable";
 import {DataService} from "../../services/data.service";
-import {Restaurant} from "../../model/restaurant";
 import {MatDialog} from "@angular/material/dialog";
 import {SelectedTableComponent} from "../selected-table/selected-table.component";
 

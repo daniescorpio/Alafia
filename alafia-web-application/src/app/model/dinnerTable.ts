@@ -1,5 +1,4 @@
 import {Booking} from './booking';
-import {BehaviorSubject} from "rxjs";
 
 export class DinnerTable {
   id: string;
