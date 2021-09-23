@@ -1,1 +1,66 @@
-<p>migration-test works!</p>
+<div>
+  <div>
+    <h3>¿Qué es lo que más te ha llamado la atención sobre sus costumbres?</h3>
+    <mat-radio-group [(ngModel)]="answer1">
+      <mat-radio-button [value]="1">1</mat-radio-button>
+      <mat-radio-button [value]="2">2</mat-radio-button>
+      <mat-radio-button [value]="3">3</mat-radio-button>
+      <mat-radio-button [value]="4">4</mat-radio-button>
+      <mat-radio-button [value]="5">5</mat-radio-button>
+    </mat-radio-group>
+    <hr>
+  </div>
+  <div>
+    <h3>¿Cuál es el plato que más te ha gustado?</h3>
+    <mat-radio-group [(ngModel)]="answer2">
+      <mat-radio-button [value]="1">1</mat-radio-button>
+      <mat-radio-button [value]="2">2</mat-radio-button>
+      <mat-radio-button [value]="3">3</mat-radio-button>
+      <mat-radio-button [value]="4">4</mat-radio-button>
+      <mat-radio-button [value]="5">5</mat-radio-button>
+    </mat-radio-group>
+    <hr>
+  </div>
+  <div>
+    <h3>¿Te has sentido cómoda con la atención al cliente?</h3>
+    <mat-radio-group [(ngModel)]="answer3">
+      <mat-radio-button [value]="1">1</mat-radio-button>
+      <mat-radio-button [value]="2">2</mat-radio-button>
+      <mat-radio-button [value]="3">3</mat-radio-button>
+      <mat-radio-button [value]="4">4</mat-radio-button>
+      <mat-radio-button [value]="5">5</mat-radio-button>
+    </mat-radio-group>
+    <hr>
+  </div>
+  <div>
+    <h3>¿Volverías al restaurante?</h3>
+    <mat-radio-group [(ngModel)]="answer4">
+      <mat-radio-button [value]="1">1</mat-radio-button>
+      <mat-radio-button [value]="2">2</mat-radio-button>
+      <mat-radio-button [value]="3">3</mat-radio-button>
+      <mat-radio-button [value]="4">4</mat-radio-button>
+      <mat-radio-button [value]="5">5</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="flex-parent jc-center">
+    <button mat-flat-button color="primary"
+            (click)="submitAnswers()"
+            style="background-color: #8bb42e;
+            font-size: large;
+            padding: 30px;
+            margin: 20px;
+            width: 49%">
+      Enviar respuestas
+    </button>
+    <button mat-flat-button color="primary"
+            (click)="backToMenu()"
+            style="background-color: #b45d2e;
+            font-size: large;
+            padding: 30px;
+            margin: 20px;
+            text-align: center;
+            width: 49%">
+      Volver al menu
+    </button>
+  </div>
+</div>

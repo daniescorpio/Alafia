@@ -37,6 +37,7 @@ import {WaitDinersComponent} from './components/wait-diners/wait-diners.componen
 import {BillComponent} from './components/bill/bill.component';
 import {ReplaceClientComponent} from './components/replace-client/replace-client.component';
 import {TableBillComponent} from './components/table-bill/table-bill.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -62,24 +63,25 @@ import {TableBillComponent} from './components/table-bill/table-bill.component';
     ReplaceClientComponent,
     TableBillComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatSelectModule,
-    FormsModule,
-    MatIconModule,
-    MatDialogModule,
-    MatListModule,
-    MatSidenavModule,
-    HttpClientModule,
-    MatGridListModule
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatInputModule,
+        MatSelectModule,
+        FormsModule,
+        MatIconModule,
+        MatDialogModule,
+        MatListModule,
+        MatSidenavModule,
+        HttpClientModule,
+        MatGridListModule,
+        MatRadioModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

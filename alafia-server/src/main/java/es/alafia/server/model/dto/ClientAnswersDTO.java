@@ -11,11 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDTO {
-    private String name;
-    private String mail;
-    private String bookingId;
-    private String dinnerTableId;
-    private String restaurantId;
-    private List<String> testAnswers;
+public class ClientAnswersDTO {
+    private String clientId;
+    private List<String> answers;
 }

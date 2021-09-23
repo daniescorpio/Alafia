@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,4 +24,6 @@ public class Client {
     private Order order;
 
     private Boolean confirmed = false;
+
+    private List<String> testAnswers;
 }

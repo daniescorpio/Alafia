@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -325,6 +326,38 @@ public class DataService {
                     .build();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Table with id " + tableId + " not found in DB");
+        }
+    }
+
+    public void updateClientWithTestAnswers(ClientAnswersDTO clientAnswersDTO) {
+        Client client;
+        String clientId = clientAnswersDTO.getClientId();
+        try {
+            client = clientRepository.findById(clientId).orElseThrow();
+        } catch (Exception e) {
+            throw new RequestedItemNotFoundException("Client with id " + clientId + " not found in DB");
+        }
+        List<String> answers = client.getTestAnswers();
+        if (answers == null) {
+            answers = new ArrayList<>();
+        }
+        if (!answers.isEmpty()) {
+            answers.clear();
+        }
+        answers.addAll(clientAnswersDTO.getAnswers());
+        client.setTestAnswers(answers);
+        log.info("Test answers saved for client {}", clientId);
+        clientRepository.save(client);
+
+        for (Client c : clientRepository.findAll()) {
+            List<String> testAnswers = c.getTestAnswers();
+            if (testAnswers != null) {
+                log.info("Answers of client {}: 1: {}, 2: {}, 3: {}, 4: {}", c.getId(),
+                        testAnswers.get(0),
+                        testAnswers.get(1),
+                        testAnswers.get(2),
+                        testAnswers.get(3));
+            }
         }
     }
 }

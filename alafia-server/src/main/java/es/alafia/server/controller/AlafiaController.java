@@ -174,6 +174,13 @@ public class AlafiaController {
     public TableBillDTO getTablleBill(@PathVariable String activeTableId) {
         return dataService.retrieveTableBill(activeTableId);
     }
+
+    @PostMapping(value = "/migrationTest")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveClientAnswers(@RequestBody ClientAnswersDTO clientAnswersDTO) {
+        log.info("Saving answers of migration test of client {}", clientAnswersDTO.getClientId());
+        dataService.updateClientWithTestAnswers(clientAnswersDTO);
+    }
 }
 
 

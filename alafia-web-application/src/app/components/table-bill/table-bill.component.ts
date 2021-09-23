@@ -19,6 +19,7 @@ export class TableBillComponent implements OnInit {
 
   constructor(public dataService: DataService, private router: Router) {
     this.table = dataService.activeTable;
+    this.tableBill = new TableBill();
     console.log('Table: ');
     console.log(this.table);
   }
