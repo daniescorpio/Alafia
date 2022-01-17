@@ -59,6 +59,7 @@ public class LoadInitData {
                 .nutritionalValues("nutritional values course 1")
                 .obtainProcess("obtain process course 1")
                 .price(6.9)
+                .urlVideo("-Hi8uEbGk_4")
                 .build();
         Course course_2 = Course.builder()
                 .description("course 2")
@@ -66,6 +67,7 @@ public class LoadInitData {
                 .nutritionalValues("nutritional values course 2")
                 .obtainProcess("obtain process course 2")
                 .price(7.9)
+                .urlVideo("AEvclAvvMcI")
                 .build();
         Course course_3 = Course.builder()
                 .description("course 3")
@@ -73,6 +75,7 @@ public class LoadInitData {
                 .nutritionalValues("nutritional values course 3")
                 .obtainProcess("obtain process course 3")
                 .price(8.9)
+                .urlVideo("-Hi8uEbGk_4")
                 .build();
         Course course_4 = Course.builder()
                 .description("course 4")
@@ -80,6 +83,7 @@ public class LoadInitData {
                 .nutritionalValues("nutritional values course 4")
                 .obtainProcess("obtain process course 4")
                 .price(9.9)
+                .urlVideo("AEvclAvvMcI")
                 .build();
 
         Order order_1 = Order.builder()

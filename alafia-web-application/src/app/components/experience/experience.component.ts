@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {DataService} from "../../services/data.service";
+import {Router} from '@angular/router';
+import {DataService} from '../../services/data.service';
+import {Drink} from "../../model/drink";
+import {CourseDto} from "../../model/dto/courseDto";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-experience',
@@ -9,9 +12,15 @@ import {DataService} from "../../services/data.service";
 })
 export class ExperienceComponent implements OnInit {
 
-  constructor(private router: Router, public dataService: DataService) { }
+  urlVideo: string;
 
-  ngOnInit(): void {
+  constructor(private router: Router, public dataService: DataService, public sanitizer: DomSanitizer) {
+  }
+
+  async ngOnInit() {
+    this.urlVideo = this.dataService.activeClient.order.courses
+      .find(course => course.id === this.dataService.courseIdToLaunchExperience)
+      .urlVideo;
   }
 
   skipExperience() {

@@ -1,2 +1,22 @@
-<p (click)="skipExperience()">experience works!</p>
-<h1>{{this.dataService.courseIdToLaunchExperience}}</h1>
+<div>
+  <iframe
+    width="620"
+    height="350"
+    src="https://www.youtube.com/embed/AEvclAvvMcI"
+    *ngIf="this.urlVideo === 'AEvclAvvMcI'"
+  ></iframe>
+  <iframe
+    width="620"
+    height="350"
+    src="https://www.youtube.com/embed/-Hi8uEbGk_4"
+    *ngIf="this.urlVideo === '-Hi8uEbGk_4'"
+  ></iframe>
+  <button mat-flat-button color="primary"
+          (click)="skipExperience()"
+          style="background-color: #b45d2e;
+            font-size: large;
+            padding: 30px;
+            width: 100%; margin-top: 15%">
+    Volver al menú principal
+  </button>
+</div>

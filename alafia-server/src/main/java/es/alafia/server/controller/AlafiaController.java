@@ -84,6 +84,14 @@ public class AlafiaController {
         return courses;
     }
 
+    @GetMapping(value = "/courses/{courseId}")
+    public CourseDTO getCourseUrl(@PathVariable String courseId) {
+        CourseDTO course = dataService.retrieveCourseData(courseId);
+        log.info("Found with id {} course in DB", courseId);
+        log.info("Url of video: {}", course.getUrlVideo());
+        return course;
+    }
+
     @GetMapping(value = "/drinks")
     public List<Drink> getDrinksData() {
         List<Drink> drinks = dataService.retrieveDrinksData();

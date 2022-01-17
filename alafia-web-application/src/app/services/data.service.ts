@@ -23,6 +23,7 @@ export class DataService {
   activeTable: DinnerTable;
   activeClient: Client;
   courseIdToLaunchExperience: string;
+  experienceManagerRequest = false;
 
 
   constructor(private httpClient: HttpClient) {
@@ -121,6 +122,10 @@ export class DataService {
 
   getCourses() {
     return this.httpClient.get(this.apiPath + '/courses');
+  }
+
+  getCoursesById(courseId: string) {
+    return this.httpClient.get(this.apiPath + '/courses/' + courseId);
   }
 
   postCourse(course: Course) {

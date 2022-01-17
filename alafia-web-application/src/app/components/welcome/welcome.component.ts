@@ -28,7 +28,7 @@ export class WelcomeComponent implements OnInit {
 
   selectOtherClient() {
     this.dialog.open(SelectClientComponent, {
-      width: '250px',
+      width: 'max-content',
       data: this.dataService.restaurant
     }).afterClosed().subscribe(result => {
 

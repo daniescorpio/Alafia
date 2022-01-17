@@ -59,6 +59,15 @@ public class DataService {
         return courseRepository.findAll();
     }
 
+    public CourseDTO retrieveCourseData(String courseId) {
+        log.info("Fetching course with id {}", courseId);
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(RequestedItemNotFoundException::new);
+        return CourseDTO.builder()
+                .urlVideo(course.getUrlVideo())
+                .build();
+    }
+
     public List<Drink> retrieveDrinksData() {
         log.info("Fetching drinks...");
         return drinkRepository.findAll();

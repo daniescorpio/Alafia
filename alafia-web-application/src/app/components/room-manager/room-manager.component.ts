@@ -28,7 +28,7 @@ export class RoomManagerComponent implements OnInit {
       result => {
 
       }, error => {
-        console.log('Modal closed clicking background')
+        console.log('Modal closed clicking background');
       });
   }
 

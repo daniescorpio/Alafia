@@ -14,7 +14,7 @@ import {MigrationTestComponent} from './components/migration-test/migration-test
 import {WaitDinersComponent} from './components/wait-diners/wait-diners.component';
 import {BillComponent} from './components/bill/bill.component';
 import {ReplaceClientComponent} from './components/replace-client/replace-client.component';
-import {TableBillComponent} from "./components/table-bill/table-bill.component";
+import {TableBillComponent} from './components/table-bill/table-bill.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},

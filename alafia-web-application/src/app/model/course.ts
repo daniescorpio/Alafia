@@ -6,8 +6,15 @@ export class Course {
   obtainProcess: string;
   history: string;
   served: boolean;
+  urlVideo: string;
 
-  constructor(id: string, description: string, price: number, nutritionalValues: string, obtainProcess: string, history: string) {
+  constructor(id: string,
+              description: string,
+              price: number,
+              nutritionalValues: string,
+              obtainProcess: string,
+              history: string,
+              urlVideo: string) {
     this.id = id;
     this.description = description;
     this.price = price;
@@ -15,5 +22,6 @@ export class Course {
     this.obtainProcess = obtainProcess;
     this.history = history;
     this.served = false;
+    this.urlVideo = urlVideo;
   }
 }

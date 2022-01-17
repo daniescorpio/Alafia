@@ -40,16 +40,7 @@ export class AppMenuComponent implements OnInit {
   }
 
   onExperienceManagerClick() {
-    this.dialog.open(ExperienceManagerComponent, {
-      width: '75%',
-      height: '75%',
-      data: this.dataService.activeClient,
-    }).afterClosed().subscribe(
-      result => {
-
-      }, error => {
-        console.log('Modal closed clicking background');
-      });
+    this.dataService.experienceManagerRequest = !this.dataService.experienceManagerRequest;
   }
 
   onExtrasClick() {

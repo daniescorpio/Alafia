@@ -1,4 +1,5 @@
 <div>
+  <h1 style="font-size: xxx-large; line-height: 150%">Seleccione el nombre del cliente que hizo la reserva</h1>
   <mat-list>
     <mat-list-item *ngFor="let table of data.dinnerTables; let i = index"
                    (click)="saveAsNewClient(table.booking.client.id)"
