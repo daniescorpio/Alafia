@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DinnerTable} from "../../model/dinnerTable";
-import {DataService} from "../../services/data.service";
-import {MatDialog} from "@angular/material/dialog";
-import {SelectedTableComponent} from "../selected-table/selected-table.component";
+import {DinnerTable} from '../../model/dinnerTable';
+import {DataService} from '../../services/data.service';
+import {MatDialog} from '@angular/material/dialog';
+import {SelectedTableComponent} from '../selected-table/selected-table.component';
 
 @Component({
   selector: 'app-room-manager',

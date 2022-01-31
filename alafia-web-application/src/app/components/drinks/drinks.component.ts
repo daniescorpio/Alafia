@@ -23,7 +23,7 @@ export class DrinksComponent implements OnInit {
 
   getDrinkKeys() {
     this.dataService.getDrinks().subscribe((data: Drink[]) => {
-      console.log('Retrieved ' + data.length + ' drinks from DB')
+      console.log('Retrieved ' + data.length + ' drinks from DB');
       this.drinks = data;
     });
   }

@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {DinnerTable} from "../../model/dinnerTable";
-import {Client} from "../../model/client";
-import {DataService} from "../../services/data.service";
-import {CourseDto} from "../../model/dto/courseDto";
-import {Order} from "../../model/order";
-import {Restaurant} from "../../model/restaurant";
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {DinnerTable} from '../../model/dinnerTable';
+import {Client} from '../../model/client';
+import {DataService} from '../../services/data.service';
+import {CourseDto} from '../../model/dto/courseDto';
+import {Order} from '../../model/order';
+import {Restaurant} from '../../model/restaurant';
 
 @Component({
   selector: 'app-selected-table',
@@ -27,7 +27,7 @@ export class SelectedTableComponent implements OnInit {
     this.dataService.activeClient = this.data.booking.diners.find(client => client.id === dinerId);
     console.log('New activeClient ' + this.dataService.activeClient.id);
 
-    let courseDto: CourseDto = new CourseDto(
+    const courseDto: CourseDto = new CourseDto(
       courseId,
       this.dataService.activeClient.order.id,
       this.dataService.activeClient.id,

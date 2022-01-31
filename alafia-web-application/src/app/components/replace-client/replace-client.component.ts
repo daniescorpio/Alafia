@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from "../../services/data.service";
-import {Router} from "@angular/router";
-import {Client} from "../../model/client";
-import {AddClientComponent} from "../add-client/add-client.component";
-import {MatDialog} from "@angular/material/dialog";
+import {DataService} from '../../services/data.service';
+import {Router} from '@angular/router';
+import {Client} from '../../model/client';
+import {AddClientComponent} from '../add-client/add-client.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-replace-client',
