@@ -1,6 +1,6 @@
 package es.alafia.server.controller;
 
-import es.alafia.server.LoadInitData;
+import es.alafia.server.mock.LoadInitData;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.*;
 import es.alafia.server.service.DataService;
@@ -167,7 +167,8 @@ public class AlafiaController {
     @PostMapping(value = "/add-drink")
     @ResponseStatus(HttpStatus.CREATED)
     public Client addDrinkInClient(@RequestBody AddDrinkDTO addDrinkDTO) {
-        log.info("Trying to add drink with id {} in client with id {}", addDrinkDTO.getDrinkId(), addDrinkDTO.getClientId());
+        log.info("Trying to add drink with id {} in client with id {}",
+                addDrinkDTO.getDrinkId(), addDrinkDTO.getClientId());
         return dataService.addDrinkInClient(addDrinkDTO);
     }
 

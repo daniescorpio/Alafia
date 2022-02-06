@@ -1,4 +1,4 @@
-package es.alafia.server;
+package es.alafia.server.mock;
 
 import es.alafia.server.model.*;
 import es.alafia.server.repository.*;
