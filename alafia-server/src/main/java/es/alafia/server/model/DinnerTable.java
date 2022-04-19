@@ -16,4 +16,6 @@ public class DinnerTable {
     private String id;
 
     private Booking booking;
+
+    private Boolean activeNotification;
 }

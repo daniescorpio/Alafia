@@ -10,6 +10,7 @@ import {ClientDto} from '../model/dto/clientDto';
 import {DrinkDto} from '../model/dto/drinkDto';
 import {CourseDto} from '../model/dto/courseDto';
 import {ClientAnswersDto} from '../model/dto/clientAnswersDto';
+import {UpdateTableDto} from "../model/dto/updateTableDto";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,14 @@ export class DataService {
     });
   }
 
+  loadDataFromServer() {
+    return this.getRestaurants().subscribe(data => {
+      console.log('Data loaded complete');
+      console.log('Setting default restaurant...');
+      this.setDefaultRestaurant();
+    });
+  }
+
   setDefaultRestaurant() {
     this.getRestaurants().subscribe((data: Restaurant[]) => {
       console.log('Retrieved ' + data.length + ' restaurants from server');
@@ -60,6 +69,11 @@ export class DataService {
         table.allDinersConfirmed = true;
       } else {
         table.allDinersConfirmed = true;
+      }
+      if (table.activeNotification === undefined) {
+        table.activeNotification = false;
+      } else {
+        table.activeNotification = false;
       }
     });
     return restaurant;
@@ -156,5 +170,13 @@ export class DataService {
 
   postClientAnswers(client: ClientAnswersDto) {
     return this.httpClient.post(this.apiPath + '/migrationTest', client).subscribe(d => console.log(d));
+  }
+
+  patchTableNotification(updateTableDto: UpdateTableDto) {
+    let dinnerTable = this.restaurant.dinnerTables.find(table => table.id === updateTableDto.dinnerTableId);
+    console.log('Table until patch:');
+    console.log(dinnerTable);
+    this.httpClient.patch(this.apiPath + '/experience-manager-notification', updateTableDto)
+      .subscribe(res => console.log(res));
   }
 }

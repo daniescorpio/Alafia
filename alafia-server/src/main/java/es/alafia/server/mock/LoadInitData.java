@@ -149,9 +149,11 @@ public class LoadInitData {
 
         DinnerTable dinnerTable_1 = DinnerTable.builder()
                 .booking(booking_1)
+                .activeNotification(false)
                 .build();
         DinnerTable dinnerTable_2 = DinnerTable.builder()
                 .booking(booking_2)
+                .activeNotification(false)
                 .build();
 
         Restaurant restaurant = Restaurant.builder()

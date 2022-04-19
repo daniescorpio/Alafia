@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {DataService} from '../../services/data.service';
 import {MatDialog} from '@angular/material/dialog';
 import {Client} from '../../model/client';
-import {ClientDto} from "../../model/dto/clientDto";
+import {ClientDto} from '../../model/dto/clientDto';
 
 @Component({
   selector: 'app-warm-up',

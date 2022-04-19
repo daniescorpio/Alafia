@@ -1,5 +1,6 @@
 package es.alafia.server.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import es.alafia.server.mock.LoadInitData;
 import es.alafia.server.model.*;
 import es.alafia.server.model.dto.*;
@@ -19,6 +20,7 @@ public class AlafiaController {
 
     private final DataService dataService;
     private final LoadInitData loadInitData;
+    private final ObjectMapper objectMapper;
 
     @GetMapping(value = "/load-data")
     public void loadMockedData() {
@@ -35,6 +37,13 @@ public class AlafiaController {
     public List<Restaurant> getRestaurantsData() {
         List<Restaurant> restaurants = dataService.retrieveRestaurantsData();
         log.info("Found {} restaurants in DB", restaurants.size());
+        restaurants.stream()
+                .map(Restaurant::getDinnerTables)
+                .findFirst()
+                .ifPresent(tables -> tables
+                        .forEach(dinnerTable ->
+                                log.info("{} -> {}", dinnerTable.getId(), dinnerTable.getActiveNotification())));
+
         return restaurants;
     }
 
@@ -180,7 +189,7 @@ public class AlafiaController {
     }
 
     @GetMapping(value = "/table-bill/{activeTableId}")
-    public TableBillDTO getTablleBill(@PathVariable String activeTableId) {
+    public TableBillDTO getTableBill(@PathVariable String activeTableId) {
         return dataService.retrieveTableBill(activeTableId);
     }
 
@@ -189,6 +198,13 @@ public class AlafiaController {
     public void saveClientAnswers(@RequestBody ClientAnswersDTO clientAnswersDTO) {
         log.info("Saving answers of migration test of client {}", clientAnswersDTO.getClientId());
         dataService.updateClientWithTestAnswers(clientAnswersDTO);
+    }
+
+    @PatchMapping(value = "/experience-manager-notification")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateTableWithNotificationOfExperienceManager(@RequestBody UpdateTableDTO updateTableDTO) {
+        log.info("Updating notification status of table {}", updateTableDTO.getDinnerTableId());
+        dataService.updateTableWithNotification(updateTableDTO);
     }
 }
 

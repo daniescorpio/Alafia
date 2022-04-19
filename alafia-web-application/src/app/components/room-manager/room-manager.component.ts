@@ -3,6 +3,8 @@ import {DinnerTable} from '../../model/dinnerTable';
 import {DataService} from '../../services/data.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SelectedTableComponent} from '../selected-table/selected-table.component';
+import {Restaurant} from "../../model/restaurant";
+import {UpdateTableDto} from "../../model/dto/updateTableDto";
 
 @Component({
   selector: 'app-room-manager',
@@ -14,8 +16,8 @@ export class RoomManagerComponent implements OnInit {
   constructor(public dataService: DataService, public dialog: MatDialog) {
   }
 
-  ngOnInit(): void {
-    this.dataService.loadMockedData();
+  async ngOnInit() {
+    this.refreshData();
   }
 
   onTableClick(table: DinnerTable) {
@@ -30,6 +32,26 @@ export class RoomManagerComponent implements OnInit {
       }, error => {
         console.log('Modal closed clicking background');
       });
+  }
+
+  async refreshData() {
+    do {
+      this.dataService.getRestaurants().subscribe((data: Restaurant[]) => {
+        console.log('Retrieved ' + data.length + ' restaurants from server');
+        console.log(data);
+        if (data.length > 0) {
+          this.dataService.restaurant = data[0];
+        }
+      });
+      console.log('restaurant:');
+      console.log(this.dataService.restaurant);
+      await this.dataService.delay(5000);
+    } while (true);
+  }
+
+  removeNotification() {
+    const updateTableDto = new UpdateTableDto(this.dataService.activeTable.id, this.dataService.restaurant.id);
+    this.dataService.patchTableNotification(updateTableDto);
   }
 
 }

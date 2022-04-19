@@ -108,7 +108,9 @@ public class DataService {
         try {
             client = clientRepository.findById(oldClientDTO.getOldClientId()).orElseThrow();
         } catch (Exception e) {
-            throw new RequestedItemNotFoundException("Client with id " + oldClientDTO.getOldClientId() + " not found in DB");
+            throw new RequestedItemNotFoundException("Client with id " +
+                    oldClientDTO.getOldClientId() +
+                    " not found in DB");
         }
         client.setConfirmed(true);
         client.setName(oldClientDTO.getName());
@@ -121,7 +123,8 @@ public class DataService {
     public Client updateClientStatus(UpdateClientDTO updateClientDTO) {
         Client client;
         try {
-            client = clientRepository.findById(updateClientDTO.getOldClientId()).orElseThrow();
+            client = clientRepository.findById(updateClientDTO.getOldClientId())
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + updateClientDTO + " not found in DB");
         }
@@ -159,16 +162,19 @@ public class DataService {
             client = clientRepository.findById(addDrinkDTO.getClientId()).orElseThrow();
             log.info("Client with id {} retrieved from DB correctly", addDrinkDTO.getClientId());
         } catch (Exception e) {
-            throw new RequestedItemNotFoundException("Client with id " + addDrinkDTO.getClientId() + " not found in DB");
+            throw new RequestedItemNotFoundException("Client with id " + addDrinkDTO.getClientId() +
+                    " not found in DB");
         }
         try {
-            order = orderRepository.findById(addDrinkDTO.getOrderId()).orElseThrow();
+            order = orderRepository.findById(addDrinkDTO.getOrderId())
+                    .orElseThrow();
             log.info("Order with id {} retrieved from DB correctly", addDrinkDTO.getOrderId());
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Order with id " + addDrinkDTO.getOrderId() + " not found in DB");
         }
         try {
-            drink = drinkRepository.findById(addDrinkDTO.getDrinkId()).orElseThrow();
+            drink = drinkRepository.findById(addDrinkDTO.getDrinkId())
+                    .orElseThrow();
             log.info("Drink with id {} retrieved from DB correctly", addDrinkDTO.getDrinkId());
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Drink with id " + addDrinkDTO.getDrinkId() + " not found in DB");
@@ -197,26 +203,30 @@ public class DataService {
         Order order;
         Course course;
         try {
-            client = clientRepository.findById(courseDTO.getClientId()).orElseThrow();
+            client = clientRepository.findById(courseDTO.getClientId())
+                    .orElseThrow();
             log.info("Client with id {} retrieved from DB correctly", courseDTO.getClientId());
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + courseDTO.getClientId() + " not found in DB");
         }
         try {
-            order = orderRepository.findById(courseDTO.getOrderId()).orElseThrow();
+            order = orderRepository.findById(courseDTO.getOrderId())
+                    .orElseThrow();
             log.info("Order with id {} retrieved from DB correctly", courseDTO.getOrderId());
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + courseDTO.getClientId() + " not found in DB");
         }
         try {
-            course = courseRepository.findById(courseDTO.getCourseId()).orElseThrow();
+            course = courseRepository.findById(courseDTO.getCourseId())
+                    .orElseThrow();
             log.info("Course with id {} retrieved from DB correctly", courseDTO.getCourseId());
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + courseDTO.getClientId() + " not found in DB");
         }
 
         var coursesServedInClient = client.getOrder().getCoursesIdServed();
-        var courseIsServed = coursesServedInClient.stream().anyMatch(c -> c.equals(course.getId()));
+        var courseIsServed = coursesServedInClient.stream()
+                .anyMatch(c -> c.equals(course.getId()));
         if (courseIsServed) {
             coursesServedInClient.remove(course.getId());
             log.info("Setting status of course {} to NOT SERVED", course.getId());
@@ -245,7 +255,8 @@ public class DataService {
 
     public DinnerTable getDinersOfTable(String tableId) {
         try {
-            return dinnerTableRepository.findById(tableId).orElseThrow();
+            return dinnerTableRepository.findById(tableId)
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Dinner table with id " + tableId + " not found in DB");
         }
@@ -255,7 +266,8 @@ public class DataService {
         log.info("Updating parents of client {}", newClient.getId());
         Booking booking;
         try {
-            booking = bookingRepository.findById(client.getBookingId()).orElseThrow();
+            booking = bookingRepository.findById(client.getBookingId())
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Booking with id " + client.getBookingId() + " not found in DB");
         }
@@ -280,7 +292,8 @@ public class DataService {
 
         DinnerTable dinnerTable;
         try {
-            dinnerTable = dinnerTableRepository.findById(client.getDinnerTableId()).orElseThrow();
+            dinnerTable = dinnerTableRepository.findById(client.getDinnerTableId())
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Booking with id " + client.getBookingId() + " not found in DB");
         }
@@ -290,11 +303,16 @@ public class DataService {
 
         Restaurant restaurant;
         try {
-            restaurant = restaurantRepository.findById(client.getRestaurantId()).orElseThrow();
+            restaurant = restaurantRepository.findById(client.getRestaurantId())
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Booking with id " + client.getBookingId() + " not found in DB");
         }
-        restaurant.getDinnerTables().stream().filter(table -> table.getId().equals(client.getDinnerTableId())).findFirst().orElseThrow().setBooking(booking);
+        restaurant.getDinnerTables().stream()
+                .filter(table -> table.getId().equals(client.getDinnerTableId()))
+                .findFirst()
+                .orElseThrow()
+                .setBooking(booking);
         restaurantRepository.save(restaurant);
         log.info("Restaurant updated with new data");
     }
@@ -302,7 +320,8 @@ public class DataService {
     public boolean checkClientsConfirmedInTable(String tableId) {
         DinnerTable table;
         try {
-            table = dinnerTableRepository.findById(tableId).orElseThrow();
+            table = dinnerTableRepository.findById(tableId)
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("DinnerTable with id " + tableId + " not found in DB");
         }
@@ -312,7 +331,8 @@ public class DataService {
     public Client retrieveClientData(String clientId) {
         Client client;
         try {
-            client = clientRepository.findById(clientId).orElseThrow();
+            client = clientRepository.findById(clientId)
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + clientId + " not found in DB");
         }
@@ -342,7 +362,8 @@ public class DataService {
         Client client;
         String clientId = clientAnswersDTO.getClientId();
         try {
-            client = clientRepository.findById(clientId).orElseThrow();
+            client = clientRepository.findById(clientId)
+                    .orElseThrow();
         } catch (Exception e) {
             throw new RequestedItemNotFoundException("Client with id " + clientId + " not found in DB");
         }
@@ -368,5 +389,25 @@ public class DataService {
                         testAnswers.get(3));
             }
         }
+    }
+
+    public void updateTableWithNotification(UpdateTableDTO updateTableDTO) {
+        var dinnerTable = dinnerTableRepository.findById(updateTableDTO.getDinnerTableId()).orElseThrow(() ->
+                new RequestedItemNotFoundException("Table with Id " + updateTableDTO + " not found"));
+        var newTableStatus = !dinnerTable.getActiveNotification();
+        dinnerTable.setActiveNotification(newTableStatus);
+        var updatedDinnerTable = dinnerTableRepository.save(dinnerTable);
+        log.info("Dinner Table updated: {}", updatedDinnerTable);
+
+        restaurantRepository.findById(updateTableDTO.getRestaurantId())
+                .ifPresent(restaurant -> {
+                    restaurant.getDinnerTables().stream()
+                            .filter(table -> table.getId().equals(updateTableDTO.getDinnerTableId()))
+                            .findFirst()
+                            .orElseThrow()
+                            .setActiveNotification(newTableStatus);
+                    restaurantRepository.save(restaurant);
+                    log.info("Restaurant tables updated with new status");
+                });
     }
 }

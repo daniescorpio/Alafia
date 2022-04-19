@@ -6,8 +6,8 @@ import {Drink} from '../../model/drink';
 import {DrinkDto} from '../../model/dto/drinkDto';
 import {MigrationTestComponent} from '../migration-test/migration-test.component';
 import {ExtrasComponent} from '../extras/extras.component';
-import {ExperienceManagerComponent} from '../experience-manager/experience-manager.component';
 import {Router} from '@angular/router';
+import {UpdateTableDto} from '../../model/dto/updateTableDto';
 
 @Component({
   selector: 'app-app-menu',
@@ -41,6 +41,8 @@ export class AppMenuComponent implements OnInit {
 
   onExperienceManagerClick() {
     this.dataService.experienceManagerRequest = !this.dataService.experienceManagerRequest;
+    const updateTableDto = new UpdateTableDto(this.dataService.activeTable.id, this.dataService.restaurant.id);
+    this.dataService.patchTableNotification(updateTableDto);
   }
 
   onExtrasClick() {

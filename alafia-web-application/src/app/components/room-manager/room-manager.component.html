@@ -1,6 +1,8 @@
 <mat-grid-list cols="2" rowHeight="2:1">
   <mat-grid-tile *ngFor="let dinnerTable of this.dataService.restaurant.dinnerTables">
     <div class="gridElement" (click)="onTableClick(dinnerTable)">
+      <mat-icon *ngIf="dinnerTable.activeNotification" (click)="removeNotification()">notification_important</mat-icon>
+      <p *ngIf="!dinnerTable.activeNotification"><br></p>
       <p><b>Id de la mesa: </b><br>{{dinnerTable.id}}</p>
       <p><b>Reserva de la mesa: </b><br>{{dinnerTable.booking.client.name}}</p>
     </div>
