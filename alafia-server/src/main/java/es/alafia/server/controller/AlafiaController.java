@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -39,6 +40,8 @@ public class AlafiaController {
         log.info("Found {} restaurants in DB", restaurants.size());
         restaurants.stream()
                 .map(Restaurant::getDinnerTables)
+                .filter(Objects::nonNull)
+                .filter(list -> !list.isEmpty())
                 .findFirst()
                 .ifPresent(tables -> tables
                         .forEach(dinnerTable ->

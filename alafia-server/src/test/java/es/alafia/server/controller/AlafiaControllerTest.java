@@ -1,7 +1,6 @@
 package es.alafia.server.controller;
 
 import es.alafia.server.model.*;
-import es.alafia.server.model.dto.ClientDTO;
 import es.alafia.server.model.dto.OldClientDTO;
 import es.alafia.server.model.exception.RequestedItemNotFoundException;
 import es.alafia.server.service.DataService;

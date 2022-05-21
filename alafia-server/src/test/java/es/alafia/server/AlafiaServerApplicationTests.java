@@ -2,7 +2,6 @@ package es.alafia.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.alafia.server.model.*;
-import es.alafia.server.model.dto.ClientDTO;
 import es.alafia.server.model.dto.OldClientDTO;
 import es.alafia.server.repository.BookingRepository;
 import es.alafia.server.repository.ClientRepository;
