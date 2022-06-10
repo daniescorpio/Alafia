@@ -33,8 +33,7 @@ export class SelectedTableComponent implements OnInit {
       this.dataService.activeClient.id,
       this.dataService.activeTable.booking.id,
       this.dataService.activeTable.id,
-      this.dataService.restaurant.id,
-      ''
+      this.dataService.restaurant.id
     );
 
     this.dataService.updateCourseStatus(courseDto)

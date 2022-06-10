@@ -17,5 +17,6 @@ public class ClientDTO {
     private String bookingId;
     private String dinnerTableId;
     private String restaurantId;
+    private Boolean confirmed;
     private List<String> testAnswers;
 }

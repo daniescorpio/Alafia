@@ -26,7 +26,7 @@ export class ReplaceClientComponent implements OnInit {
     }).afterClosed().subscribe(result => {
       if (result) {
         console.log(this.dataService.activeClient.mail);
-        this.router.navigateByUrl('/drinks');
+        this.router.navigateByUrl('/wait-diners');
       }
     });
   }

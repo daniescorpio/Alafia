@@ -43,8 +43,7 @@ export class AddClientComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.value.email === null || this.loginForm.value.name === null) {
       this.dialogRef.close(false);
-    }
-    else {
+    } else {
       let newClient = new ClientDto(
         this.loginForm.value.name,
         this.loginForm.value.email,
